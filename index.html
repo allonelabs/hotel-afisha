@@ -4,14 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hotel Afisha — Be Your Own Muse | Tbilisi, Georgia</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Libre+Caslon+Display&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Noto+Serif+Georgian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.web-fonts.ge/fonts/bpg-nino-elite/css/bpg-nino-elite.css">
 <link rel="stylesheet" href="https://cdn.web-fonts.ge/fonts/bpg-nateli/css/bpg-nateli.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ── Brand Fonts ──────────────────────────── */
+@font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Simplo'; src: url('fonts/Simplo-It.otf') format('opentype'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Noir'; src: url('fonts/Noir_regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Noir'; src: url('fonts/Noir_medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Galins'; src: url('fonts/Galins-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'ATWriter'; src: url('fonts/atwriter.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Halimun'; src: url('fonts/Halimun.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+
 /* ═══════════════════════════════════════════
-   HOTEL AFISHA — Cinematic Noir × Georgian Warmth
+   HOTEL AFISHA — Official Brand (Gastronaut, 2026)
+   Poster paper × red × b/w film
    ═══════════════════════════════════════════ */
 
 *, *::before, *::after {
@@ -21,21 +34,38 @@
 }
 
 :root {
-  --dark: #0e0e1a;
-  --dark-surface: #151525;
-  --navy: #1a1a2e;
-  --purple: #3D2E5B;
-  --gold: #ffffff;
-  --gold-light: #f0f0f0;
-  --taupe: #a19581;
-  --cream: #f5f0eb;
-  --offwhite: #faf8f5;
-  --text-dark: #2c2c2c;
-  --text-muted: #6b6363;
+  /* official palette */
+  --red: #DD4747;
+  --red-deep: #C53B3B;
+  --blue: #243E93;
+  --ink: #232122;
+  --ink-surface: #2B292A;
+  --grey: #595859;
+  --paper: #FAF8F5;
+  --cream: #F2EDE6;
+  --line: rgba(35, 33, 34, 0.14);
+  --line-strong: rgba(35, 33, 34, 0.32);
 
-  --font-display: 'Libre Caslon Display', 'Cormorant Garamond', serif;
-  --font-heading: 'Cormorant Garamond', serif;
-  --font-body: 'DM Sans', sans-serif;
+  /* legacy aliases (used by inline styles & JS templates) */
+  --brand-red: var(--red);
+  --brand-grey: var(--grey);
+  --brand-blue: var(--blue);
+  --gold: var(--red);
+  --gold-light: var(--red-deep);
+  --dark: var(--ink);
+  --dark-surface: var(--ink-surface);
+  --navy: var(--blue);
+  --taupe: var(--grey);
+  --offwhite: var(--paper);
+  --text-dark: #2c2c2c;
+  --text-muted: var(--grey);
+  --accent: var(--red);
+
+  --font-display: 'Galins', 'Noto Serif Georgian', serif;
+  --font-heading: 'Noir', 'Simplo', sans-serif;
+  --font-body: 'Simplo', sans-serif;
+  --font-type: 'ATWriter', 'American Typewriter', 'Courier New', monospace;
+  --font-script: 'Halimun', cursive;
 
   --header-h: 72px;
   --section-pad: clamp(80px, 12vw, 160px);
@@ -49,10 +79,33 @@ html {
 
 body {
   font-family: var(--font-body);
+  font-weight: 300;
   color: var(--text-dark);
-  background: var(--offwhite);
+  background: var(--paper);
   overflow-x: hidden;
   line-height: 1.6;
+}
+
+/* recycled-paper speckle, like the brand book cover */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--red);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
 }
 
 /* ── Utility ────────────────────────────── */
@@ -87,23 +140,39 @@ body {
 
 /* ── Typography helpers ─────────────────── */
 
+/* black label tab with red rule — signature brand element */
 .section-label {
+  display: inline-block;
   font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 20px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: lowercase;
+  color: #fff;
+  background: var(--ink);
+  padding: 8px 18px 13px 16px;
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.section-label::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  bottom: 7px;
+  width: 30px;
+  height: 1.5px;
+  background: var(--red);
 }
 
 .section-title {
-  font-family: var(--font-heading);
+  font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(32px, 4.5vw, 56px);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  line-height: 1.15;
+  font-size: clamp(36px, 4.6vw, 60px);
+  letter-spacing: 0.01em;
+  text-transform: lowercase;
+  line-height: 1.04;
+  color: var(--text-dark);
   margin-bottom: 24px;
 }
 
@@ -119,6 +188,7 @@ body {
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   font-family: var(--font-body);
   font-size: 11px;
@@ -127,8 +197,8 @@ body {
   text-transform: uppercase;
   text-decoration: none;
   padding: 16px 36px;
-  border: 1px solid var(--gold);
-  color: var(--gold);
+  border: 1px solid var(--red);
+  color: var(--red);
   background: transparent;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -140,7 +210,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--gold);
+  background: var(--red);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -152,7 +222,7 @@ body {
 }
 
 .btn:hover {
-  color: var(--dark);
+  color: #fff;
 }
 
 .btn span,
@@ -172,30 +242,44 @@ body {
 }
 
 .btn--light {
-  border-color: var(--cream);
-  color: var(--cream);
+  border-color: #fff;
+  color: #fff;
 }
 
 .btn--light::before {
-  background: var(--cream);
+  background: #fff;
 }
 
 .btn--light:hover {
-  color: var(--dark);
+  color: var(--ink);
 }
 
 .btn--solid {
-  background: var(--gold);
-  color: var(--dark);
-  border-color: var(--gold);
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
 }
 
 .btn--solid::before {
-  background: var(--dark);
+  background: var(--red-deep);
 }
 
 .btn--solid:hover {
-  color: var(--gold);
+  color: #fff;
+}
+
+.btn--ghost {
+  border-color: var(--line-strong);
+  color: var(--grey);
+}
+
+.btn--ghost::before {
+  background: transparent;
+}
+
+.btn--ghost:hover {
+  border-color: var(--ink);
+  color: var(--ink);
 }
 
 .arrow-icon {
@@ -215,15 +299,16 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 clamp(24px, 4vw, 60px);
-  background: #ffffff;
-  border-bottom: 1px solid #000000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 -4px 12px rgba(0, 0, 0, 0.04) inset;
-  transition: background 0.5s, box-shadow 0.5s;
+  background: rgba(250, 248, 245, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  transition: background 0.5s, border-color 0.5s;
 }
 
 .header.scrolled {
-  background: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 -4px 12px rgba(0, 0, 0, 0.04) inset;
+  background: rgba(250, 248, 245, 0.98);
+  border-bottom-color: var(--line-strong);
 }
 
 .header__logo {
@@ -231,17 +316,12 @@ body {
   white-space: nowrap;
   display: inline-block;
   overflow: hidden;
-  height: 22px;
-}
-
-.header__logo img {
-  filter: brightness(0) saturate(100%) invert(15%) sepia(95%) saturate(6000%) hue-rotate(355deg) brightness(95%) contrast(95%);
-  margin-top: -2px;
+  height: 35px;
 }
 
 .header__logo em {
   font-style: normal;
-  color: var(--gold);
+  color: var(--red);
 }
 
 .header__nav {
@@ -256,7 +336,7 @@ body {
   font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: #000;
+  color: var(--text-dark);
   text-decoration: none;
   transition: color 0.3s;
   position: relative;
@@ -268,13 +348,13 @@ body {
   bottom: -4px;
   left: 0;
   width: 0;
-  height: 1px;
-  background: #000;
+  height: 1.5px;
+  background: var(--red);
   transition: width 0.3s;
 }
 
 .header__nav a:hover {
-  color: var(--text-dark);
+  color: var(--red);
 }
 
 .header__nav a:hover::after {
@@ -301,11 +381,11 @@ body {
   font-family: var(--font-body);
   font-size: 11px;
   letter-spacing: 0.15em;
-  color: #000;
+  color: var(--grey);
   cursor: pointer;
   padding: 4px 2px;
   transition: color 0.3s;
-  border-bottom: 1px solid transparent;
+  border-bottom: 1.5px solid transparent;
 }
 
 .lang-btn:hover {
@@ -314,11 +394,11 @@ body {
 
 .lang-btn.active {
   color: var(--text-dark);
-  border-bottom-color: var(--text-dark);
+  border-bottom-color: var(--red);
 }
 
 .lang-sep {
-  color: #000;
+  color: var(--grey);
   font-size: 10px;
 }
 
@@ -328,9 +408,6 @@ body.lang-ka .section-label,
 body.lang-ka .room-card__desc,
 body.lang-ka .resto-card__desc,
 body.lang-ka .resto-card__type,
-body.lang-ka .cinema__director-role,
-body.lang-ka .welcome__role,
-body.lang-ka .wellness__feature-text p,
 body.lang-ka .footer__links a,
 body.lang-ka .footer__col-title,
 body.lang-ka .footer__brand-desc,
@@ -342,8 +419,6 @@ body.lang-ka .modal__field label,
 body.lang-ka .btn span,
 body.lang-ka .header__nav a,
 body.lang-ka .header__book,
-body.lang-ka .hero__label,
-body.lang-ka .hero__subtitle,
 body.lang-ka .hero__scroll span,
 body.lang-ka .mobile-nav a,
 body.lang-ka .room-card__link,
@@ -352,26 +427,31 @@ body.lang-ka .footer__newsletter-form input,
 body.lang-ka .footer__newsletter-form button,
 body.lang-ka .footer__bottom,
 body.lang-ka select,
-body.lang-ka option {
+body.lang-ka option,
+body.lang-ka .info-box__subtitle,
+body.lang-ka .info-box__item-content p,
+body.lang-ka .info-box__link,
+body.lang-ka .team-card__role,
+body.lang-ka .team-card__bio,
+body.lang-ka .vacancy-card__meta,
+body.lang-ka .vacancy-card__apply,
+body.lang-ka .wellness__feature-text p {
   font-family: 'BPG Nino Elite', 'Noto Serif Georgian', sans-serif;
 }
 
 body.lang-ka .section-title,
-body.lang-ka .hero__title,
-body.lang-ka .cta-section__title,
 body.lang-ka .modal__title,
 body.lang-ka .room-card__name,
 body.lang-ka .resto-card__name,
-body.lang-ka .cinema__director-name,
-body.lang-ka .welcome__name,
-body.lang-ka .wellness__feature-text h4 {
+body.lang-ka .wellness__feature-text h4,
+body.lang-ka .info-box__title,
+body.lang-ka .team-card__name,
+body.lang-ka .vacancy-card__info h4 {
   font-family: 'Noto Serif Georgian', 'BPG Nateli', serif;
   font-weight: 500;
 }
 
-body.lang-ka .welcome__quote,
-body.lang-ka .cinema__text,
-body.lang-ka .cta-section__subtitle {
+body.lang-ka .cinema__text {
   font-family: 'Noto Serif Georgian', 'BPG Nateli', serif;
   font-weight: 300;
 }
@@ -381,10 +461,6 @@ body.lang-ka .philharmonic__fact-num {
   font-family: 'Noto Serif Georgian', 'BPG Nateli', serif;
 }
 
-body.lang-ka .welcome__signature {
-  font-family: 'BPG Nateli', 'Noto Serif Georgian', serif;
-}
-
 .header__book {
   font-family: var(--font-body);
   font-size: 10px;
@@ -392,7 +468,7 @@ body.lang-ka .welcome__signature {
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: #ffffff;
-  background: #000000;
+  background: var(--red);
   border: none;
   padding: 12px 28px;
   cursor: pointer;
@@ -400,7 +476,7 @@ body.lang-ka .welcome__signature {
 }
 
 .header__book:hover {
-  background: #222;
+  background: var(--red-deep);
   transform: translateY(-1px);
 }
 
@@ -419,7 +495,7 @@ body.lang-ka .welcome__signature {
   display: block;
   width: 24px;
   height: 1.5px;
-  background: #000;
+  background: var(--ink);
   transition: all 0.35s;
 }
 
@@ -441,7 +517,7 @@ body.lang-ka .welcome__signature {
   position: fixed;
   inset: 0;
   z-index: 999;
-  background: #000000;
+  background: var(--ink);
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -461,17 +537,17 @@ body.lang-ka .welcome__signature {
   font-size: 28px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--cream);
+  color: #fff;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .mobile-nav a:hover {
-  color: var(--gold);
+  color: var(--red);
 }
 
 /* ═══════════════════════════════════════════
-   HERO
+   HERO — b/w film, red logo lockup
    ═══════════════════════════════════════════ */
 
 .hero {
@@ -482,7 +558,7 @@ body.lang-ka .welcome__signature {
   height: 100vh;
   z-index: -1;
   overflow: hidden;
-  background: #000;
+  background: var(--ink);
 }
 
 .hero__bg {
@@ -494,6 +570,15 @@ body.lang-ka .welcome__signature {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: brightness(0.88);
+}
+
+.hero__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(35, 33, 34, 0.25), transparent 30%, transparent 65%, rgba(35, 33, 34, 0.55));
+  pointer-events: none;
 }
 
 .hero__logo {
@@ -502,12 +587,23 @@ body.lang-ka .welcome__signature {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-  opacity: 0.45;
+  text-align: center;
 }
 
 .hero__logo img {
-  height: clamp(60px, 10vw, 120px);
-  filter: brightness(0) invert(1);
+  height: clamp(72px, 11vw, 130px);
+  filter: drop-shadow(0 2px 18px rgba(0, 0, 0, 0.35));
+}
+
+.hero__tagline {
+  font-family: var(--font-type);
+  font-size: clamp(11px, 1.2vw, 13px);
+  letter-spacing: 0.42em;
+  text-transform: lowercase;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 22px;
+  text-indent: 0.42em; /* balances tracking on centered text */
 }
 
 /* Spacer to push content below the video */
@@ -523,7 +619,6 @@ body.lang-ka .welcome__signature {
   background: transparent;
 }
 
-
 .hero__scroll {
   position: fixed;
   bottom: 40px;
@@ -536,7 +631,7 @@ body.lang-ka .welcome__signature {
   gap: 8px;
   transition: opacity 0.4s;
   pointer-events: none;
-  color: rgba(245, 240, 235, 0.35);
+  color: rgba(255, 255, 255, 0.55);
   font-size: 9px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -545,7 +640,7 @@ body.lang-ka .welcome__signature {
 .hero__scroll-line {
   width: 1px;
   height: 40px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
+  background: linear-gradient(to bottom, var(--red), transparent);
   animation: scrollPulse 2s ease-in-out infinite;
 }
 
@@ -554,103 +649,13 @@ body.lang-ka .welcome__signature {
   50% { opacity: 1; transform: scaleY(1.3); }
 }
 
-
-/* ═══════════════════════════════════════════
-   WELCOME / ABOUT
-   ═══════════════════════════════════════════ */
-
-.welcome {
-  padding: var(--section-pad) clamp(24px, 6vw, 100px);
-  background: var(--offwhite);
-}
-
-.welcome__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(40px, 6vw, 100px);
-  max-width: 1200px;
-  margin: 0 auto;
-  align-items: center;
-}
-
-.welcome__img {
-  position: relative;
-  aspect-ratio: 3/4;
-  overflow: hidden;
-  max-height: 90vh;
-}
-
-.welcome__img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.welcome__img:hover img {
-  transform: scale(1.03);
-}
-
-.welcome__img::after {
-  content: '';
-  position: absolute;
-  bottom: -20px;
-  right: -20px;
-  width: 120px;
-  height: 120px;
-  border: 1px solid var(--gold);
-  opacity: 0.25;
-  pointer-events: none;
-}
-
-.welcome__text {
-  padding: 20px 0;
-}
-
-.welcome__quote {
-  font-family: var(--font-heading);
-  font-size: clamp(22px, 2.5vw, 30px);
-  font-weight: 300;
-  font-style: italic;
-  line-height: 1.6;
-  color: var(--text-dark);
-  margin-bottom: 36px;
-  position: relative;
-  padding-left: 24px;
-  border-left: 2px solid var(--gold);
-}
-
-.welcome__name {
-  font-family: var(--font-heading);
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--text-dark);
-  margin-bottom: 4px;
-}
-
-.welcome__role {
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--taupe);
-  margin-bottom: 20px;
-}
-
-.welcome__signature {
-  font-family: var(--font-display);
-  font-size: 28px;
-  color: var(--gold);
-  opacity: 0.6;
-  font-style: italic;
-}
-
 /* ═══════════════════════════════════════════
    ROOMS
    ═══════════════════════════════════════════ */
 
 .rooms {
   padding: clamp(30px, 5vw, 60px) 0 var(--section-pad);
-  background: #ffffff;
+  background: var(--paper);
   overflow: hidden;
 }
 
@@ -684,13 +689,16 @@ body.lang-ka .welcome__signature {
   flex: 0 0 340px;
   scroll-snap-align: start;
   background: #fff;
+  border: 1px solid var(--line);
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.5s,
               box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .room-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 24px 60px rgba(14, 14, 26, 0.1);
+  border-color: var(--red);
+  box-shadow: 0 18px 44px rgba(35, 33, 34, 0.08);
 }
 
 .room-card__img {
@@ -714,7 +722,7 @@ body.lang-ka .welcome__signature {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(14, 14, 26, 0.3), transparent 40%);
+  background: linear-gradient(to top, rgba(35, 33, 34, 0.25), transparent 40%);
 }
 
 .room-card__body {
@@ -723,7 +731,7 @@ body.lang-ka .welcome__signature {
 
 .room-card__name {
   font-family: var(--font-heading);
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -745,10 +753,10 @@ body.lang-ka .welcome__signature {
 }
 
 .room-card__price {
-  font-family: var(--font-heading);
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--text-dark);
+  font-family: var(--font-type);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--red);
 }
 
 .room-card__price small {
@@ -764,35 +772,13 @@ body.lang-ka .welcome__signature {
   text-transform: uppercase;
   color: var(--text-dark);
   text-decoration: none;
-  border-bottom: 1px solid var(--gold);
+  border-bottom: 1.5px solid var(--red);
   padding-bottom: 2px;
   transition: color 0.3s;
 }
 
 .room-card__link:hover {
-  color: #c9a96e;
-  border-bottom-color: #c9a96e;
-}
-
-/* Rooms showcase image */
-.rooms__showcase {
-  width: 100%;
-  max-width: 1400px;
-  margin: 60px auto 0;
-  padding: 0 clamp(24px, 4vw, 60px);
-  aspect-ratio: 958.4 / 638.92;
-  overflow: hidden;
-}
-
-.rooms__showcase img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.rooms__showcase:hover img {
-  transform: scale(1.03);
+  color: var(--red);
 }
 
 /* Carousel arrows */
@@ -806,7 +792,7 @@ body.lang-ka .welcome__signature {
 .carousel-arrow {
   width: 48px;
   height: 48px;
-  border: 1px solid rgba(44, 44, 44, 0.2);
+  border: 1px solid var(--line-strong);
   background: transparent;
   cursor: pointer;
   display: flex;
@@ -816,12 +802,12 @@ body.lang-ka .welcome__signature {
 }
 
 .carousel-arrow:hover {
-  border-color: var(--gold);
-  background: var(--gold);
+  border-color: var(--red);
+  background: var(--red);
 }
 
 .carousel-arrow:hover svg {
-  color: var(--dark);
+  color: #fff;
 }
 
 .carousel-arrow svg {
@@ -832,14 +818,14 @@ body.lang-ka .welcome__signature {
 }
 
 /* ═══════════════════════════════════════════
-   CINEMA HERITAGE
+   CINEMA HERITAGE — b/w still with label tab
    ═══════════════════════════════════════════ */
 
 .cinema {
   position: relative;
   padding: clamp(60px, 9vw, 120px) clamp(24px, 6vw, 100px);
   overflow: hidden;
-  background: #ffffff;
+  background: var(--paper);
 }
 
 .cinema__bg-img {
@@ -849,56 +835,14 @@ body.lang-ka .welcome__signature {
   height: 75%;
   object-fit: cover;
   z-index: 0;
-  border-radius: 8px;
+  filter: grayscale(1) contrast(1.08);
 }
 
 .cinema__overlay {
   position: absolute;
   inset: 12.5%;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(24, 22, 23, 0.6);
   z-index: 1;
-  border-radius: 8px;
-}
-
-.cinema__bg-pattern {
-  position: absolute;
-  inset: 0;
-  opacity: 0.04;
-  background-image:
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 18px,
-      rgba(201, 169, 110, 0.5) 18px,
-      rgba(201, 169, 110, 0.5) 19px
-    );
-  pointer-events: none;
-}
-
-/* Film strip decorations */
-.cinema__strip {
-  position: absolute;
-  width: 48px;
-  top: 0;
-  bottom: 0;
-  opacity: 0.06;
-  background:
-    repeating-linear-gradient(
-      180deg,
-      var(--gold) 0px,
-      var(--gold) 24px,
-      transparent 24px,
-      transparent 32px
-    );
-  pointer-events: none;
-}
-
-.cinema__strip--left {
-  left: clamp(10px, 3vw, 40px);
-}
-
-.cinema__strip--right {
-  right: clamp(10px, 3vw, 40px);
 }
 
 .cinema__inner {
@@ -909,64 +853,17 @@ body.lang-ka .welcome__signature {
   text-align: center;
 }
 
-.cinema .section-label {
-  color: rgba(255, 255, 255, 0.7);
-}
-
 .cinema .section-title {
   color: #ffffff;
 }
 
 .cinema__text {
-  font-family: var(--font-heading);
-  font-size: clamp(17px, 2vw, 20px);
+  font-size: clamp(15px, 1.8vw, 18px);
   font-weight: 300;
   font-style: italic;
-  line-height: 1.9;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 48px;
-}
-
-.cinema__directors {
-  display: flex;
-  justify-content: center;
-  gap: 48px;
-  flex-wrap: wrap;
-}
-
-.cinema__director {
-  text-align: center;
-}
-
-.cinema__director-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin: 0 auto 12px;
-  border: 1px solid rgba(201, 169, 110, 0.3);
-}
-
-.cinema__director-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(60%) contrast(1.1);
-}
-
-.cinema__director-name {
-  font-family: var(--font-heading);
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-dark);
-  letter-spacing: 0.05em;
-}
-
-.cinema__director-role {
-  font-size: 11px;
-  color: var(--taupe);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  line-height: 2;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 24px;
 }
 
 /* ═══════════════════════════════════════════
@@ -975,7 +872,7 @@ body.lang-ka .welcome__signature {
 
 .philharmonic {
   padding: var(--section-pad) clamp(24px, 6vw, 100px);
-  background: #ffffff;
+  background: var(--paper);
 }
 
 .philharmonic__grid {
@@ -1001,29 +898,20 @@ body.lang-ka .welcome__signature {
   max-width: 700px;
 }
 
-.philharmonic__text .section-label {
-  color: #000;
-}
-
-.philharmonic__text .section-title {
-  color: #000;
-}
-
 .philharmonic__text .section-body {
   margin: 0 auto;
-  color: #999;
 }
 
 .philharmonic__img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: sepia(0.45) contrast(1.1) brightness(0.9);
+  filter: grayscale(1) contrast(1.06);
   transition: filter 0.6s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .philharmonic__img:hover img {
-  filter: sepia(0.15) contrast(1.05) brightness(0.95);
+  filter: grayscale(0) contrast(1);
   transform: scale(1.03);
 }
 
@@ -1032,18 +920,7 @@ body.lang-ka .welcome__signature {
   position: absolute;
   inset: 0;
   z-index: 1;
-  border: 1px solid rgba(201, 169, 110, 0.2);
-  pointer-events: none;
-}
-
-.philharmonic__img::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(135deg, rgba(201, 169, 110, 0.08) 0%, transparent 50%),
-    linear-gradient(to bottom, transparent 70%, rgba(14, 14, 26, 0.15) 100%);
+  border: 1px solid var(--line);
   pointer-events: none;
 }
 
@@ -1053,7 +930,7 @@ body.lang-ka .welcome__signature {
   gap: 48px;
   margin-top: 36px;
   padding-top: 28px;
-  border-top: 1px solid rgba(201, 169, 110, 0.25);
+  border-top: 1px solid var(--line);
 }
 
 .philharmonic__fact {
@@ -1063,10 +940,10 @@ body.lang-ka .welcome__signature {
 }
 
 .philharmonic__fact-num {
-  font-family: var(--font-heading);
-  font-size: 28px;
-  font-weight: 500;
-  color: #000;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--red);
   letter-spacing: 0.02em;
 }
 
@@ -1074,7 +951,7 @@ body.lang-ka .welcome__signature {
   font-size: 10px;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: #000;
+  color: var(--grey);
 }
 
 @media (max-width: 992px) {
@@ -1089,7 +966,7 @@ body.lang-ka .welcome__signature {
 
 .restaurants {
   padding: var(--section-pad) clamp(24px, 6vw, 100px);
-  background: #ffffff;
+  background: var(--paper);
 }
 
 .restaurants__header {
@@ -1127,8 +1004,8 @@ body.lang-ka .welcome__signature {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top,
-    rgba(14, 14, 26, 0.85) 0%,
-    rgba(14, 14, 26, 0.2) 50%,
+    rgba(24, 22, 23, 0.85) 0%,
+    rgba(24, 22, 23, 0.2) 50%,
     transparent 100%
   );
   display: flex;
@@ -1140,9 +1017,9 @@ body.lang-ka .welcome__signature {
 
 .resto-card:hover .resto-card__overlay {
   background: linear-gradient(to top,
-    rgba(14, 14, 26, 0.9) 0%,
-    rgba(14, 14, 26, 0.35) 60%,
-    rgba(14, 14, 26, 0.15) 100%
+    rgba(24, 22, 23, 0.9) 0%,
+    rgba(24, 22, 23, 0.35) 60%,
+    rgba(24, 22, 23, 0.15) 100%
   );
 }
 
@@ -1152,22 +1029,23 @@ body.lang-ka .welcome__signature {
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--cream);
+  color: #fff;
   margin-bottom: 6px;
 }
 
 .resto-card__type {
+  font-family: var(--font-type);
   font-size: 11px;
   letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--gold);
+  text-transform: lowercase;
+  color: var(--red);
   margin-bottom: 12px;
 }
 
 .resto-card__desc {
   font-size: 13px;
   line-height: 1.7;
-  color: rgba(245, 240, 235, 0.6);
+  color: rgba(255, 255, 255, 0.72);
   max-width: 280px;
   opacity: 0;
   transform: translateY(10px);
@@ -1185,7 +1063,7 @@ body.lang-ka .welcome__signature {
 
 .wellness {
   padding: var(--section-pad) clamp(24px, 6vw, 100px);
-  background: #ffffff;
+  background: var(--paper);
 }
 
 .wellness__grid {
@@ -1246,11 +1124,11 @@ body.lang-ka .welcome__signature {
   width: 36px;
   height: 36px;
   flex-shrink: 0;
-  border: 1px solid var(--gold);
+  border: 1px solid var(--red);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gold);
+  color: var(--red);
 }
 
 .wellness__feature-icon svg {
@@ -1261,7 +1139,7 @@ body.lang-ka .welcome__signature {
 .wellness__feature-text h4 {
   font-family: var(--font-heading);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-dark);
@@ -1275,65 +1153,12 @@ body.lang-ka .welcome__signature {
 }
 
 /* ═══════════════════════════════════════════
-   CTA SECTION — "LET'S CAPTURE YOUR STORY"
-   ═══════════════════════════════════════════ */
-
-.cta-section {
-  position: relative;
-  padding: clamp(100px, 15vw, 200px) clamp(24px, 6vw, 100px);
-  background: var(--dark-surface);
-  text-align: center;
-  overflow: hidden;
-}
-
-.cta-section__bg {
-  position: absolute;
-  inset: 0;
-}
-
-.cta-section__bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.18;
-  filter: grayscale(40%);
-}
-
-.cta-section__inner {
-  position: relative;
-  z-index: 1;
-  max-width: 680px;
-  margin: 0 auto;
-}
-
-.cta-section__title {
-  font-family: var(--font-display);
-  font-size: clamp(34px, 5vw, 64px);
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--cream);
-  line-height: 1.15;
-  margin-bottom: 24px;
-}
-
-.cta-section__subtitle {
-  font-family: var(--font-heading);
-  font-size: clamp(16px, 1.8vw, 19px);
-  font-weight: 300;
-  font-style: italic;
-  color: rgba(245, 240, 235, 0.5);
-  margin-bottom: 48px;
-  line-height: 1.7;
-}
-
-/* ═══════════════════════════════════════════
    FIND US
    ═══════════════════════════════════════════ */
 
 .findus {
   padding: var(--section-pad) clamp(24px, 6vw, 100px);
-  background: var(--offwhite);
+  background: var(--paper);
 }
 
 .findus__grid {
@@ -1353,10 +1178,11 @@ body.lang-ka .welcome__signature {
 }
 
 .findus__detail-label {
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--taupe);
+  font-family: var(--font-type);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: lowercase;
+  color: var(--red);
   margin-bottom: 8px;
 }
 
@@ -1371,17 +1197,18 @@ body.lang-ka .welcome__signature {
 .findus__detail-value a {
   color: var(--text-dark);
   text-decoration: none;
-  border-bottom: 1px solid var(--gold);
+  border-bottom: 1.5px solid var(--red);
   transition: color 0.3s;
 }
 
 .findus__detail-value a:hover {
-  color: var(--gold);
+  color: var(--red);
 }
 
 .findus__map {
   aspect-ratio: 1;
   background: var(--cream);
+  border: 1px solid var(--line);
   overflow: hidden;
   position: relative;
 }
@@ -1390,26 +1217,46 @@ body.lang-ka .welcome__signature {
   width: 100%;
   height: 100%;
   border: 0;
-  filter: grayscale(60%) contrast(1.1);
+  filter: grayscale(1) contrast(1.05);
   transition: filter 0.5s;
 }
 
 .findus__map:hover iframe {
-  filter: grayscale(20%) contrast(1.05);
+  filter: grayscale(0.2) contrast(1);
 }
 
 /* ═══════════════════════════════════════════
-   EVENTS
+   EVENTS — the playbill board (ink panel)
    ═══════════════════════════════════════════ */
 
 .events-section {
   padding: clamp(60px, 8vw, 120px) clamp(24px, 4vw, 60px);
-  background: var(--dark-surface);
+  background: var(--ink);
 }
 
 .events-section__header {
   text-align: center;
   margin-bottom: clamp(40px, 5vw, 60px);
+}
+
+.events-section .section-label {
+  background: transparent;
+  padding: 0;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 18px;
+}
+
+.events-section .section-label::after {
+  position: static;
+  display: block;
+  margin: 12px auto 0;
+}
+
+.events-section .section-title {
+  color: #fff;
 }
 
 .events-section__grid {
@@ -1421,14 +1268,14 @@ body.lang-ka .welcome__signature {
 }
 
 .event-card {
-  background: rgba(245, 240, 235, 0.02);
-  border: 1px solid rgba(245, 240, 235, 0.06);
+  background: var(--ink-surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   overflow: hidden;
   transition: border-color 0.3s, transform 0.4s;
 }
 
 .event-card:hover {
-  border-color: rgba(245, 240, 235, 0.15);
+  border-color: rgba(221, 71, 71, 0.55);
   transform: translateY(-4px);
 }
 
@@ -1436,7 +1283,7 @@ body.lang-ka .welcome__signature {
   width: 100%;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  background: rgba(245, 240, 235, 0.03);
+  background: rgba(255, 255, 255, 0.04);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1446,12 +1293,18 @@ body.lang-ka .welcome__signature {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+  transition: filter 0.5s;
+}
+
+.event-card:hover .event-card__img img {
+  filter: grayscale(0) contrast(1);
 }
 
 .event-card__img svg {
   width: 48px;
   height: 48px;
-  color: rgba(245, 240, 235, 0.1);
+  color: rgba(255, 255, 255, 0.12);
 }
 
 .event-card__body {
@@ -1459,10 +1312,11 @@ body.lang-ka .welcome__signature {
 }
 
 .event-card__date {
+  font-family: var(--font-type);
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #c9a96e;
+  color: var(--red);
   margin-bottom: 12px;
 }
 
@@ -1471,39 +1325,376 @@ body.lang-ka .welcome__signature {
   font-size: 22px;
   font-weight: 400;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
   margin-bottom: 10px;
 }
 
 .event-card__desc {
   font-size: 13px;
   line-height: 1.8;
-  color: rgba(245, 240, 235, 0.45);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .events-section__empty {
   text-align: center;
-  color: rgba(245, 240, 235, 0.25);
+  color: rgba(255, 255, 255, 0.4);
   grid-column: 1 / -1;
   padding: 40px 0;
 }
 
 /* ═══════════════════════════════════════════
-   REVIEWS
+   INFO BOXES (Events + Offers below hero)
+   ═══════════════════════════════════════════ */
+
+.info-boxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.info-boxes:empty,
+.info-boxes[data-empty="true"] {
+  display: none;
+}
+
+.info-box {
+  padding: clamp(48px, 6vw, 80px) clamp(24px, 4vw, 60px);
+}
+
+.info-box:first-child {
+  border-right: 1px solid var(--line);
+}
+
+.info-box__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.info-box__icon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--red);
+}
+
+.info-box__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.info-box__title {
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.info-box__subtitle {
+  font-family: var(--font-type);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: lowercase;
+  color: var(--red);
+}
+
+.info-box__items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-box__item {
+  display: flex;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.info-box__item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.info-box__item-date {
+  flex-shrink: 0;
+  width: 52px;
+  text-align: center;
+}
+
+.info-box__item-day {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--red);
+  line-height: 1;
+}
+
+.info-box__item-month {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.info-box__item-content h4 {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.info-box__item-content p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.info-box__badge {
+  display: inline-block;
+  font-family: var(--font-type);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  padding: 4px 10px;
+  background: var(--cream);
+  color: var(--text-dark);
+  margin-top: 6px;
+}
+
+.info-box__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--red);
+  padding-bottom: 2px;
+  transition: color 0.3s;
+}
+
+.info-box__link:hover {
+  color: var(--red);
+}
+
+.info-box__empty {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .info-boxes {
+    grid-template-columns: 1fr;
+  }
+  .info-box:first-child {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   AFISHA CAST (Team)
+   ═══════════════════════════════════════════ */
+
+.team-section {
+  padding: var(--section-pad) clamp(24px, 6vw, 100px);
+  background: var(--paper);
+}
+
+.team-section:empty,
+.team-section[data-empty="true"] {
+  display: none;
+}
+
+.team-section__header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.team-section__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.team-card {
+  text-align: center;
+}
+
+.team-card__img {
+  width: 180px;
+  height: 180px;
+  overflow: hidden;
+  margin: 0 auto 24px;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+.team-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1);
+  transition: filter 0.4s;
+}
+
+.team-card:hover .team-card__img img {
+  filter: grayscale(0);
+}
+
+.team-card__img svg {
+  width: 48px;
+  height: 48px;
+  color: var(--line-strong);
+  margin-top: 66px;
+}
+
+.team-card__name {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.team-card__role {
+  font-family: var(--font-type);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: lowercase;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+
+.team-card__bio {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════
+   VACANCIES
+   ═══════════════════════════════════════════ */
+
+.vacancies-section {
+  padding: clamp(60px, 8vw, 100px) clamp(24px, 6vw, 100px);
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+}
+
+.vacancies-section:empty,
+.vacancies-section[data-empty="true"] {
+  display: none;
+}
+
+.vacancies-section__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.vacancies-section__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.vacancy-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 32px;
+  background: #fff;
+  border: 1px solid var(--line);
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.vacancy-card:hover {
+  border-color: var(--red);
+  transform: translateY(-2px);
+}
+
+.vacancy-card__info h4 {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.vacancy-card__meta {
+  display: flex;
+  gap: 16px;
+  font-family: var(--font-type);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  color: var(--grey);
+}
+
+.vacancy-card__apply {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  text-decoration: none;
+  padding: 10px 24px;
+  border: 1px solid var(--text-dark);
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+
+.vacancy-card__apply:hover {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .vacancy-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   REVIEWS — guest book on paper
    ═══════════════════════════════════════════ */
 
 .reviews {
   padding: clamp(60px, 8vw, 120px) clamp(24px, 4vw, 60px);
-  background: var(--dark);
+  background: var(--cream);
 }
 
 .reviews__header {
   text-align: center;
   margin-bottom: clamp(40px, 5vw, 60px);
-}
-
-.reviews .section-title,
-.review-form__title {
-  color: #e74c3c;
 }
 
 .reviews__grid {
@@ -1515,18 +1706,18 @@ body.lang-ka .welcome__signature {
 }
 
 .review-card {
-  background: var(--dark-surface);
-  border: 1px solid rgba(245, 240, 235, 0.06);
+  background: #fff;
+  border: 1px solid var(--line);
   padding: 36px 32px;
   transition: border-color 0.3s;
 }
 
 .review-card:hover {
-  border-color: rgba(245, 240, 235, 0.15);
+  border-color: var(--line-strong);
 }
 
 .review-card__stars {
-  color: #c9a96e;
+  color: var(--red);
   font-size: 18px;
   letter-spacing: 3px;
   margin-bottom: 20px;
@@ -1535,39 +1726,43 @@ body.lang-ka .welcome__signature {
 .review-card__text {
   font-size: 15px;
   line-height: 1.8;
-  color: rgba(245, 240, 235, 0.6);
+  color: var(--text-dark);
   font-style: italic;
   margin-bottom: 24px;
 }
 
 .review-card__author {
-  font-family: var(--font-heading);
-  font-size: 18px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
+  font-family: var(--font-script);
+  font-size: 26px;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  line-height: 1;
 }
 
 .review-card__country {
+  font-family: var(--font-type);
   font-size: 11px;
   letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--taupe);
-  margin-top: 4px;
+  text-transform: lowercase;
+  color: var(--grey);
+  margin-top: 10px;
 }
 
 .review-form-wrap {
   max-width: 600px;
   margin: clamp(40px, 5vw, 60px) auto 0;
-  background: var(--dark-surface);
-  border: 1px solid rgba(245, 240, 235, 0.06);
+  background: #fff;
+  border: 1px solid var(--line);
   padding: 40px 36px;
 }
 
 .review-form__title {
-  font-family: var(--font-heading);
-  font-size: 24px;
+  font-family: var(--font-display);
+  font-size: 26px;
   font-weight: 400;
-  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  letter-spacing: 0.01em;
+  color: var(--text-dark);
   text-align: center;
   margin-bottom: 28px;
 }
@@ -1582,9 +1777,9 @@ body.lang-ka .welcome__signature {
 .review-form textarea {
   width: 100%;
   padding: 12px 16px;
-  background: rgba(245, 240, 235, 0.04);
-  border: 1px solid rgba(245, 240, 235, 0.1);
-  color: var(--cream);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  color: var(--text-dark);
   font-family: var(--font-body);
   font-size: 14px;
   outline: none;
@@ -1593,12 +1788,12 @@ body.lang-ka .welcome__signature {
 
 .review-form input:focus,
 .review-form textarea:focus {
-  border-color: var(--accent);
+  border-color: var(--red);
 }
 
 .review-form input::placeholder,
 .review-form textarea::placeholder {
-  color: rgba(245, 240, 235, 0.25);
+  color: rgba(89, 88, 89, 0.55);
 }
 
 .review-form textarea {
@@ -1614,46 +1809,47 @@ body.lang-ka .welcome__signature {
 }
 
 .review-form__stars span {
-  color: rgba(245, 240, 235, 0.15);
+  color: rgba(35, 33, 34, 0.15);
   transition: color 0.2s;
 }
 
 .review-form__stars span.active {
-  color: #c9a96e;
+  color: var(--red);
 }
 
 .review-form__btn {
   width: 100%;
   padding: 14px;
-  background: #c9a96e;
+  background: var(--red);
   border: none;
-  color: #0e0e1a;
+  color: #fff;
   font-family: var(--font-body);
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
 .review-form__btn:hover {
-  background: #c9a96e;
+  background: var(--red-deep);
 }
 
 .review-form__note {
   text-align: center;
   font-size: 13px;
   margin-top: 12px;
-  color: var(--taupe);
+  color: var(--grey);
 }
 
 /* ═══════════════════════════════════════════
-   FOOTER
+   FOOTER — ink panel, white georgian logo
    ═══════════════════════════════════════════ */
 
 .footer {
-  background: var(--dark);
-  color: rgba(245, 240, 235, 0.5);
+  background: var(--ink);
+  color: rgba(255, 255, 255, 0.55);
   padding: 80px clamp(24px, 6vw, 100px) 40px;
 }
 
@@ -1666,22 +1862,13 @@ body.lang-ka .welcome__signature {
 }
 
 .footer__brand-name {
-  font-family: var(--font-display);
-  font-size: 18px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--cream);
   margin-bottom: 16px;
-}
-
-.footer__brand-name img {
-  filter: brightness(0) saturate(100%) invert(20%) sepia(95%) saturate(5000%) hue-rotate(355deg) brightness(95%) contrast(95%);
 }
 
 .footer__brand-desc {
   font-size: 13px;
   line-height: 1.8;
-  color: rgba(245, 240, 235, 0.4);
+  color: rgba(255, 255, 255, 0.5);
   max-width: 280px;
   margin-bottom: 24px;
 }
@@ -1694,26 +1881,28 @@ body.lang-ka .welcome__signature {
 .footer__social {
   width: 36px;
   height: 36px;
-  border: 1px solid rgba(245, 240, 235, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(245, 240, 235, 0.5);
+  color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
   transition: all 0.3s;
   font-size: 13px;
 }
 
 .footer__social:hover {
-  border-color: var(--gold);
-  color: var(--gold);
+  border-color: var(--red);
+  background: var(--red);
+  color: #fff;
 }
 
 .footer__col-title {
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--gold);
+  font-family: var(--font-type);
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  text-transform: lowercase;
+  color: var(--red);
   margin-bottom: 24px;
 }
 
@@ -1726,19 +1915,19 @@ body.lang-ka .welcome__signature {
 
 .footer__links a {
   font-size: 13px;
-  color: rgba(245, 240, 235, 0.45);
+  color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .footer__links a:hover {
-  color: var(--cream);
+  color: #fff;
 }
 
 .footer__newsletter-text {
   font-size: 13px;
   line-height: 1.7;
-  color: rgba(245, 240, 235, 0.4);
+  color: rgba(255, 255, 255, 0.5);
   margin-bottom: 20px;
 }
 
@@ -1750,10 +1939,10 @@ body.lang-ka .welcome__signature {
 .footer__newsletter-form input {
   flex: 1;
   padding: 12px 16px;
-  background: rgba(245, 240, 235, 0.06);
-  border: 1px solid rgba(245, 240, 235, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-right: none;
-  color: var(--cream);
+  color: #fff;
   font-family: var(--font-body);
   font-size: 13px;
   outline: none;
@@ -1761,18 +1950,18 @@ body.lang-ka .welcome__signature {
 }
 
 .footer__newsletter-form input::placeholder {
-  color: rgba(245, 240, 235, 0.25);
+  color: rgba(255, 255, 255, 0.35);
 }
 
 .footer__newsletter-form input:focus {
-  border-color: var(--gold);
+  border-color: var(--red);
 }
 
 .footer__newsletter-form button {
   padding: 12px 20px;
-  background: var(--gold);
-  border: 1px solid var(--gold);
-  color: var(--dark);
+  background: var(--red);
+  border: 1px solid var(--red);
+  color: #fff;
   cursor: pointer;
   font-size: 10px;
   letter-spacing: 0.2em;
@@ -1783,40 +1972,41 @@ body.lang-ka .welcome__signature {
 }
 
 .footer__newsletter-form button:hover {
-  background: var(--gold-light);
+  background: var(--red-deep);
+  border-color: var(--red-deep);
 }
 
 .footer__bottom {
   max-width: 1200px;
   margin: 0 auto;
   padding-top: 32px;
-  border-top: 1px solid rgba(245, 240, 235, 0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 12px;
-  color: rgba(245, 240, 235, 0.25);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .footer__bottom a {
-  color: rgba(245, 240, 235, 0.35);
+  color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .footer__bottom a:hover {
-  color: var(--gold);
+  color: var(--red);
 }
 
 /* ═══════════════════════════════════════════
-   BOOKING MODAL
+   BOOKING MODAL — paper card
    ═══════════════════════════════════════════ */
 
 .modal-overlay {
   position: fixed;
   inset: 0;
   z-index: 2000;
-  background: rgba(14, 14, 26, 0.85);
+  background: rgba(35, 33, 34, 0.65);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
@@ -1832,8 +2022,8 @@ body.lang-ka .welcome__signature {
 }
 
 .modal {
-  background: var(--dark-surface);
-  border: 1px solid rgba(201, 169, 110, 0.12);
+  background: var(--paper);
+  border-top: 4px solid var(--red);
   padding: 48px;
   width: min(90vw, 520px);
   transform: translateY(20px);
@@ -1845,18 +2035,18 @@ body.lang-ka .welcome__signature {
 }
 
 .modal__title {
-  font-family: var(--font-heading);
-  font-size: 28px;
+  font-family: var(--font-display);
+  font-size: 32px;
   font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--cream);
+  letter-spacing: 0.01em;
+  text-transform: lowercase;
+  color: var(--text-dark);
   margin-bottom: 8px;
 }
 
 .modal__subtitle {
   font-size: 13px;
-  color: rgba(245, 240, 235, 0.4);
+  color: var(--grey);
   margin-bottom: 36px;
 }
 
@@ -1878,18 +2068,19 @@ body.lang-ka .welcome__signature {
 }
 
 .modal__field label {
-  font-size: 10px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--gold);
+  font-family: var(--font-type);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: lowercase;
+  color: var(--red);
 }
 
 .modal__field input,
 .modal__field select {
   padding: 14px 16px;
-  background: rgba(245, 240, 235, 0.04);
-  border: 1px solid rgba(245, 240, 235, 0.1);
-  color: var(--cream);
+  background: #fff;
+  border: 1px solid var(--line);
+  color: var(--text-dark);
   font-family: var(--font-body);
   font-size: 14px;
   outline: none;
@@ -1899,7 +2090,7 @@ body.lang-ka .welcome__signature {
 
 .modal__field input:focus,
 .modal__field select:focus {
-  border-color: var(--gold);
+  border-color: var(--red);
 }
 
 .modal__field select {
@@ -1907,8 +2098,8 @@ body.lang-ka .welcome__signature {
 }
 
 .modal__field select option {
-  background: var(--dark);
-  color: var(--cream);
+  background: #fff;
+  color: var(--text-dark);
 }
 
 .modal__actions {
@@ -1928,7 +2119,7 @@ body.lang-ka .welcome__signature {
   right: 0;
   background: none;
   border: none;
-  color: rgba(245, 240, 235, 0.4);
+  color: var(--grey);
   font-size: 20px;
   cursor: pointer;
   padding: 16px;
@@ -1936,7 +2127,7 @@ body.lang-ka .welcome__signature {
 }
 
 .modal__close:hover {
-  color: var(--cream);
+  color: var(--ink);
 }
 
 /* ═══════════════════════════════════════════
@@ -1949,14 +2140,9 @@ body.lang-ka .welcome__signature {
   .hamburger { display: flex; }
   .mobile-nav { display: flex; }
 
-  .welcome__grid,
   .wellness__grid,
   .findus__grid {
     grid-template-columns: 1fr;
-  }
-
-  .welcome__img {
-    aspect-ratio: 4/3;
   }
 
   .restaurants__grid {
@@ -1995,14 +2181,9 @@ body.lang-ka .welcome__signature {
     word-wrap: break-word;
   }
 
-  .hero__title {
-    font-size: 36px;
-  }
-
   /* Section titles & body text */
   .section-title {
-    font-size: clamp(24px, 6vw, 36px);
-    letter-spacing: 0.02em;
+    font-size: clamp(28px, 8vw, 40px);
   }
 
   .section-body {
@@ -2011,28 +2192,20 @@ body.lang-ka .welcome__signature {
   }
 
   .section-label {
-    font-size: 10px;
-    letter-spacing: 0.25em;
+    font-size: 10.5px;
+    padding: 7px 14px 12px 13px;
+    margin-bottom: 20px;
   }
 
-  /* Welcome / About */
-  .welcome {
-    padding: var(--section-pad) 20px;
+  .section-label::after {
+    left: 13px;
+    width: 24px;
   }
 
-  .welcome__quote {
-    font-size: 18px;
-    line-height: 1.5;
-    padding-left: 16px;
-    margin-bottom: 24px;
-  }
-
-  .welcome__name {
-    font-size: 16px;
-  }
-
-  .welcome__signature {
-    font-size: 22px;
+  .hero__tagline {
+    letter-spacing: 0.3em;
+    text-indent: 0.3em;
+    margin-top: 16px;
   }
 
   /* Rooms */
@@ -2045,7 +2218,7 @@ body.lang-ka .welcome__signature {
   }
 
   .room-card__name {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   .room-card__desc {
@@ -2061,12 +2234,10 @@ body.lang-ka .welcome__signature {
     inset: 0;
     width: 100%;
     height: 100%;
-    border-radius: 0;
   }
 
   .cinema__overlay {
     inset: 0;
-    border-radius: 0;
   }
 
   .cinema__inner {
@@ -2074,25 +2245,12 @@ body.lang-ka .welcome__signature {
   }
 
   .cinema .section-title {
-    font-size: clamp(22px, 6vw, 32px);
-    letter-spacing: 0.02em;
+    font-size: clamp(26px, 8vw, 36px);
   }
 
   .cinema__text {
     font-size: 14px;
-    line-height: 1.7;
-  }
-
-  .cinema__directors {
-    gap: 24px;
-  }
-
-  .cinema__director-name {
-    font-size: 13px;
-  }
-
-  .cinema__director-role {
-    font-size: 10px;
+    line-height: 1.8;
   }
 
   /* Philharmonic */
@@ -2107,7 +2265,7 @@ body.lang-ka .welcome__signature {
   }
 
   .philharmonic__fact-num {
-    font-size: 22px;
+    font-size: 24px;
   }
 
   .philharmonic__fact-label {
@@ -2149,21 +2307,6 @@ body.lang-ka .welcome__signature {
     font-size: 12px;
   }
 
-  /* CTA Section */
-  .cta-section {
-    padding: clamp(60px, 12vw, 120px) 20px;
-  }
-
-  .cta-section__title {
-    font-size: clamp(26px, 7vw, 40px);
-    letter-spacing: 0.03em;
-  }
-
-  .cta-section__subtitle {
-    font-size: 15px;
-    margin-bottom: 32px;
-  }
-
   /* Find Us */
   .findus {
     padding: var(--section-pad) 20px;
@@ -2196,7 +2339,7 @@ body.lang-ka .welcome__signature {
   }
 
   .footer__newsletter-form input {
-    border-right: 1px solid rgba(245, 240, 235, 0.12);
+    border-right: 1px solid rgba(255, 255, 255, 0.16);
   }
 
   .footer__bottom {
@@ -2211,7 +2354,7 @@ body.lang-ka .welcome__signature {
   }
 
   .modal__title {
-    font-size: 22px;
+    font-size: 26px;
   }
 
   .modal__row {
@@ -2247,7 +2390,8 @@ body.lang-ka .welcome__signature {
     </script>
   </div>
   <div class="hero__logo">
-    <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/66f5b9c4bd8e0267ee3b80bf_Afisha_Logo_White.png" alt="Hotel Afisha">
+    <img src="afisha-logo-white.png" alt="Hotel Afisha">
+    <p class="hero__tagline">&bull; be your own muse &bull;</p>
   </div>
   <div class="hero__scroll">
     <span>Scroll</span>
@@ -2264,7 +2408,7 @@ body.lang-ka .welcome__signature {
 
 <!-- ═══════════ HEADER ═══════════ -->
 <header class="header" id="header">
-  <a href="#" class="header__logo"><img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/66f5b9c4bd8e0267ee3b80bf_Afisha_Logo_White.png" alt="Afisha" style="height: 35px;"></a>
+  <a href="#" class="header__logo"><img src="afisha-logo-en.png" alt="Afisha" style="height: 35px;"></a>
 
   <ul class="header__nav">
     <li><a href="#about" data-i18n="nav.about">About</a></li>
@@ -2318,6 +2462,37 @@ body.lang-ka .welcome__signature {
   </div>
 </section>
 
+<!-- ═══════════ INFO BOXES (Events + Offers) ═══════════ -->
+<div class="info-boxes" id="infoBoxes" data-empty="true">
+  <div class="info-box" id="infoEvents" style="display:none;">
+    <div class="info-box__header">
+      <div>
+        <p class="info-box__subtitle" data-i18n="infobox.events.label">What's On</p>
+        <h3 class="info-box__title" data-i18n="infobox.events.title">Upcoming Events</h3>
+      </div>
+      <div class="info-box__icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      </div>
+    </div>
+    <div class="info-box__items" id="infoEventsItems"></div>
+    <a href="events.html" class="info-box__link" data-i18n="infobox.events.all">View All Events</a>
+  </div>
+
+  <div class="info-box" id="infoOffers" style="display:none;">
+    <div class="info-box__header">
+      <div>
+        <p class="info-box__subtitle" data-i18n="infobox.offers.label">Special</p>
+        <h3 class="info-box__title" data-i18n="infobox.offers.title">Offers & Discounts</h3>
+      </div>
+      <div class="info-box__icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+    </div>
+    <div class="info-box__items" id="infoOffersItems"></div>
+    <a href="offers.html" class="info-box__link" data-i18n="infobox.offers.all">View All Offers</a>
+  </div>
+</div>
+
 <!-- ═══════════ ROOMS ═══════════ -->
 <section class="rooms" id="rooms">
   <div class="rooms__header">
@@ -2331,13 +2506,13 @@ body.lang-ka .welcome__signature {
 
       <div class="room-card reveal">
         <div class="room-card__img">
-          <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67402dc9f0f0a08187dfc222_standard.jpg" alt="Standard Room">
+          <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67402dc9f0f0a08187dfc222_standard.jpg" alt="Standard King or Twin Room with French Balcony">
         </div>
         <div class="room-card__body">
-          <h3 class="room-card__name" data-i18n="rooms.standard.name">Studio Room</h3>
-          <p class="room-card__desc" data-i18n="rooms.standard.desc">Intimate and refined, with warm oak tones and soft natural light — a quiet scene for two.</p>
+          <h3 class="room-card__name" data-i18n="rooms.r1.name">Standard King or Twin Room with French Balcony</h3>
+          <p class="room-card__desc" data-i18n="rooms.r1.desc">A refined retreat with French balcony, offering warm oak tones and soft natural light — the perfect opening scene.</p>
           <div class="room-card__footer">
-            <span class="room-card__price">25 m²</span>
+            <span class="room-card__price">22 m²</span>
             <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="room-card__link" data-i18n="nav.book">Book Now</a>
           </div>
         </div>
@@ -2345,13 +2520,13 @@ body.lang-ka .welcome__signature {
 
       <div class="room-card reveal reveal-delay-1">
         <div class="room-card__img">
-          <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67402ee9e943da7c3d131e1c_deluxe2.jpg" alt="Deluxe Room">
+          <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67402ee9e943da7c3d131e1c_deluxe2.jpg" alt="Deluxe King or Twin Room">
         </div>
         <div class="room-card__body">
-          <h3 class="room-card__name" data-i18n="rooms.deluxe.name">Deluxe Room</h3>
-          <p class="room-card__desc" data-i18n="rooms.deluxe.desc">A generous canvas of comfort with city views that frame Tbilisi like a moving picture.</p>
+          <h3 class="room-card__name" data-i18n="rooms.r2.name">Deluxe King or Twin Room</h3>
+          <p class="room-card__desc" data-i18n="rooms.r2.desc">A generous canvas of comfort with elegant interiors that frame your stay like a cinematic masterpiece.</p>
           <div class="room-card__footer">
-            <span class="room-card__price">32 m²</span>
+            <span class="room-card__price">28 m²</span>
             <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="room-card__link" data-i18n="nav.book">Book Now</a>
           </div>
         </div>
@@ -2359,13 +2534,13 @@ body.lang-ka .welcome__signature {
 
       <div class="room-card reveal reveal-delay-2">
         <div class="room-card__img">
-          <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67403096dd808218743f514d_superior.jpg" alt="Superior Room">
+          <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67403096dd808218743f514d_superior.jpg" alt="Superior Double or Twin Room with City View">
         </div>
         <div class="room-card__body">
-          <h3 class="room-card__name" data-i18n="rooms.superior.name">Superior Room</h3>
-          <p class="room-card__desc" data-i18n="rooms.superior.desc">Elevated space where every detail is considered — from handpicked Georgian art to Italian linens.</p>
+          <h3 class="room-card__name" data-i18n="rooms.r3.name">Superior Double or Twin Room with City View</h3>
+          <p class="room-card__desc" data-i18n="rooms.r3.desc">Elevated space with panoramic city views — Tbilisi's skyline becomes your personal backdrop.</p>
           <div class="room-card__footer">
-            <span class="room-card__price">40 m²</span>
+            <span class="room-card__price">32 m²</span>
             <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="room-card__link" data-i18n="nav.book">Book Now</a>
           </div>
         </div>
@@ -2373,13 +2548,13 @@ body.lang-ka .welcome__signature {
 
       <div class="room-card reveal reveal-delay-3">
         <div class="room-card__img">
-          <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67402fb0654d0668668046de_junior%20suite2.jpg" alt="Junior Suite">
+          <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67403096dd808218743f514d_superior.jpg" alt="Superior Large Double or Twin Room">
         </div>
         <div class="room-card__body">
-          <h3 class="room-card__name" data-i18n="rooms.junior.name">Junior Suite</h3>
-          <p class="room-card__desc" data-i18n="rooms.junior.desc">A private screening room of your own — separate living area with panoramic Old Tbilisi views.</p>
+          <h3 class="room-card__name" data-i18n="rooms.r4.name">Superior Large Double or Twin Room</h3>
+          <p class="room-card__desc" data-i18n="rooms.r4.desc">Spacious and refined, where every detail is considered — from handpicked Georgian art to Italian linens.</p>
           <div class="room-card__footer">
-            <span class="room-card__price">55 m²</span>
+            <span class="room-card__price">38 m²</span>
             <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="room-card__link" data-i18n="nav.book">Book Now</a>
           </div>
         </div>
@@ -2387,11 +2562,67 @@ body.lang-ka .welcome__signature {
 
       <div class="room-card reveal reveal-delay-4">
         <div class="room-card__img">
-          <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/6740313460da430d0d25e34b_executive%20copy.jpg" alt="Executive Suite">
+          <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67402dc9f0f0a08187dfc222_standard.jpg" alt="King Room - Disability Access">
         </div>
         <div class="room-card__body">
-          <h3 class="room-card__name" data-i18n="rooms.executive.name">Executive Suite</h3>
-          <p class="room-card__desc" data-i18n="rooms.executive.desc">The director's cut — our most lavish accommodation with a wrap-around terrace and private study.</p>
+          <h3 class="room-card__name" data-i18n="rooms.r5.name">King Room - Disability Access</h3>
+          <p class="room-card__desc" data-i18n="rooms.r5.desc">Thoughtfully designed for full accessibility without compromising on luxury or cinematic ambiance.</p>
+          <div class="room-card__footer">
+            <span class="room-card__price">30 m²</span>
+            <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="room-card__link" data-i18n="nav.book">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="room-card reveal">
+        <div class="room-card__img">
+          <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67403096dd808218743f514d_superior.jpg" alt="Superior King Room">
+        </div>
+        <div class="room-card__body">
+          <h3 class="room-card__name" data-i18n="rooms.r6.name">Superior King Room</h3>
+          <p class="room-card__desc" data-i18n="rooms.r6.desc">A commanding space with king-size comfort, where Georgian artistry meets modern elegance.</p>
+          <div class="room-card__footer">
+            <span class="room-card__price">35 m²</span>
+            <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="room-card__link" data-i18n="nav.book">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="room-card reveal reveal-delay-1">
+        <div class="room-card__img">
+          <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67403096dd808218743f514d_superior.jpg" alt="Superior Double Room">
+        </div>
+        <div class="room-card__body">
+          <h3 class="room-card__name" data-i18n="rooms.r7.name">Superior Double Room</h3>
+          <p class="room-card__desc" data-i18n="rooms.r7.desc">Refined double accommodation with premium finishes and a curated sense of cinematic calm.</p>
+          <div class="room-card__footer">
+            <span class="room-card__price">33 m²</span>
+            <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="room-card__link" data-i18n="nav.book">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="room-card reveal reveal-delay-2">
+        <div class="room-card__img">
+          <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67402fb0654d0668668046de_junior%20suite2.jpg" alt="Junior Suite Room">
+        </div>
+        <div class="room-card__body">
+          <h3 class="room-card__name" data-i18n="rooms.r8.name">Junior Suite Room</h3>
+          <p class="room-card__desc" data-i18n="rooms.r8.desc">A private screening room of your own — separate living area with panoramic Old Tbilisi views.</p>
+          <div class="room-card__footer">
+            <span class="room-card__price">50 m²</span>
+            <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="room-card__link" data-i18n="nav.book">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="room-card reveal reveal-delay-3">
+        <div class="room-card__img">
+          <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/6740313460da430d0d25e34b_executive%20copy.jpg" alt="Executive Suite Room">
+        </div>
+        <div class="room-card__body">
+          <h3 class="room-card__name" data-i18n="rooms.r9.name">Executive Suite Room</h3>
+          <p class="room-card__desc" data-i18n="rooms.r9.desc">The director's cut — our most lavish accommodation with wrap-around terrace and private study.</p>
           <div class="room-card__footer">
             <span class="room-card__price">75 m²</span>
             <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="room-card__link" data-i18n="nav.book">Book Now</a>
@@ -2572,6 +2803,30 @@ body.lang-ka .welcome__signature {
   </div>
 </section>
 
+<!-- ═══════════ AFISHA CAST (Team) ═══════════ -->
+<section class="team-section" id="team" data-empty="true">
+  <div class="team-section__header">
+    <p class="section-label reveal" data-i18n="team.label">Our People</p>
+    <h2 class="section-title reveal reveal-delay-1" data-i18n="team.title" data-i18n-html="true">Afisha<br>Cast</h2>
+    <p class="section-body reveal reveal-delay-2" style="margin: 0 auto;" data-i18n="team.subtitle">The talented team behind your unforgettable experience.</p>
+  </div>
+  <div class="team-section__grid" id="teamGrid">
+    <!-- Team loaded dynamically -->
+  </div>
+</section>
+
+<!-- ═══════════ VACANCIES ═══════════ -->
+<section class="vacancies-section" id="vacancies" data-empty="true">
+  <div class="vacancies-section__header">
+    <p class="section-label reveal" data-i18n="vacancies.label">Careers</p>
+    <h2 class="section-title reveal reveal-delay-1" data-i18n="vacancies.title" data-i18n-html="true">Join<br>Our Cast</h2>
+    <p class="section-body reveal reveal-delay-2" style="margin: 0 auto;" data-i18n="vacancies.subtitle">Be part of the story. Explore current opportunities at Hotel Afisha.</p>
+  </div>
+  <div class="vacancies-section__grid" id="vacanciesGrid">
+    <!-- Vacancies loaded dynamically -->
+  </div>
+</section>
+
 <!-- ═══════════ FIND US ═══════════ -->
 <section class="findus" id="contact">
   <div class="findus__grid">
@@ -2615,7 +2870,7 @@ body.lang-ka .welcome__signature {
 <footer class="footer">
   <div class="footer__top">
     <div>
-      <p class="footer__brand-name"><img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/66f5b9c4bd8e0267ee3b80bf_Afisha_Logo_White.png" alt="Hotel Afisha" style="height: 28px;"></p>
+      <p class="footer__brand-name"><img src="afisha-logo-ka-white.png" alt="სასტუმრო აფიშა — Hotel Afisha" style="height: 30px;"></p>
       <p class="footer__brand-desc" data-i18n="footer.desc">A five-star design hotel in the heart of Tbilisi, where Georgian cinema heritage meets contemporary luxury.</p>
       <div class="footer__socials">
         <a href="https://www.facebook.com/hotel.afisha" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
@@ -2641,6 +2896,7 @@ body.lang-ka .welcome__signature {
       <ul class="footer__links">
         <li><a href="offers.html" data-i18n="footer.offers">Offers</a></li>
         <li><a href="events.html" data-i18n="footer.events">Events</a></li>
+        <li id="footerTeamLink" style="display:none;"><a href="#team" data-i18n="footer.team">Afisha Cast</a></li>
         <li><a href="press.html" data-i18n="footer.press">Press</a></li>
         <li><a href="careers.html" data-i18n="footer.careers">Careers</a></li>
         <li><a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
@@ -2697,20 +2953,24 @@ body.lang-ka .welcome__signature {
       <div class="modal__field">
         <label for="roomtype" data-i18n="modal.roomtype">Room Type</label>
         <select id="roomtype">
-          <option>Studio Room</option>
-          <option>Deluxe Room</option>
-          <option>Superior Room</option>
-          <option>Junior Suite</option>
-          <option>Executive Suite</option>
+          <option>Standard King or Twin with French Balcony</option>
+          <option>Deluxe King or Twin Room</option>
+          <option>Superior Double or Twin with City View</option>
+          <option>Superior Large Double or Twin Room</option>
+          <option>King Room - Disability Access</option>
+          <option>Superior King Room</option>
+          <option>Superior Double Room</option>
+          <option>Junior Suite Room</option>
+          <option>Executive Suite Room</option>
         </select>
       </div>
     </div>
 
     <div class="modal__actions">
-      <button class="btn btn--solid" onclick="document.getElementById('bookingModal').classList.remove('open'); document.body.style.overflow='';">
+      <button class="btn btn--ghost" onclick="document.getElementById('bookingModal').classList.remove('open'); document.body.style.overflow='';">
         <span data-i18n="modal.cancel">Cancel</span>
       </button>
-      <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="btn" style="border-color: var(--gold); color: var(--gold); text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+      <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="btn btn--solid">
         <span data-i18n="modal.continue">Continue</span>
         <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
@@ -2755,16 +3015,42 @@ body.lang-ka .welcome__signature {
       'rooms.title': 'Your Scene<br>Awaits',
       'rooms.subtitle': 'Generous rooms designed with cinematic attention to light, texture, and composition.',
       'rooms.pernight': '/ night',
-      'rooms.standard.name': 'Studio Room',
-      'rooms.standard.desc': 'Intimate and refined, with warm oak tones and soft natural light — a quiet scene for two.',
-      'rooms.deluxe.name': 'Deluxe Room',
-      'rooms.deluxe.desc': 'A generous canvas of comfort with city views that frame Tbilisi like a moving picture.',
-      'rooms.superior.name': 'Superior Room',
-      'rooms.superior.desc': 'Elevated space where every detail is considered — from handpicked Georgian art to Italian linens.',
-      'rooms.junior.name': 'Junior Suite',
-      'rooms.junior.desc': 'A private screening room of your own — separate living area with panoramic Old Tbilisi views.',
-      'rooms.executive.name': 'Executive Suite',
-      'rooms.executive.desc': 'The director\u2019s cut — our most lavish accommodation with a wrap-around terrace and private study.',
+      'rooms.r1.name': 'Standard King or Twin Room with French Balcony',
+      'rooms.r1.desc': 'A refined retreat with French balcony, offering warm oak tones and soft natural light — the perfect opening scene.',
+      'rooms.r2.name': 'Deluxe King or Twin Room',
+      'rooms.r2.desc': 'A generous canvas of comfort with elegant interiors that frame your stay like a cinematic masterpiece.',
+      'rooms.r3.name': 'Superior Double or Twin Room with City View',
+      'rooms.r3.desc': 'Elevated space with panoramic city views — Tbilisi\u2019s skyline becomes your personal backdrop.',
+      'rooms.r4.name': 'Superior Large Double or Twin Room',
+      'rooms.r4.desc': 'Spacious and refined, where every detail is considered — from handpicked Georgian art to Italian linens.',
+      'rooms.r5.name': 'King Room - Disability Access',
+      'rooms.r5.desc': 'Thoughtfully designed for full accessibility without compromising on luxury or cinematic ambiance.',
+      'rooms.r6.name': 'Superior King Room',
+      'rooms.r6.desc': 'A commanding space with king-size comfort, where Georgian artistry meets modern elegance.',
+      'rooms.r7.name': 'Superior Double Room',
+      'rooms.r7.desc': 'Refined double accommodation with premium finishes and a curated sense of cinematic calm.',
+      'rooms.r8.name': 'Junior Suite Room',
+      'rooms.r8.desc': 'A private screening room of your own — separate living area with panoramic Old Tbilisi views.',
+      'rooms.r9.name': 'Executive Suite Room',
+      'rooms.r9.desc': 'The director\u2019s cut — our most lavish accommodation with wrap-around terrace and private study.',
+
+      // Info Boxes
+      'infobox.events.label': 'What\u2019s On',
+      'infobox.events.title': 'Upcoming Events',
+      'infobox.events.all': 'View All Events',
+      'infobox.offers.label': 'Special',
+      'infobox.offers.title': 'Offers & Discounts',
+      'infobox.offers.all': 'View All Offers',
+
+      // Team
+      'team.label': 'Our People',
+      'team.title': 'Afisha<br>Cast',
+      'team.subtitle': 'The talented team behind your unforgettable experience.',
+
+      // Vacancies
+      'vacancies.label': 'Careers',
+      'vacancies.title': 'Join<br>Our Cast',
+      'vacancies.subtitle': 'Be part of the story. Explore current opportunities at Hotel Afisha.',
 
       // Cinema
       'cinema.label': 'Our Heritage',
@@ -2837,6 +3123,7 @@ body.lang-ka .welcome__signature {
       'footer.press': 'Press',
       'footer.careers': 'Careers',
       'footer.privacy': 'Privacy Policy',
+      'footer.team': 'Afisha Cast',
       'footer.connected': 'Stay Connected',
       'footer.subscribe': 'Subscribe for exclusive offers and the latest from Hotel Afisha.',
       'footer.emailph': 'Your email address',
@@ -2857,11 +3144,15 @@ body.lang-ka .welcome__signature {
       'modal.guest.2': '2 Adults',
       'modal.guest.3': '2 Adults, 1 Child',
       'modal.guest.4': '2 Adults, 2 Children',
-      'modal.room.1': 'Studio Room',
-      'modal.room.2': 'Deluxe Room',
-      'modal.room.3': 'Superior Room',
-      'modal.room.4': 'Junior Suite',
-      'modal.room.5': 'Executive Suite',
+      'modal.room.1': 'Standard King or Twin with French Balcony',
+      'modal.room.2': 'Deluxe King or Twin Room',
+      'modal.room.3': 'Superior Double or Twin with City View',
+      'modal.room.4': 'Superior Large Double or Twin Room',
+      'modal.room.5': 'King Room - Disability Access',
+      'modal.room.6': 'Superior King Room',
+      'modal.room.7': 'Superior Double Room',
+      'modal.room.8': 'Junior Suite Room',
+      'modal.room.9': 'Executive Suite Room',
     },
 
     ka: {
@@ -2891,16 +3182,42 @@ body.lang-ka .welcome__signature {
       'rooms.title': 'თქვენი სცენა<br>გელოდებათ',
       'rooms.subtitle': 'დახვეწილი ნომრები, შექმნილი კინემატოგრაფიული ყურადღებით სინათლის, ტექსტურისა და კომპოზიციის მიმართ.',
       'rooms.pernight': '/ ღამე',
-      'rooms.standard.name': 'სტუდიო ნომერი',
-      'rooms.standard.desc': 'ინტიმური და დახვეწილი, თბილი მუხის ტონებითა და რბილი ბუნებრივი შუქით — მშვიდი სცენა ორისთვის.',
-      'rooms.deluxe.name': 'დელუქს ნომერი',
-      'rooms.deluxe.desc': 'კომფორტის ფართო ტილო ქალაქის ხედით, რომელიც თბილისს მოძრავ სურათად ჩარჩოებს.',
-      'rooms.superior.name': 'სუპერიორ ნომერი',
-      'rooms.superior.desc': 'ამაღლებული სივრცე, სადაც ყოველი დეტალი გათვალისწინებულია — ქართული ხელოვნებიდან იტალიურ თეთრეულამდე.',
-      'rooms.junior.name': 'ჯუნიორ სვიტი',
-      'rooms.junior.desc': 'თქვენი პირადი ჩვენების დარბაზი — ცალკე მისაღები ძველი თბილისის პანორამული ხედით.',
-      'rooms.executive.name': 'ეგზეკუტივ სვიტი',
-      'rooms.executive.desc': 'რეჟისორის ვერსია — ჩვენი ყველაზე ფუფუნებული საცხოვრისი შემოვლითი ტერასითა და კერძო სამუშაო ოთახით.',
+      'rooms.r1.name': 'სტანდარტ კინგ ან თვინ ნომერი ფრანგული აივნით',
+      'rooms.r1.desc': 'დახვეწილი თავშესაფარი ფრანგული აივნით, თბილი მუხის ტონებითა და რბილი ბუნებრივი შუქით.',
+      'rooms.r2.name': 'დელუქს კინგ ან თვინ ნომერი',
+      'rooms.r2.desc': 'კომფორტის ფართო ტილო ელეგანტური ინტერიერით, რომელიც თქვენს ყოფნას კინემატოგრაფიულ შედევრად აქცევს.',
+      'rooms.r3.name': 'სუპერიორ ორადგილიანი ან თვინ ნომერი ქალაქის ხედით',
+      'rooms.r3.desc': 'ამაღლებული სივრცე პანორამული ქალაქის ხედით — თბილისის ჰორიზონტი თქვენი პირადი ფონი ხდება.',
+      'rooms.r4.name': 'სუპერიორ დიდი ორადგილიანი ან თვინ ნომერი',
+      'rooms.r4.desc': 'ფართო და დახვეწილი, სადაც ყოველი დეტალი გათვალისწინებულია — ქართული ხელოვნე���იდან იტალიურ თეთრეულამდე.',
+      'rooms.r5.name': 'კინგ ნომ��რი - შეზღუდული შესაძლებლობები',
+      'rooms.r5.desc': 'გააზრებულად შექმნილი სრული ხელმისაწვდომობისთვის, ფუფუნებისა და კინემატოგრაფიული ატმოსფეროს შენარჩუნებით.',
+      'rooms.r6.name': 'სუპერიორ კინგ ნომერი',
+      'rooms.r6.desc': 'იმპოზანტური სივრცე კინგ-საიზ კომფორტით, სადაც ქართული ხელოვნება თანამედროვე ელეგანტურობას ხვდება.',
+      'rooms.r7.name': 'სუპერიორ ორადგილიანი ნომერი',
+      'rooms.r7.desc': 'დახვეწილი ორადგილიანი განთავსება პრემიუმ გაწყობით და კინემატოგრაფიული სიმშვიდის განცდით.',
+      'rooms.r8.name': 'ჯუნიორ სვიტი',
+      'rooms.r8.desc': 'თქვენი პირადი ჩვენების დარბაზი — ცალკე მისაღები ძველი თბილისის პანორამული ხედით.',
+      'rooms.r9.name': 'ეგზეკუ��ივ სვიტი',
+      'rooms.r9.desc': 'რეჟისორის ვერსია — ჩვენი ყველაზე ფუფუნებული საცხოვრისი შემოვლითი ტერასითა და კერძო სამუშაო ოთახით.',
+
+      // Info Boxes
+      'infobox.events.label': 'რა ხდება',
+      'infobox.events.title': 'მომავალი ღონისძიებები',
+      'infobox.events.all': 'ყველა ღონისძიების ნახვა',
+      'infobox.offers.label': 'სპეციალური',
+      'infobox.offers.title': 'შეთავაზებები და ფასდაკლებები',
+      'infobox.offers.all': 'ყველა შეთავაზების ნახვა',
+
+      // Team
+      'team.label': 'ჩვენი გუნდი',
+      'team.title': 'აფიშა<br>ქასთი',
+      'team.subtitle': 'ნიჭიერი გუნდი თქვენი დაუვიწყარი გამოცდილების უკან.',
+
+      // Vacancies
+      'vacancies.label': 'კარიერა',
+      'vacancies.title': 'შემოუერთდი<br>ჩვენს ქასთს',
+      'vacancies.subtitle': 'გახდი ისტორიის ნაწილი. გაეცანი მიმდინარე ვაკანსიებს სასტუმრო აფიშაში.',
 
       // Cinema
       'cinema.label': 'ჩვენი მემკვიდრეობა',
@@ -2973,6 +3290,7 @@ body.lang-ka .welcome__signature {
       'footer.press': 'პრესა',
       'footer.careers': 'კარიერა',
       'footer.privacy': 'კონფიდენციალურობის პოლიტიკა',
+      'footer.team': 'აფიშა ქასთი',
       'footer.connected': 'იყავი კავშირში',
       'footer.subscribe': 'გამოიწერეთ ექსკლუზიური შეთავაზებები და სიახლეები სასტუმრო აფიშადან.',
       'footer.emailph': 'თქვენი ელ. ფოსტა',
@@ -2993,11 +3311,15 @@ body.lang-ka .welcome__signature {
       'modal.guest.2': '2 ზრდასრული',
       'modal.guest.3': '2 ზრდასრული, 1 ბავშვი',
       'modal.guest.4': '2 ზრდასრული, 2 ბავშვი',
-      'modal.room.1': 'სტუდიო ნომერი',
-      'modal.room.2': 'დელუქს ნომერი',
-      'modal.room.3': 'სუპერიორ ნომერი',
-      'modal.room.4': 'ჯუნიორ სვიტი',
-      'modal.room.5': 'ეგზეკუტივ სვიტი',
+      'modal.room.1': 'სტანდარტ კინგ ან თვინ ფრანგული აივნით',
+      'modal.room.2': 'დელუქს კინგ ან თვინ ნომერი',
+      'modal.room.3': 'სუპერიორ ორადგილიანი ან თვინ ქალაქის ხედით',
+      'modal.room.4': 'სუპერიორ დიდი ორადგილიანი ან თვინ ნომერი',
+      'modal.room.5': 'კინგ ნომერი - შეზღუდული შესაძლებლობები',
+      'modal.room.6': 'სუპერიორ კინგ ნომერი',
+      'modal.room.7': 'სუპერიორ ორადგილიანი ნომერი',
+      'modal.room.8': 'ჯუნიორ სვიტი',
+      'modal.room.9': 'ეგზეკუტივ სვიტი',
     }
   };
 
@@ -3046,7 +3368,7 @@ body.lang-ka .welcome__signature {
     // Update select options for room type
     const roomSelect = document.getElementById('roomtype');
     if (roomSelect) {
-      const roomKeys = ['modal.room.1', 'modal.room.2', 'modal.room.3', 'modal.room.4', 'modal.room.5'];
+      const roomKeys = ['modal.room.1', 'modal.room.2', 'modal.room.3', 'modal.room.4', 'modal.room.5', 'modal.room.6', 'modal.room.7', 'modal.room.8', 'modal.room.9'];
       roomSelect.querySelectorAll('option').forEach((opt, i) => {
         if (dict[roomKeys[i]]) opt.textContent = dict[roomKeys[i]];
       });
@@ -3252,6 +3574,127 @@ body.lang-ka .welcome__signature {
     .catch(() => {
       reviewsGrid.innerHTML = '<p style="text-align:center;color:var(--taupe);grid-column:1/-1;">Reviews coming soon.</p>';
     });
+
+  // ── Load info boxes (events + offers) ────
+  const infoBoxes = document.getElementById('infoBoxes');
+  const infoEvents = document.getElementById('infoEvents');
+  const infoEventsItems = document.getElementById('infoEventsItems');
+  const infoOffers = document.getElementById('infoOffers');
+  const infoOffersItems = document.getElementById('infoOffersItems');
+
+  function parseDate(str) {
+    const d = new Date(str);
+    if (isNaN(d)) return null;
+    return d;
+  }
+
+  function formatDay(d) { return d.getDate(); }
+  function formatMonth(d) {
+    return d.toLocaleDateString('en', { month: 'short' }).toUpperCase();
+  }
+
+  // Load events into info box
+  fetch('http://localhost:3002/api/events')
+    .then(r => r.json())
+    .then(events => {
+      if (!events.length) return;
+      infoEvents.style.display = '';
+      infoBoxes.setAttribute('data-empty', 'false');
+      infoEventsItems.innerHTML = events.slice(0, 3).map(ev => {
+        const d = parseDate(ev.date);
+        return `
+          <div class="info-box__item">
+            ${d ? `<div class="info-box__item-date">
+              <div class="info-box__item-day">${formatDay(d)}</div>
+              <div class="info-box__item-month">${formatMonth(d)}</div>
+            </div>` : ''}
+            <div class="info-box__item-content">
+              <h4>${ev.title}</h4>
+              ${ev.desc ? `<p>${ev.desc.substring(0, 100)}${ev.desc.length > 100 ? '...' : ''}</p>` : ''}
+              ${ev.time ? `<span class="info-box__badge">${ev.time}${ev.location ? ' — ' + ev.location : ''}</span>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    })
+    .catch(() => {});
+
+  // Load offers into info box
+  fetch('http://localhost:3002/api/offers')
+    .then(r => r.json())
+    .then(offers => {
+      const active = offers.filter(o => o.active !== false);
+      if (!active.length) return;
+      infoOffers.style.display = '';
+      infoBoxes.setAttribute('data-empty', 'false');
+      infoOffersItems.innerHTML = active.slice(0, 3).map(offer => {
+        const d = offer.validUntil ? parseDate(offer.validUntil) : null;
+        return `
+          <div class="info-box__item">
+            ${offer.discount ? `<div class="info-box__item-date">
+              <div class="info-box__item-day" style="font-size:16px;">${offer.discount}</div>
+            </div>` : ''}
+            <div class="info-box__item-content">
+              <h4>${offer.title}</h4>
+              ${offer.desc ? `<p>${offer.desc.substring(0, 100)}${offer.desc.length > 100 ? '...' : ''}</p>` : ''}
+              ${d ? `<span class="info-box__badge">Valid until ${d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</span>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    })
+    .catch(() => {});
+
+  // ── Load team (Afisha Cast) ────
+  const teamSection = document.getElementById('team');
+  const teamGrid = document.getElementById('teamGrid');
+  fetch('http://localhost:3002/api/team')
+    .then(r => r.json())
+    .then(members => {
+      if (!members.length) return;
+      teamSection.setAttribute('data-empty', 'false');
+      teamSection.style.display = '';
+      var ftl = document.getElementById('footerTeamLink');
+      if (ftl) ftl.style.display = '';
+      teamGrid.innerHTML = members.sort((a, b) => (a.order || 0) - (b.order || 0)).map(m => `
+        <div class="team-card reveal">
+          <div class="team-card__img">
+            ${m.img ? `<img src="${m.img.startsWith('http') ? m.img : 'http://localhost:3002' + m.img}" alt="${m.name}">` : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8 4 4 0 000-8z"/></svg>`}
+          </div>
+          <h3 class="team-card__name">${m.name}</h3>
+          <p class="team-card__role">${m.role}</p>
+          ${m.bio ? `<p class="team-card__bio">${m.bio}</p>` : ''}
+        </div>
+      `).join('');
+      teamGrid.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    })
+    .catch(() => {});
+
+  // ── Load vacancies ────
+  const vacanciesSection = document.getElementById('vacancies');
+  const vacanciesGrid = document.getElementById('vacanciesGrid');
+  fetch('http://localhost:3002/api/vacancies')
+    .then(r => r.json())
+    .then(vacancies => {
+      const active = vacancies.filter(v => v.active !== false);
+      if (!active.length) return;
+      vacanciesSection.setAttribute('data-empty', 'false');
+      vacanciesSection.style.display = '';
+      vacanciesGrid.innerHTML = active.map(v => `
+        <div class="vacancy-card reveal">
+          <div class="vacancy-card__info">
+            <h4>${v.title}</h4>
+            <div class="vacancy-card__meta">
+              ${v.department ? `<span>${v.department}</span>` : ''}
+              ${v.type ? `<span>${v.type}</span>` : ''}
+            </div>
+          </div>
+          <a href="mailto:${v.email || 'hr@hotelafisha.com'}?subject=Application: ${encodeURIComponent(v.title)}" class="vacancy-card__apply">Apply</a>
+        </div>
+      `).join('');
+      vacanciesGrid.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    })
+    .catch(() => {});
 
   // ── Star rating picker ────
   let selectedRating = 5;

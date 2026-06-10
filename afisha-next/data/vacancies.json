@@ -1,0 +1,24 @@
+[
+  {
+    "id": "mo8kkjzrgpe",
+    "title": "Front Desk Agent",
+    "department": "Front Office",
+    "type": "Full-time",
+    "desc": "Welcome guests and manage check-in/check-out operations.",
+    "requirements": "",
+    "email": "hr@hotelafisha.com",
+    "active": true,
+    "createdAt": "2026-04-21T11:57:46.935Z"
+  },
+  {
+    "id": "mo8kkk097qs",
+    "title": "Spa Therapist",
+    "department": "Wellness",
+    "type": "Full-time",
+    "desc": "Deliver exceptional spa treatments and wellness experiences.",
+    "requirements": "",
+    "email": "hr@hotelafisha.com",
+    "active": true,
+    "createdAt": "2026-04-21T11:57:46.953Z"
+  }
+]

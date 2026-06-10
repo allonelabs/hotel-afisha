@@ -32,6 +32,21 @@ export default function AdminPage() {
   const [editingEvent, setEditingEvent] = useState(null);
   const [eventForm, setEventForm] = useState({ title: '', date: '', time: '', location: 'Hotel Afisha', desc: '', img: '' });
 
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [showTeamForm, setShowTeamForm] = useState(false);
+  const [editingTeam, setEditingTeam] = useState(null);
+  const [teamForm, setTeamForm] = useState({ name: '', role: '', bio: '', img: '' });
+
+  const [vacancies, setVacancies] = useState([]);
+  const [showVacancyForm, setShowVacancyForm] = useState(false);
+  const [editingVacancy, setEditingVacancy] = useState(null);
+  const [vacancyForm, setVacancyForm] = useState({ title: '', department: '', type: 'Full-time', desc: '', requirements: '', email: 'hr@hotelafisha.com' });
+
+  const [offers, setOffers] = useState([]);
+  const [showOfferForm, setShowOfferForm] = useState(false);
+  const [editingOffer, setEditingOffer] = useState(null);
+  const [offerForm, setOfferForm] = useState({ title: '', desc: '', discount: '', validUntil: '', img: '' });
+
   // Check auth on load
   useEffect(() => {
     fetch('/api/auth').then(r => {
@@ -70,23 +85,32 @@ export default function AdminPage() {
 
   const fetchData = async () => {
     setLoading(true);
-    const [mRes, sRes, rRes, eRes, rvRes] = await Promise.all([
+    const [mRes, sRes, rRes, eRes, rvRes, tRes, vRes, oRes] = await Promise.all([
       fetch('/api/menu'),
       fetch('/api/newsletter'),
       fetch('/api/rooms'),
       fetch('/api/events'),
       fetch('/api/reviews'),
+      fetch('/api/team'),
+      fetch('/api/vacancies'),
+      fetch('/api/offers'),
     ]);
     const mData = await mRes.json();
     const sData = await sRes.json();
     const rData = await rRes.json();
     const eData = await eRes.json();
     const rvData = await rvRes.json();
+    const tData = await tRes.json();
+    const vData = await vRes.json();
+    const oData = await oRes.json();
     setMenuItems(mData);
     setSubscribers(sData.sort((a, b) => new Date(b.subscribedAt) - new Date(a.subscribedAt)));
     setRooms(rData);
     setEvents(eData.sort((a, b) => new Date(a.date) - new Date(b.date)));
     setReviews(rvData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+    setTeamMembers(tData);
+    setVacancies(vData);
+    setOffers(oData);
     setLoading(false);
   };
 
@@ -218,6 +242,100 @@ export default function AdminPage() {
     await fetchData();
   };
 
+  // Team CRUD
+  const openTeamForm = (member = null) => {
+    if (member) {
+      setEditingTeam(member);
+      setTeamForm({ name: member.name, role: member.role, bio: member.bio || '', img: member.img || '' });
+    } else {
+      setEditingTeam(null);
+      setTeamForm({ name: '', role: '', bio: '', img: '' });
+    }
+    setShowTeamForm(true);
+  };
+
+  const saveTeamMember = async () => {
+    if (!teamForm.name || !teamForm.role) return;
+    if (editingTeam) {
+      await fetch(`/api/team/${editingTeam.id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(teamForm) });
+    } else {
+      await fetch('/api/team', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(teamForm) });
+    }
+    setShowTeamForm(false);
+    fetchData();
+  };
+
+  const deleteTeamMember = async (id) => {
+    await fetch(`/api/team/${id}`, { method: 'DELETE' });
+    await fetchData();
+  };
+
+  // Vacancy CRUD
+  const openVacancyForm = (vacancy = null) => {
+    if (vacancy) {
+      setEditingVacancy(vacancy);
+      setVacancyForm({ title: vacancy.title, department: vacancy.department || '', type: vacancy.type || 'Full-time', desc: vacancy.desc || '', requirements: vacancy.requirements || '', email: vacancy.email || 'hr@hotelafisha.com' });
+    } else {
+      setEditingVacancy(null);
+      setVacancyForm({ title: '', department: '', type: 'Full-time', desc: '', requirements: '', email: 'hr@hotelafisha.com' });
+    }
+    setShowVacancyForm(true);
+  };
+
+  const saveVacancy = async () => {
+    if (!vacancyForm.title) return;
+    if (editingVacancy) {
+      await fetch(`/api/vacancies/${editingVacancy.id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(vacancyForm) });
+    } else {
+      await fetch('/api/vacancies', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(vacancyForm) });
+    }
+    setShowVacancyForm(false);
+    fetchData();
+  };
+
+  const deleteVacancy = async (id) => {
+    await fetch(`/api/vacancies/${id}`, { method: 'DELETE' });
+    await fetchData();
+  };
+
+  const toggleVacancyActive = async (id, active) => {
+    await fetch(`/api/vacancies/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ active: !active }) });
+    await fetchData();
+  };
+
+  // Offer CRUD
+  const openOfferForm = (offer = null) => {
+    if (offer) {
+      setEditingOffer(offer);
+      setOfferForm({ title: offer.title, desc: offer.desc || '', discount: offer.discount || '', validUntil: offer.validUntil || '', img: offer.img || '' });
+    } else {
+      setEditingOffer(null);
+      setOfferForm({ title: '', desc: '', discount: '', validUntil: '', img: '' });
+    }
+    setShowOfferForm(true);
+  };
+
+  const saveOffer = async () => {
+    if (!offerForm.title) return;
+    if (editingOffer) {
+      await fetch(`/api/offers/${editingOffer.id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(offerForm) });
+    } else {
+      await fetch('/api/offers', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(offerForm) });
+    }
+    setShowOfferForm(false);
+    fetchData();
+  };
+
+  const deleteOffer = async (id) => {
+    await fetch(`/api/offers/${id}`, { method: 'DELETE' });
+    await fetchData();
+  };
+
+  const toggleOfferActive = async (id, active) => {
+    await fetch(`/api/offers/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ active: !active }) });
+    await fetchData();
+  };
+
   const [uploading, setUploading] = useState(false);
 
   const uploadImage = async (file, setter, field) => {
@@ -295,7 +413,7 @@ export default function AdminPage() {
 
       {/* Navigation */}
       <nav className={styles.nav}>
-        {['dashboard', 'menu', 'rooms', 'events', 'reviews', 'subscribers'].map(t => (
+        {['dashboard', 'menu', 'rooms', 'events', 'team', 'vacancies', 'offers', 'reviews', 'subscribers'].map(t => (
           <button key={t} className={`${styles.navBtn} ${tab === t ? styles.navActive : ''}`} onClick={() => { setTab(t); setSelected(null); }}>
             {t.charAt(0).toUpperCase() + t.slice(1)}
           </button>
@@ -341,6 +459,18 @@ export default function AdminPage() {
                 <div className={styles.statCard}>
                   <span className={styles.statNum}>{menuItems.filter(m => m.restaurant === 'Brasserie').length}</span>
                   <span className={styles.statLabel}>Brasserie Items</span>
+                </div>
+                <div className={styles.statCard}>
+                  <span className={styles.statNum}>{teamMembers.length}</span>
+                  <span className={styles.statLabel}>Team Members</span>
+                </div>
+                <div className={styles.statCard}>
+                  <span className={styles.statNum}>{vacancies.length}</span>
+                  <span className={styles.statLabel}>Vacancies</span>
+                </div>
+                <div className={styles.statCard}>
+                  <span className={styles.statNum}>{offers.length}</span>
+                  <span className={styles.statLabel}>Offers</span>
                 </div>
               </div>
 
@@ -641,6 +771,273 @@ export default function AdminPage() {
                             <div className={styles.actions}>
                               <button onClick={() => openEventForm(ev)} className={styles.actBtn} style={{ color: 'var(--accent)' }}>Edit</button>
                               <button onClick={() => deleteEvent(ev.id)} className={styles.actBtn} style={{ color: '#e74c3c' }}>Delete</button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* ── TEAM TAB ── */}
+          {tab === 'team' && (
+            <div className={styles.subContent}>
+              <div className={styles.subPanel}>
+                <div className={styles.tableHeader}>
+                  <h2 className={styles.panelHead}>Afisha Cast ({teamMembers.length})</h2>
+                  <button className={styles.addBtn} onClick={() => openTeamForm()}>+ Add Member</button>
+                </div>
+
+                {showTeamForm && (
+                  <div className={styles.formCard}>
+                    <h3 className={styles.formCardTitle}>{editingTeam ? 'Edit Team Member' : 'Add Team Member'}</h3>
+                    <div className={styles.formGrid}>
+                      <div className={styles.formField}>
+                        <label>Name *</label>
+                        <input value={teamForm.name} onChange={e => setTeamForm(p => ({ ...p, name: e.target.value }))} placeholder="e.g. John Smith" />
+                      </div>
+                      <div className={styles.formField}>
+                        <label>Role *</label>
+                        <input value={teamForm.role} onChange={e => setTeamForm(p => ({ ...p, role: e.target.value }))} placeholder="e.g. Head Chef" />
+                      </div>
+                      <div className={`${styles.formField} ${styles.formFull}`}>
+                        <label>Image</label>
+                        <div className={styles.imgUploadRow}>
+                          <label className={styles.uploadBtn}>
+                            {uploading ? 'Uploading...' : 'Upload Image'}
+                            <input type="file" accept="image/*" hidden onChange={e => e.target.files[0] && uploadImage(e.target.files[0], setTeamForm, 'img')} />
+                          </label>
+                          <span className={styles.orText}>or</span>
+                          <input value={teamForm.img} onChange={e => setTeamForm(p => ({ ...p, img: e.target.value }))} placeholder="Paste image URL..." style={{ flex: 1 }} />
+                        </div>
+                        {teamForm.img && <img src={teamForm.img} alt="Preview" className={styles.imgPreview} />}
+                      </div>
+                      <div className={`${styles.formField} ${styles.formFull}`}>
+                        <label>Bio</label>
+                        <textarea value={teamForm.bio} onChange={e => setTeamForm(p => ({ ...p, bio: e.target.value }))} placeholder="Short biography..." />
+                      </div>
+                    </div>
+                    <div className={styles.formActions}>
+                      <button className={styles.formCancel} onClick={() => setShowTeamForm(false)}>Cancel</button>
+                      <button className={styles.formSave} onClick={saveTeamMember}>{editingTeam ? 'Update' : 'Add Member'}</button>
+                    </div>
+                  </div>
+                )}
+
+                {teamMembers.length === 0 && !showTeamForm ? (
+                  <p className={styles.emptyMsg}>No team members yet. Click &quot;+ Add Member&quot; to create one.</p>
+                ) : (
+                  <table className={styles.table}>
+                    <thead>
+                      <tr>
+                        <th>Member</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {teamMembers.map(member => (
+                        <tr key={member.id}>
+                          <td>
+                            <strong>{member.name}</strong>
+                            {member.bio && <span className={styles.cellSub}>{member.bio.substring(0, 60)}{member.bio.length > 60 ? '...' : ''}</span>}
+                          </td>
+                          <td>{member.role}</td>
+                          <td>
+                            <div className={styles.actions}>
+                              <button onClick={() => openTeamForm(member)} className={styles.actBtn} style={{ color: 'var(--accent)' }}>Edit</button>
+                              <button onClick={() => deleteTeamMember(member.id)} className={styles.actBtn} style={{ color: '#e74c3c' }}>Delete</button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* ── VACANCIES TAB ── */}
+          {tab === 'vacancies' && (
+            <div className={styles.subContent}>
+              <div className={styles.subPanel}>
+                <div className={styles.tableHeader}>
+                  <h2 className={styles.panelHead}>Vacancies ({vacancies.length})</h2>
+                  <button className={styles.addBtn} onClick={() => openVacancyForm()}>+ Add Vacancy</button>
+                </div>
+
+                {showVacancyForm && (
+                  <div className={styles.formCard}>
+                    <h3 className={styles.formCardTitle}>{editingVacancy ? 'Edit Vacancy' : 'Add New Vacancy'}</h3>
+                    <div className={styles.formGrid}>
+                      <div className={styles.formField}>
+                        <label>Title *</label>
+                        <input value={vacancyForm.title} onChange={e => setVacancyForm(p => ({ ...p, title: e.target.value }))} placeholder="e.g. Front Desk Manager" />
+                      </div>
+                      <div className={styles.formField}>
+                        <label>Department</label>
+                        <input value={vacancyForm.department} onChange={e => setVacancyForm(p => ({ ...p, department: e.target.value }))} placeholder="e.g. Hospitality" />
+                      </div>
+                      <div className={styles.formField}>
+                        <label>Type</label>
+                        <select value={vacancyForm.type} onChange={e => setVacancyForm(p => ({ ...p, type: e.target.value }))}>
+                          <option>Full-time</option>
+                          <option>Part-time</option>
+                          <option>Contract</option>
+                        </select>
+                      </div>
+                      <div className={styles.formField}>
+                        <label>Contact Email</label>
+                        <input value={vacancyForm.email} onChange={e => setVacancyForm(p => ({ ...p, email: e.target.value }))} placeholder="hr@hotelafisha.com" />
+                      </div>
+                      <div className={`${styles.formField} ${styles.formFull}`}>
+                        <label>Description</label>
+                        <textarea value={vacancyForm.desc} onChange={e => setVacancyForm(p => ({ ...p, desc: e.target.value }))} placeholder="Job description..." />
+                      </div>
+                      <div className={`${styles.formField} ${styles.formFull}`}>
+                        <label>Requirements</label>
+                        <textarea value={vacancyForm.requirements} onChange={e => setVacancyForm(p => ({ ...p, requirements: e.target.value }))} placeholder="Job requirements..." />
+                      </div>
+                    </div>
+                    <div className={styles.formActions}>
+                      <button className={styles.formCancel} onClick={() => setShowVacancyForm(false)}>Cancel</button>
+                      <button className={styles.formSave} onClick={saveVacancy}>{editingVacancy ? 'Update' : 'Add Vacancy'}</button>
+                    </div>
+                  </div>
+                )}
+
+                {vacancies.length === 0 && !showVacancyForm ? (
+                  <p className={styles.emptyMsg}>No vacancies yet. Click &quot;+ Add Vacancy&quot; to create one.</p>
+                ) : (
+                  <table className={styles.table}>
+                    <thead>
+                      <tr>
+                        <th>Position</th>
+                        <th>Department</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {vacancies.map(v => (
+                        <tr key={v.id}>
+                          <td>
+                            <strong>{v.title}</strong>
+                            {v.desc && <span className={styles.cellSub}>{v.desc.substring(0, 60)}{v.desc.length > 60 ? '...' : ''}</span>}
+                          </td>
+                          <td>{v.department || '—'}</td>
+                          <td>{v.type || '—'}</td>
+                          <td>
+                            <span className={styles.statusBadge} style={{ background: (v.active !== false ? '#4caf50' : '#c9a96e') + '22', color: v.active !== false ? '#4caf50' : '#c9a96e' }}>
+                              {v.active !== false ? 'Active' : 'Inactive'}
+                            </span>
+                          </td>
+                          <td>
+                            <div className={styles.actions}>
+                              <button onClick={() => toggleVacancyActive(v.id, v.active !== false)} className={styles.actBtn} style={{ color: v.active !== false ? '#c9a96e' : '#4caf50' }}>
+                                {v.active !== false ? 'Deactivate' : 'Activate'}
+                              </button>
+                              <button onClick={() => openVacancyForm(v)} className={styles.actBtn} style={{ color: 'var(--accent)' }}>Edit</button>
+                              <button onClick={() => deleteVacancy(v.id)} className={styles.actBtn} style={{ color: '#e74c3c' }}>Delete</button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* ── OFFERS TAB ── */}
+          {tab === 'offers' && (
+            <div className={styles.subContent}>
+              <div className={styles.subPanel}>
+                <div className={styles.tableHeader}>
+                  <h2 className={styles.panelHead}>Offers ({offers.length})</h2>
+                  <button className={styles.addBtn} onClick={() => openOfferForm()}>+ Add Offer</button>
+                </div>
+
+                {showOfferForm && (
+                  <div className={styles.formCard}>
+                    <h3 className={styles.formCardTitle}>{editingOffer ? 'Edit Offer' : 'Add New Offer'}</h3>
+                    <div className={styles.formGrid}>
+                      <div className={styles.formField}>
+                        <label>Title *</label>
+                        <input value={offerForm.title} onChange={e => setOfferForm(p => ({ ...p, title: e.target.value }))} placeholder="e.g. Summer Special" />
+                      </div>
+                      <div className={styles.formField}>
+                        <label>Discount</label>
+                        <input value={offerForm.discount} onChange={e => setOfferForm(p => ({ ...p, discount: e.target.value }))} placeholder="e.g. 20% off" />
+                      </div>
+                      <div className={styles.formField}>
+                        <label>Valid Until</label>
+                        <input type="date" value={offerForm.validUntil} onChange={e => setOfferForm(p => ({ ...p, validUntil: e.target.value }))} />
+                      </div>
+                      <div className={`${styles.formField} ${styles.formFull}`}>
+                        <label>Image</label>
+                        <div className={styles.imgUploadRow}>
+                          <label className={styles.uploadBtn}>
+                            {uploading ? 'Uploading...' : 'Upload Image'}
+                            <input type="file" accept="image/*" hidden onChange={e => e.target.files[0] && uploadImage(e.target.files[0], setOfferForm, 'img')} />
+                          </label>
+                          <span className={styles.orText}>or</span>
+                          <input value={offerForm.img} onChange={e => setOfferForm(p => ({ ...p, img: e.target.value }))} placeholder="Paste image URL..." style={{ flex: 1 }} />
+                        </div>
+                        {offerForm.img && <img src={offerForm.img} alt="Preview" className={styles.imgPreview} />}
+                      </div>
+                      <div className={`${styles.formField} ${styles.formFull}`}>
+                        <label>Description</label>
+                        <textarea value={offerForm.desc} onChange={e => setOfferForm(p => ({ ...p, desc: e.target.value }))} placeholder="Offer description..." />
+                      </div>
+                    </div>
+                    <div className={styles.formActions}>
+                      <button className={styles.formCancel} onClick={() => setShowOfferForm(false)}>Cancel</button>
+                      <button className={styles.formSave} onClick={saveOffer}>{editingOffer ? 'Update' : 'Add Offer'}</button>
+                    </div>
+                  </div>
+                )}
+
+                {offers.length === 0 && !showOfferForm ? (
+                  <p className={styles.emptyMsg}>No offers yet. Click &quot;+ Add Offer&quot; to create one.</p>
+                ) : (
+                  <table className={styles.table}>
+                    <thead>
+                      <tr>
+                        <th>Offer</th>
+                        <th>Discount</th>
+                        <th>Valid Until</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {offers.map(o => (
+                        <tr key={o.id}>
+                          <td>
+                            <strong>{o.title}</strong>
+                            {o.desc && <span className={styles.cellSub}>{o.desc.substring(0, 60)}{o.desc.length > 60 ? '...' : ''}</span>}
+                          </td>
+                          <td>{o.discount || '—'}</td>
+                          <td>{o.validUntil || '—'}</td>
+                          <td>
+                            <span className={styles.statusBadge} style={{ background: (o.active !== false ? '#4caf50' : '#c9a96e') + '22', color: o.active !== false ? '#4caf50' : '#c9a96e' }}>
+                              {o.active !== false ? 'Active' : 'Inactive'}
+                            </span>
+                          </td>
+                          <td>
+                            <div className={styles.actions}>
+                              <button onClick={() => toggleOfferActive(o.id, o.active !== false)} className={styles.actBtn} style={{ color: o.active !== false ? '#c9a96e' : '#4caf50' }}>
+                                {o.active !== false ? 'Deactivate' : 'Activate'}
+                              </button>
+                              <button onClick={() => openOfferForm(o)} className={styles.actBtn} style={{ color: 'var(--accent)' }}>Edit</button>
+                              <button onClick={() => deleteOffer(o.id)} className={styles.actBtn} style={{ color: '#e74c3c' }}>Delete</button>
                             </div>
                           </td>
                         </tr>

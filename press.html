@@ -4,45 +4,60 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Press — Hotel Afisha</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Libre+Caslon+Display&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
 <style>
+@font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Simplo'; src: url('fonts/Simplo-It.otf') format('opentype'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Noir'; src: url('fonts/Noir_regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Noir'; src: url('fonts/Noir_medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Galins'; src: url('fonts/Galins-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'ATWriter'; src: url('fonts/atwriter.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --dark: #0e0e1a; --dark-surface: #151525; --taupe: #a19581;
-  --cream: #f5f0eb; --accent: #c9a96e;
-  --font-heading: 'Cormorant Garamond', serif;
-  --font-body: 'DM Sans', sans-serif;
+  --red: #DD4747; --red-deep: #C53B3B; --blue: #243E93;
+  --ink: #232122; --ink-surface: #2B292A; --grey: #595859;
+  --paper: #FAF8F5; --cream: #F2EDE6;
+  --line: rgba(35,33,34,0.14); --line-strong: rgba(35,33,34,0.32);
+  --dark: var(--ink); --dark-surface: var(--ink-surface); --taupe: var(--grey); --accent: var(--red);
+  --font-heading: 'Noir', 'Simplo', sans-serif;
+  --font-display: 'Galins', serif;
+  --font-body: 'Simplo', sans-serif;
+  --font-type: 'ATWriter', 'American Typewriter', 'Courier New', monospace;
 }
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-body { font-family: var(--font-body); background: var(--dark); color: var(--cream); min-height: 100vh; }
-.header { display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(24px,4vw,60px); height: 72px; border-bottom: 1px solid rgba(245,240,235,0.06); }
-.header__logo { text-decoration: none; display: inline-block; overflow: hidden; height: 22px; }
-.header__logo img { filter: brightness(0) saturate(100%) invert(15%) sepia(95%) saturate(6000%) hue-rotate(355deg) brightness(95%) contrast(95%); margin-top: -2px; }
-.header__back { font-family: var(--font-body); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--taupe); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.3s; }
-.header__back:hover { color: var(--cream); }
+body { font-family: var(--font-body); font-weight: 300; background: var(--paper); color: #2c2c2c; min-height: 100vh; }
+body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-events: none; opacity: 0.05; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+::selection { background: var(--red); color: #fff; }
+.header { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(24px,4vw,60px); height: 72px; background: rgba(250,248,245,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.header__logo { text-decoration: none; display: inline-block; overflow: hidden; height: 30px; }
+.header__logo img { height: 30px; }
+.header__back { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--grey); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.3s; }
+.header__back:hover { color: var(--red); }
 .header__back svg { width: 16px; height: 16px; }
 .page-title { text-align: center; padding: clamp(50px,6vw,90px) 24px clamp(30px,4vw,50px); }
-.page-title h1 { font-family: var(--font-heading); font-weight: 400; font-size: clamp(32px,5vw,56px); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 16px; }
-.page-title p { font-size: 15px; color: rgba(245,240,235,0.4); max-width: 520px; margin: 0 auto; line-height: 1.8; }
+.page-title h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(38px,5.4vw,64px); letter-spacing: 0.01em; text-transform: lowercase; line-height: 1.04; color: #2c2c2c; margin-bottom: 16px; }
+.page-title h1::after { content: ''; display: block; width: 44px; height: 2px; background: var(--red); margin: 20px auto 0; }
+.page-title p { font-size: 15px; color: var(--grey); max-width: 540px; margin: 0 auto; line-height: 1.8; }
+
 .content { max-width: 800px; margin: 0 auto; padding: 0 clamp(24px,4vw,60px) clamp(60px,8vw,100px); }
-.press-item { background: var(--dark-surface); border: 1px solid rgba(245,240,235,0.06); padding: 36px 36px; margin-bottom: 24px; transition: border-color 0.3s; }
-.press-item:hover { border-color: rgba(245,240,235,0.15); }
-.press-item__date { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-.press-item__title { font-family: var(--font-heading); font-size: 24px; font-weight: 400; letter-spacing: 0.04em; margin-bottom: 10px; }
-.press-item__desc { font-size: 13px; line-height: 1.8; color: rgba(245,240,235,0.45); }
-.press-contact { text-align: center; margin-top: 50px; padding: 50px 32px; border: 1px solid rgba(245,240,235,0.06); background: var(--dark-surface); }
-.press-contact h3 { font-family: var(--font-heading); font-size: 24px; font-weight: 400; margin-bottom: 12px; }
-.press-contact p { font-size: 14px; color: rgba(245,240,235,0.4); max-width: 460px; margin: 0 auto 24px; line-height: 1.7; }
-.press-contact a { display: inline-block; padding: 12px 32px; border: 1px solid var(--cream); color: var(--cream); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
-.press-contact a:hover { background: var(--cream); color: var(--dark); }
+.press-item { background: #fff; border: 1px solid var(--line); padding: 36px 36px; margin-bottom: 24px; transition: border-color 0.3s; }
+.press-item:hover { border-color: var(--red); }
+.press-item__date { font-family: var(--font-type); font-size: 11px; letter-spacing: 0.2em; text-transform: lowercase; color: var(--red); margin-bottom: 12px; }
+.press-item__title { font-family: var(--font-heading); font-size: 22px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: #2c2c2c; margin-bottom: 10px; }
+.press-item__desc { font-size: 13px; line-height: 1.8; color: var(--grey); }
+.press-contact { text-align: center; margin-top: 60px; padding: 56px 32px; background: var(--ink); }
+.press-contact h3 { font-family: var(--font-display); font-size: 28px; font-weight: 400; text-transform: lowercase; color: #fff; margin-bottom: 12px; }
+.press-contact p { font-size: 14px; color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto 24px; line-height: 1.7; }
+.press-contact a { display: inline-block; padding: 12px 32px; background: var(--red); border: 1px solid var(--red); color: #fff; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+.press-contact a:hover { background: var(--red-deep); border-color: var(--red-deep); }
 </style>
 </head>
 <body>
 <header class="header">
   <a href="index.html" class="header__logo">
-    <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/66ac0f8b54e4c62eee2e4777_afisha-logo.svg" alt="Hotel Afisha" height="22">
+    <img src="afisha-logo-en.png" alt="Hotel Afisha">
   </a>
   <a href="index.html" class="header__back">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>

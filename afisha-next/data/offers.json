@@ -1,0 +1,22 @@
+[
+  {
+    "id": "mo8kkk0q1wn",
+    "title": "Summer Escape",
+    "desc": "Enjoy 20% off stays of 3 nights or more this summer.",
+    "discount": "20% OFF",
+    "validUntil": "2026-08-31",
+    "img": "",
+    "active": true,
+    "createdAt": "2026-04-21T11:57:46.970Z"
+  },
+  {
+    "id": "mo8kkk17h71",
+    "title": "Spa & Stay Package",
+    "desc": "Complimentary spa session with any 2-night booking.",
+    "discount": "FREE SPA",
+    "validUntil": "2026-06-30",
+    "img": "",
+    "active": true,
+    "createdAt": "2026-04-21T11:57:46.987Z"
+  }
+]

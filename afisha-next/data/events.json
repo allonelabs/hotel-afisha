@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "id": "evt001",
+    "title": "Rooftop Sunset Dinner",
+    "date": "May 10, 2026",
+    "time": "19:00",
+    "location": "8th Floor Terrace",
+    "desc": "A five-course tasting menu served on our rooftop terrace as the sun sets over Old Tbilisi. Limited to 24 guests.",
+    "img": "/media/sunset-dinner.jpg",
+    "createdAt": "2026-04-16T10:00:00.000Z"
+  },
+  {
+    "id": "evt002",
+    "title": "Live Jazz at Bubble Bar",
+    "date": "May 17, 2026",
+    "time": "21:00",
+    "location": "Bubble Bar, 8th Floor",
+    "desc": "An evening of live jazz with breathtaking skyline views and signature cocktails. Free entry for hotel guests.",
+    "img": "/media/jazz-night.jpg",
+    "createdAt": "2026-04-16T10:00:00.000Z"
+  },
+  {
+    "id": "evt003",
+    "title": "Georgian Wine Tasting",
+    "date": "June 7, 2026",
+    "time": "18:00",
+    "location": "Wine Room",
+    "desc": "Explore qvevri wines guided by our sommelier, paired with traditional Georgian cheese and snacks.",
+    "img": "/media/wine-tasting.jpg",
+    "createdAt": "2026-04-16T10:00:00.000Z"
+  }
+]

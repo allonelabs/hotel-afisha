@@ -1,0 +1,38 @@
+[
+  {
+    "id": "mo8kk9fh99r",
+    "name": "Giorgi Khetsuriani",
+    "role": "General Manager",
+    "bio": "Leading the Afisha vision with 15 years of hospitality experience.",
+    "img": "",
+    "order": 0,
+    "createdAt": "2026-04-21T11:57:33.245Z"
+  },
+  {
+    "id": "mo8kk9fsx52",
+    "name": "Nino Avaliani",
+    "role": "Head of Operations",
+    "bio": "Ensuring every guest experience runs seamlessly from check-in to check-out.",
+    "img": "",
+    "order": 1,
+    "createdAt": "2026-04-21T11:57:33.256Z"
+  },
+  {
+    "id": "mo8kk9g2j7f",
+    "name": "Dato Melikishvili",
+    "role": "Executive Chef",
+    "bio": "Crafting modern Georgian cuisine at Kino and overseeing all Afisha dining.",
+    "img": "",
+    "order": 2,
+    "createdAt": "2026-04-21T11:57:33.266Z"
+  },
+  {
+    "id": "mo8kk9gcvup",
+    "name": "Esma Khetsuriani",
+    "role": "Creative Director",
+    "bio": "The eye behind Afisha's cinematic aesthetic and brand identity.",
+    "img": "",
+    "order": 3,
+    "createdAt": "2026-04-21T11:57:33.276Z"
+  }
+]

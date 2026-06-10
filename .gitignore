@@ -3,3 +3,5 @@ node_modules
 .next
 afisha-next/.next
 afisha-next/node_modules
+.gstack/
+client-assets/
