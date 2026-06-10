@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menus — Hotel Afisha</title>
+<style>
+@font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Simplo'; src: url('fonts/Simplo-It.otf') format('opentype'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Noir'; src: url('fonts/Noir_regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Noir'; src: url('fonts/Noir_medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Galins'; src: url('fonts/Galins-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'ATWriter'; src: url('fonts/atwriter.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Halimun'; src: url('fonts/Halimun.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --red: #DD4747; --red-deep: #C53B3B; --blue: #243E93;
+  --ink: #232122; --ink-surface: #2B292A; --grey: #595859;
+  --paper: #FAF8F5; --cream: #F2EDE6;
+  --line: rgba(35,33,34,0.14); --line-strong: rgba(35,33,34,0.32);
+  --font-heading: 'Noir', 'Simplo', sans-serif;
+  --font-display: 'Galins', serif;
+  --font-body: 'Simplo', sans-serif;
+  --font-type: 'ATWriter', 'American Typewriter', 'Courier New', monospace;
+  --font-script: 'Halimun', cursive;
+}
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-body); font-weight: 300; background: var(--paper); color: #2c2c2c; min-height: 100vh; }
+body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-events: none; opacity: 0.05; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+::selection { background: var(--red); color: #fff; }
+.header { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(24px,4vw,60px); height: 72px; background: rgba(250,248,245,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.header__logo { text-decoration: none; display: inline-block; overflow: hidden; height: 30px; }
+.header__logo img { height: 30px; }
+.header__back { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--grey); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.3s; }
+.header__back:hover { color: var(--red); }
+.header__back svg { width: 16px; height: 16px; }
+.page-title { text-align: center; padding: clamp(50px,6vw,90px) 24px clamp(26px,3.5vw,42px); }
+.page-title h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(38px,5.4vw,64px); letter-spacing: 0.01em; text-transform: lowercase; line-height: 1.04; color: #2c2c2c; margin-bottom: 16px; }
+.page-title h1::after { content: ''; display: block; width: 44px; height: 2px; background: var(--red); margin: 20px auto 0; }
+.page-title p { font-size: 15px; color: var(--grey); max-width: 540px; margin: 0 auto; line-height: 1.8; }
+
+/* jump nav */
+.menu-nav { position: sticky; top: 72px; z-index: 90; display: flex; justify-content: center; flex-wrap: wrap; gap: clamp(14px, 2.5vw, 36px); padding: 14px 16px; background: rgba(250,248,245,0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.menu-nav a { font-family: var(--font-type); font-size: 12px; letter-spacing: 0.18em; text-transform: lowercase; color: var(--grey); text-decoration: none; padding-bottom: 3px; border-bottom: 1.5px solid transparent; transition: color 0.3s, border-color 0.3s; white-space: nowrap; }
+.menu-nav a:hover, .menu-nav a.active { color: var(--red); border-bottom-color: var(--red); }
+
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 clamp(20px,4vw,60px) clamp(60px,8vw,100px); }
+
+/* one printed menu = one paper card */
+.menu { background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--red); padding: clamp(28px,5vw,64px) clamp(20px,5vw,72px) clamp(36px,5vw,56px); margin-top: clamp(36px,5vw,56px); scroll-margin-top: 140px; }
+.menu__head { text-align: center; margin-bottom: clamp(28px,4vw,44px); }
+.menu__venue { font-family: var(--font-type); font-size: 12px; letter-spacing: 0.32em; text-transform: lowercase; color: var(--grey); margin-bottom: 10px; }
+.menu__title { font-family: var(--font-display); font-size: clamp(30px,4vw,44px); font-weight: 400; text-transform: lowercase; line-height: 1.05; color: #2c2c2c; }
+.menu__note { font-size: 13px; font-style: italic; color: var(--grey); margin-top: 12px; }
+.menu__pdf { display: inline-block; margin-top: 18px; font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--red); text-decoration: none; border: 1px solid var(--red); padding: 9px 22px; transition: all 0.3s; }
+.menu__pdf:hover { background: var(--red); color: #fff; }
+
+.menu-section { margin-top: clamp(30px,4vw,46px); }
+.menu-section__title { font-family: var(--font-script); font-size: clamp(30px,3.6vw,38px); color: var(--red); margin-bottom: 18px; line-height: 1; }
+
+.mi { padding: 11px 0 9px; border-bottom: 1px solid var(--line); }
+.mi:first-of-type { border-top: 1px solid var(--line); }
+.mi__row { display: flex; align-items: baseline; gap: 10px; }
+.mi__name { font-family: var(--font-type); font-size: 15px; letter-spacing: 0.02em; color: var(--red); }
+.mi__dots { flex: 1; border-bottom: 1px dotted var(--line-strong); transform: translateY(-4px); }
+.mi__price { font-family: var(--font-type); font-size: 14px; color: #2c2c2c; white-space: nowrap; }
+.mi__desc { font-size: 12.5px; line-height: 1.6; color: var(--grey); margin-top: 3px; max-width: 80%; }
+.veg { font-size: 10px; font-family: var(--font-body); font-style: italic; color: var(--grey); border: 1px solid var(--line-strong); border-radius: 50%; padding: 1px 4px; margin-left: 6px; vertical-align: 2px; }
+
+/* compact two-column lists (beverages, mini bar) */
+.cols { columns: 2; column-gap: clamp(28px,5vw,64px); }
+.cols .menu-section { break-inside: avoid; margin-top: 0; margin-bottom: 34px; }
+.cols .menu-section__title { font-size: 28px; }
+.cols .mi { padding: 7px 0 6px; }
+.cols .mi__name { font-size: 13.5px; }
+.cols .mi__price { font-size: 13px; }
+@media (max-width: 640px) { .cols { columns: 1; } .mi__desc { max-width: 100%; } }
+
+/* wine list rows */
+.wine-head { display: grid; grid-template-columns: 52px 1fr 56px 56px; gap: 10px; padding: 0 0 8px; font-family: var(--font-type); font-size: 10px; letter-spacing: 0.18em; text-transform: lowercase; color: var(--grey); }
+.wine-head span:nth-child(3), .wine-head span:nth-child(4) { text-align: right; }
+.wr { display: grid; grid-template-columns: 52px 1fr 56px 56px; gap: 10px; align-items: baseline; padding: 9px 0 8px; border-bottom: 1px solid var(--line); }
+.wr:first-of-type { border-top: 1px solid var(--line); }
+.wr__year { font-family: var(--font-type); font-size: 12px; color: var(--red); }
+.wr__name { font-size: 14.5px; font-style: italic; color: #2c2c2c; }
+.wr__name small { font-style: normal; font-size: 11px; color: var(--grey); letter-spacing: 0.03em; }
+.wr__name b { display: block; font-style: normal; font-weight: 500; font-size: 12px; letter-spacing: 0.04em; color: #2c2c2c; margin-top: 1px; }
+.wr__g, .wr__b { font-family: var(--font-type); font-size: 13px; color: #2c2c2c; text-align: right; }
+.wr__g:empty::after { content: '—'; color: var(--line-strong); }
+@media (max-width: 560px) {
+  .wine-head { grid-template-columns: 44px 1fr 44px 44px; }
+  .wr { grid-template-columns: 44px 1fr 44px 44px; gap: 7px; }
+  .wr__name { font-size: 13px; }
+}
+
+.menu-foot { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line-strong); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 11.5px; font-style: italic; color: var(--grey); }
+
+/* closing panel */
+.reserve { text-align: center; margin-top: 60px; padding: 56px 32px; background: var(--ink); }
+.reserve h3 { font-family: var(--font-display); font-size: 28px; font-weight: 400; text-transform: lowercase; color: #fff; margin-bottom: 12px; }
+.reserve p { font-size: 14px; color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto 24px; line-height: 1.7; }
+.reserve a { display: inline-block; padding: 12px 32px; background: var(--red); border: 1px solid var(--red); color: #fff; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+.reserve a:hover { background: var(--red-deep); border-color: var(--red-deep); }
+</style>
+</head>
+<body>
+<header class="header">
+  <a href="index.html" class="header__logo">
+    <img src="afisha-logo-en.png" alt="Hotel Afisha">
+  </a>
+  <a href="index.html" class="header__back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Back to Hotel
+  </a>
+</header>
+
+<div class="page-title">
+  <h1>menus</h1>
+  <p>From the Brasserie's Josper grill to the Wine Room's qvevri cellar — every menu at Hotel Afisha, exactly as served.</p>
+</div>
+
+<nav class="menu-nav" id="menuNav">
+  <a href="#brasserie" class="active">brasserie</a>
+  <a href="#lunch">lunch</a>
+  <a href="#wine">wine room</a>
+  <a href="#room-service">room service</a>
+  <a href="#mini-bar">mini bar</a>
+</nav>
+
+<div class="wrap">
+
+<!-- ═══════════ BRASSERIE ═══════════ -->
+<section class="menu" id="brasserie">
+  <div class="menu__head">
+    <p class="menu__venue">&bull; afisha brasserie &bull;</p>
+    <h2 class="menu__title">dine menu</h2>
+    <a class="menu__pdf" href="menus/brasserie.pdf" target="_blank">Download PDF</a>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Starter</h3>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Georgian Mezze Board<span class="veg">v</span></span><span class="mi__dots"></span><span class="mi__price">30.00 ₾</span></div><p class="mi__desc">Four kinds of pkhali selection, tomato &amp; cucumber with coriander pesto, Guda cheese, marinated jonjoli, lavashi bread</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Avocado-Shrimp Salsa</span><span class="mi__dots"></span><span class="mi__price">32.00 ₾</span></div><p class="mi__desc">Avocado shrimps' salad with rocket leaves, cherry tomato confit and vinegar dressing</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Salmon Rillette</span><span class="mi__dots"></span><span class="mi__price">33.00 ₾</span></div><p class="mi__desc">Smoked salmon, cream cheese</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Tomato Stracciatella<span class="veg">v</span></span><span class="mi__dots"></span><span class="mi__price">38.00 ₾</span></div><p class="mi__desc">Stracciatella, pickled onion, Kakhetian oil dressing, pistachio</p></div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Salad</h3>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Georgian Salad<span class="veg">v</span></span><span class="mi__dots"></span><span class="mi__price">22.00 ₾</span></div><p class="mi__desc">Tomato and cucumber, fresh herbs, onion, sour cream, walnut dressing &amp; fried jonjoli</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Caesar Salad</span><span class="mi__dots"></span><span class="mi__price">32.00 ₾ / 38.00 ₾</span></div><p class="mi__desc">Grilled chicken or shrimps, parmesan, Caesar dressing</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Burrata Salad<span class="veg">v</span></span><span class="mi__dots"></span><span class="mi__price">38.00 ₾</span></div><p class="mi__desc">Tomato, basil pesto</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Steak Salad</span><span class="mi__dots"></span><span class="mi__price">39.00 ₾</span></div><p class="mi__desc">Beef steak, cream, pesto, parmesan, salad leaves, walnut, grapes</p></div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Soup</h3>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Pelmeni Soup</span><span class="mi__dots"></span><span class="mi__price">19.00 ₾</span></div><p class="mi__desc">Chicken broth, mixed meat dumplings &amp; sour cream</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Soup &ldquo;Kharcho&rdquo;</span><span class="mi__dots"></span><span class="mi__price">23.00 ₾</span></div><p class="mi__desc">Boiled beef with fresh herbs, tomato paste, rice &amp; home-made adjika</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Borsch</span><span class="mi__dots"></span><span class="mi__price">25.00 ₾</span></div><p class="mi__desc">Beef short ribs, beetroot, cabbage, sour cream</p></div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Sandwiches</h3>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Falafel Wrap<span class="veg">vg</span></span><span class="mi__dots"></span><span class="mi__price">25.00 ₾</span></div><p class="mi__desc">Falafel balls wrapped in taco bread &amp; tahini dressing</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Steak Sandwich</span><span class="mi__dots"></span><span class="mi__price">36.00 ₾</span></div><p class="mi__desc">Focaccia bread, steak, mushroom, marinated onion, green pesto sauce and rucola</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">The Brasserie House Burger</span><span class="mi__dots"></span><span class="mi__price">38.00 ₾</span></div><p class="mi__desc">Angus beef topped with melted cheese, pickled onion on toast bun</p></div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Main Dish</h3>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Stuffed Eggplant<span class="veg">v</span></span><span class="mi__dots"></span><span class="mi__price">24.00 ₾</span></div><p class="mi__desc">Vegetable ratatouille with spicy tomato sauce</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Adjapsandali with Guda Cheese<span class="veg">v</span></span><span class="mi__dots"></span><span class="mi__price">25.00 ₾</span></div><p class="mi__desc">Eggplant, bell pepper, onion, garlic, cornbread</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Mini Khinkali</span><span class="mi__dots"></span><span class="mi__price">33.00 ₾</span></div><p class="mi__desc">With creamy truffle sauce</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Chkmeruli</span><span class="mi__dots"></span><span class="mi__price">34.00 ₾</span></div><p class="mi__desc">Grilled poulet fillet with garlic-butter sauce and potato</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Apkhazura</span><span class="mi__dots"></span><span class="mi__price">35.00 ₾</span></div><p class="mi__desc">Potato puree with cheese, tkemali sauce and sauteed green beans</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Duck Ravioli</span><span class="mi__dots"></span><span class="mi__price">35.00 ₾</span></div><p class="mi__desc">Tomato, basil, duck confit, parmesan</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Chicken Kiev</span><span class="mi__dots"></span><span class="mi__price">38.00 ₾</span></div><p class="mi__desc">Potato puree, green peas, truffle sauce</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Duck Breast</span><span class="mi__dots"></span><span class="mi__price">45.00 ₾</span></div><p class="mi__desc">With sweet potato puree &amp; berry sauce</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Beef Stroganoff</span><span class="mi__dots"></span><span class="mi__price">55.00 ₾</span></div><p class="mi__desc">Mixed mushrooms, potato pave</p></div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">From Josper Grill</h3>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Grilled Mountain River Trout</span><span class="mi__dots"></span><span class="mi__price">40.00 ₾</span></div></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Pork Mtsvadi</span><span class="mi__dots"></span><span class="mi__price">35.00 ₾</span></div></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Slow Cooked Pork Belly</span><span class="mi__dots"></span><span class="mi__price">41.00 ₾</span></div></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Grilled Salmon Steak</span><span class="mi__dots"></span><span class="mi__price">65.00 ₾</span></div></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Lamb Chops</span><span class="mi__dots"></span><span class="mi__price">69.00 ₾</span></div></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Organic Tenderloin Steak</span><span class="mi__dots"></span><span class="mi__price">70.00 ₾</span></div></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Angus Rib-eye Steak</span><span class="mi__dots"></span><span class="mi__price">115.00 ₾</span></div></div>
+  </div>
+
+  <div class="cols" style="margin-top: clamp(30px,4vw,46px);">
+    <div class="menu-section">
+      <h3 class="menu-section__title">Garnish</h3>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Potato Puree</span><span class="mi__dots"></span><span class="mi__price">15.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">French Fries</span><span class="mi__dots"></span><span class="mi__price">15.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Grilled Vegetables</span><span class="mi__dots"></span><span class="mi__price">15.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Baked Potato with Herbs</span><span class="mi__dots"></span><span class="mi__price">15.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Creamy Spinach</span><span class="mi__dots"></span><span class="mi__price">17.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Sauteed Mushrooms</span><span class="mi__dots"></span><span class="mi__price">17.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Sweet Potato Fries</span><span class="mi__dots"></span><span class="mi__price">17.00 ₾</span></div></div>
+    </div>
+    <div class="menu-section">
+      <h3 class="menu-section__title">Sauces</h3>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Red Wine</span><span class="mi__dots"></span><span class="mi__price">5.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Chimichurri</span><span class="mi__dots"></span><span class="mi__price">5.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Pepper</span><span class="mi__dots"></span><span class="mi__price">7.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Bearnaise</span><span class="mi__dots"></span><span class="mi__price">9.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Beurre Blanc</span><span class="mi__dots"></span><span class="mi__price">9.00 ₾</span></div></div>
+    </div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Pasta</h3>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Arrabiata<span class="veg">v</span></span><span class="mi__dots"></span><span class="mi__price">40.00 ₾</span></div><p class="mi__desc">Spaghetti, penne or fettuccini</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Carbonara</span><span class="mi__dots"></span><span class="mi__price">42.00 ₾</span></div><p class="mi__desc">Spaghetti, penne or fettuccini</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Bolognese</span><span class="mi__dots"></span><span class="mi__price">45.00 ₾</span></div><p class="mi__desc">Spaghetti, penne or fettuccini</p></div>
+  </div>
+
+  <div class="cols" style="margin-top: clamp(30px,4vw,46px);">
+    <div class="menu-section">
+      <h3 class="menu-section__title">Bakery</h3>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Cornbread<span class="veg">v</span></span><span class="mi__dots"></span><span class="mi__price">9.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Pan Fried Pkhlovana<span class="veg">v</span></span><span class="mi__dots"></span><span class="mi__price">27.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Pan Fried Khachapuri<span class="veg">v</span></span><span class="mi__dots"></span><span class="mi__price">27.00 ₾</span></div></div>
+    </div>
+    <div class="menu-section">
+      <h3 class="menu-section__title">Desserts</h3>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Creme Brulee</span><span class="mi__dots"></span><span class="mi__price">18.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Tiramisu</span><span class="mi__dots"></span><span class="mi__price">19.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Ideal</span><span class="mi__dots"></span><span class="mi__price">19.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Profiteroli with Berries</span><span class="mi__dots"></span><span class="mi__price">19.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Pistachio Crepe Cake</span><span class="mi__dots"></span><span class="mi__price">21.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Pavlova</span><span class="mi__dots"></span><span class="mi__price">21.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Cheesecake</span><span class="mi__dots"></span><span class="mi__price">22.00 ₾</span></div></div>
+    </div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Beverage</h3>
+    <div class="cols">
+      <div class="menu-section">
+        <h3 class="menu-section__title" style="font-size:24px;">Soft Drinks</h3>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Spring Water</span><span class="mi__dots"></span><span class="mi__price">6.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Sparkling Water</span><span class="mi__dots"></span><span class="mi__price">7.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Coca-Cola</span><span class="mi__dots"></span><span class="mi__price">7.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Selection of Juice</span><span class="mi__dots"></span><span class="mi__price">9.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Tonic Water</span><span class="mi__dots"></span><span class="mi__price">10.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Energy Drink</span><span class="mi__dots"></span><span class="mi__price">15.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">House Press <small>(citrus)</small></span><span class="mi__dots"></span><span class="mi__price">16.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Homemade Lemonade</span><span class="mi__dots"></span><span class="mi__price">18.00 ₾</span></div></div>
+      </div>
+      <div class="menu-section">
+        <h3 class="menu-section__title" style="font-size:24px;">Coffee</h3>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Espresso / Lungo</span><span class="mi__dots"></span><span class="mi__price">10.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Americano</span><span class="mi__dots"></span><span class="mi__price">10.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Cappuccino / Flat White</span><span class="mi__dots"></span><span class="mi__price">12.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Fredo Espresso</span><span class="mi__dots"></span><span class="mi__price">12.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Latte</span><span class="mi__dots"></span><span class="mi__price">13.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Hot Chocolate</span><span class="mi__dots"></span><span class="mi__price">18.00 ₾</span></div></div>
+      </div>
+      <div class="menu-section">
+        <h3 class="menu-section__title" style="font-size:24px;">Palais des Thes Tea</h3>
+        <div class="mi"><div class="mi__row"><span class="mi__name">English Breakfast</span><span class="mi__dots"></span><span class="mi__price">15.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">The du Hammam</span><span class="mi__dots"></span><span class="mi__price">15.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">L'Herboriste N95</span><span class="mi__dots"></span><span class="mi__price">15.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Jardin des Bois</span><span class="mi__dots"></span><span class="mi__price">15.00 ₾</span></div></div>
+      </div>
+      <div class="menu-section">
+        <h3 class="menu-section__title" style="font-size:24px;">Beer</h3>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Super Bock</span><span class="mi__dots"></span><span class="mi__price">15.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Estrella</span><span class="mi__dots"></span><span class="mi__price">17.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Black Lion</span><span class="mi__dots"></span><span class="mi__price">25.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Inedit Damm <small>0.75&nbsp;l</small></span><span class="mi__dots"></span><span class="mi__price">63.00 ₾</span></div></div>
+      </div>
+      <div class="menu-section">
+        <h3 class="menu-section__title" style="font-size:24px;">Vermouth, Bitter, Liqueur</h3>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Rose Strawberry Liqueur</span><span class="mi__dots"></span><span class="mi__price">17.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Five Farms Irish Cream</span><span class="mi__dots"></span><span class="mi__price">19.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Amaro Angostura</span><span class="mi__dots"></span><span class="mi__price">20.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Pisco Barsol Primero</span><span class="mi__dots"></span><span class="mi__price">20.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Dom Benedictine</span><span class="mi__dots"></span><span class="mi__price">25.00 ₾</span></div></div>
+      </div>
+      <div class="menu-section">
+        <h3 class="menu-section__title" style="font-size:24px;">Gin</h3>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Broker's London Dry</span><span class="mi__dots"></span><span class="mi__price">20.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Tanqueray London Dry</span><span class="mi__dots"></span><span class="mi__price">20.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Hendrick's</span><span class="mi__dots"></span><span class="mi__price">29.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Mirabeau Rose</span><span class="mi__dots"></span><span class="mi__price">29.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">The Botanist Islay Dry</span><span class="mi__dots"></span><span class="mi__price">30.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Roku Gin</span><span class="mi__dots"></span><span class="mi__price">35.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Tobermory Hebridean</span><span class="mi__dots"></span><span class="mi__price">35.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Monkey 47</span><span class="mi__dots"></span><span class="mi__price">63.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Plymouth</span><span class="mi__dots"></span><span class="mi__price">63.00 ₾</span></div></div>
+      </div>
+      <div class="menu-section">
+        <h3 class="menu-section__title" style="font-size:24px;">Tequila</h3>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Milagro Silver</span><span class="mi__dots"></span><span class="mi__price">23.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Mezcal Nuestra Soledad</span><span class="mi__dots"></span><span class="mi__price">37.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Patron Silver</span><span class="mi__dots"></span><span class="mi__price">51.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Don Julio Blanco</span><span class="mi__dots"></span><span class="mi__price">55.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Patron Anejo</span><span class="mi__dots"></span><span class="mi__price">56.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Don Julio Reposado</span><span class="mi__dots"></span><span class="mi__price">57.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Clase Azul Plata</span><span class="mi__dots"></span><span class="mi__price">81.00 ₾</span></div></div>
+      </div>
+      <div class="menu-section">
+        <h3 class="menu-section__title" style="font-size:24px;">Rum</h3>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Sailor Jerry</span><span class="mi__dots"></span><span class="mi__price">21.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Angostura Tamboo Spiced</span><span class="mi__dots"></span><span class="mi__price">24.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Plantation Grande Reserva <small>5 yo</small></span><span class="mi__dots"></span><span class="mi__price">30.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Kill Devil 'Navy Style'</span><span class="mi__dots"></span><span class="mi__price">38.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Don Papa</span><span class="mi__dots"></span><span class="mi__price">43.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Diplomatico Reserva Exclusiva</span><span class="mi__dots"></span><span class="mi__price">45.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Zacapa Centenario <small>23 yo</small></span><span class="mi__dots"></span><span class="mi__price">53.00 ₾</span></div></div>
+      </div>
+      <div class="menu-section">
+        <h3 class="menu-section__title" style="font-size:24px;">Cognac &amp; Brandy</h3>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Askaneli Brothers XO</span><span class="mi__dots"></span><span class="mi__price">43.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Remy Martin VSOP</span><span class="mi__dots"></span><span class="mi__price">47.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Sarajishvili XO</span><span class="mi__dots"></span><span class="mi__price">49.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Hennessy VSOP</span><span class="mi__dots"></span><span class="mi__price">51.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Bolero King Tamar's Reserve <small>20 yo</small></span><span class="mi__dots"></span><span class="mi__price">73.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Bolero David the Builder's Blend <small>25 yo</small></span><span class="mi__dots"></span><span class="mi__price">83.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Bolero Gorgasali's Courage <small>18 yo</small></span><span class="mi__dots"></span><span class="mi__price">86.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Courvoisier XO</span><span class="mi__dots"></span><span class="mi__price">159.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Hennessy XO</span><span class="mi__dots"></span><span class="mi__price">161.00 ₾</span></div></div>
+      </div>
+      <div class="menu-section">
+        <h3 class="menu-section__title" style="font-size:24px;">Whiskey</h3>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Kinahan's Irish Whiskey</span><span class="mi__dots"></span><span class="mi__price">23.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Bulleit Kentucky</span><span class="mi__dots"></span><span class="mi__price">27.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Maker's Mark</span><span class="mi__dots"></span><span class="mi__price">43.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Talisker Skye</span><span class="mi__dots"></span><span class="mi__price">47.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">GlenAllachie <small>12 yo</small></span><span class="mi__dots"></span><span class="mi__price">47.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Chivas Regal <small>18 yo</small></span><span class="mi__dots"></span><span class="mi__price">47.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Glenturret</span><span class="mi__dots"></span><span class="mi__price">47.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Kilchoman Sanaig</span><span class="mi__dots"></span><span class="mi__price">53.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Nikka From the Barrel</span><span class="mi__dots"></span><span class="mi__price">59.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">The Macallan <small>15 yo</small></span><span class="mi__dots"></span><span class="mi__price">157.00 ₾</span></div></div>
+      </div>
+      <div class="menu-section">
+        <h3 class="menu-section__title" style="font-size:24px;">Vodka &amp; Chacha</h3>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Kirke Wine Distillery</span><span class="mi__dots"></span><span class="mi__price">16.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Benjy's Chacha</span><span class="mi__dots"></span><span class="mi__price">16.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Chateau Mukhrani Chacha</span><span class="mi__dots"></span><span class="mi__price">24.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Beluga</span><span class="mi__dots"></span><span class="mi__price">27.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Grey Goose</span><span class="mi__dots"></span><span class="mi__price">29.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Belvedere</span><span class="mi__dots"></span><span class="mi__price">29.00 ₾</span></div></div>
+        <div class="mi"><div class="mi__row"><span class="mi__name">Mont Blanc</span><span class="mi__dots"></span><span class="mi__price">31.00 ₾</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-foot">
+    <span>Prices include VAT 18% &nbsp;&middot;&nbsp; <span class="veg" style="margin-left:0;">v</span> vegetarian &nbsp; <span class="veg" style="margin-left:0;">vg</span> vegan</span>
+    <span>Dishes may contain allergens — please ask a member of our staff for more information</span>
+  </div>
+</section>
+
+<!-- ═══════════ LUNCH ═══════════ -->
+<section class="menu" id="lunch">
+  <div class="menu__head">
+    <p class="menu__venue">&bull; afisha brasserie &bull;</p>
+    <h2 class="menu__title">lunch menu</h2>
+    <p class="menu__note">Build your own set — choose one dish per course</p>
+    <a class="menu__pdf" href="menus/lunch.pdf" target="_blank">Download PDF</a>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Sets</h3>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Starter, Main Course &amp; Dessert</span><span class="mi__dots"></span><span class="mi__price">60 ₾</span></div></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Starter &amp; Main Course</span><span class="mi__dots"></span><span class="mi__price">55 ₾</span></div></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Main Course &amp; Dessert</span><span class="mi__dots"></span><span class="mi__price">50 ₾</span></div></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Starter &amp; Dessert</span><span class="mi__dots"></span><span class="mi__price">45 ₾</span></div></div>
+  </div>
+
+  <div class="cols" style="margin-top: clamp(30px,4vw,46px);">
+    <div class="menu-section">
+      <h3 class="menu-section__title">Starter</h3>
+      <div class="mi"><p class="mi__desc" style="max-width:100%;">Fried fish balls with vegetables and beurre blanc sauce</p></div>
+      <div class="mi"><p class="mi__desc" style="max-width:100%;">Grilled chicken breast with tarragon sauce</p></div>
+      <div class="mi"><p class="mi__desc" style="max-width:100%;">Josper grilled eggplant babaganoush <span class="veg">vg</span></p></div>
+    </div>
+    <div class="menu-section">
+      <h3 class="menu-section__title">Main Course</h3>
+      <div class="mi"><p class="mi__desc" style="max-width:100%;">Pan fried chicken pate in bade koni</p></div>
+      <div class="mi"><p class="mi__desc" style="max-width:100%;">Creamy tomato gnocchi <span class="veg">v</span></p></div>
+      <div class="mi"><p class="mi__desc" style="max-width:100%;">Grilled pork chop with beetroot puree and gravy sauce</p></div>
+    </div>
+    <div class="menu-section">
+      <h3 class="menu-section__title">Dessert</h3>
+      <div class="mi"><p class="mi__desc" style="max-width:100%;">Peanut tart</p></div>
+      <div class="mi"><p class="mi__desc" style="max-width:100%;">Fruit crepes</p></div>
+      <div class="mi"><p class="mi__desc" style="max-width:100%;">Vegan chocolate cake <span class="veg">vg</span></p></div>
+    </div>
+    <div class="menu-section">
+      <h3 class="menu-section__title">Drinks</h3>
+      <div class="mi"><p class="mi__desc" style="max-width:100%;">Borjomi, coffee or tea — included</p></div>
+    </div>
+  </div>
+
+  <div class="menu-foot">
+    <span>Prices include 18% VAT &nbsp;&middot;&nbsp; <span class="veg" style="margin-left:0;">v</span> vegetarian &nbsp; <span class="veg" style="margin-left:0;">vg</span> vegan</span>
+    <span>Dishes may contain allergens — please contact a service employee for information</span>
+  </div>
+</section>
+
+<!-- ═══════════ WINE ROOM ═══════════ -->
+<section class="menu" id="wine">
+  <div class="menu__head">
+    <p class="menu__venue">&bull; afisha wine room &bull;</p>
+    <h2 class="menu__title">wine menu</h2>
+    <a class="menu__pdf" href="menus/wine.pdf" target="_blank">Download PDF</a>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Sparkling Wine</h3>
+    <div class="wine-head"><span>year</span><span>wine</span><span>glass</span><span>bottle</span></div>
+    <div class="wr"><span class="wr__year">N/V</span><span class="wr__name">Prosecco <small>DOC Extra-dry, Veneto, Italy</small><b>Tosti</b></span><span class="wr__g">21</span><span class="wr__b">91</span></div>
+    <div class="wr"><span class="wr__year">N/V</span><span class="wr__name">Prosecco <small>DOC Brut, Veneto, Italy</small><b>Mionetto</b></span><span class="wr__g"></span><span class="wr__b">96</span></div>
+    <div class="wr"><span class="wr__year">N/V</span><span class="wr__name">Prosecco <small>DOC Extra-dry, Veneto, Italy</small><b>Mionetto</b></span><span class="wr__g"></span><span class="wr__b">101</span></div>
+    <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Prosecco <small>DOC Brut, Veneto, Italy</small><b>Bortolomiol Miol</b></span><span class="wr__g"></span><span class="wr__b">127</span></div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">White Dry</h3>
+    <div class="wine-head"><span>year</span><span>wine</span><span>glass</span><span>bottle</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Tsinandali <small>PDO, Limited collection</small><b>Bolero Winery</b></span><span class="wr__g">15</span><span class="wr__b">60</span></div>
+    <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Tsitska Tsolikouri<b>Royal Khvanchkara</b></span><span class="wr__g">16</span><span class="wr__b">70</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Goruli Mtsvane <small>On Lees</small><b>Mosavali Winery</b></span><span class="wr__g">17</span><span class="wr__b">80</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Cuvee<b>Orgo</b></span><span class="wr__g">19</span><span class="wr__b">90</span></div>
+    <div class="wr"><span class="wr__year">2025</span><span class="wr__name">Manavi Mtsvane<b>6000 B.C.</b></span><span class="wr__g">19</span><span class="wr__b">83</span></div>
+    <div class="wr"><span class="wr__year">2024</span><span class="wr__name">Mtsvane – Chardonnay<b>Dakishvili Family Selection</b></span><span class="wr__g">18</span><span class="wr__b">85</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Rkatsiteli<b>Anemo</b></span><span class="wr__g">21</span><span class="wr__b">89</span></div>
+    <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Chelti White <small>Barrel</small><b>Chelti Winery</b></span><span class="wr__g">18</span><span class="wr__b">90</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Rkatsiteli – Tsitska<b>Unico</b></span><span class="wr__g"></span><span class="wr__b">90</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Mtsvane <small>Barrel</small><b>Tbilvino</b></span><span class="wr__g"></span><span class="wr__b">95</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Muscaturi Rkatsiteli<b>Spring Fields</b></span><span class="wr__g"></span><span class="wr__b">100</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Tsolikauri <small>On Lees</small><b>Naberauli</b></span><span class="wr__g"></span><span class="wr__b">110</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Albizzia Chardonnay <small>Toscana IGT, Italy</small><b>Frescobaldi</b></span><span class="wr__g"></span><span class="wr__b">115</span></div>
+    <div class="wr"><span class="wr__year">2021</span><span class="wr__name">Tsitska – Tsolikouri – Krakhuna<b>Winiveria</b></span><span class="wr__g"></span><span class="wr__b">116</span></div>
+    <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Trebbiano – Pinot Bianco – Pinot Grigio <small>Toscana IGT, Italy</small><b>Villa Antinori</b></span><span class="wr__g"></span><span class="wr__b">125</span></div>
+    <div class="wr"><span class="wr__year">2024</span><span class="wr__name">Atenuri <small>PDO BIO</small><b>Atenis Terasebi</b></span><span class="wr__g"></span><span class="wr__b">130</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Koncho White <small>Barrel</small><b>Koncho &amp; Co</b></span><span class="wr__g"></span><span class="wr__b">135</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Sauvignon Blanc <small>Martinborough, New Zealand</small><b>Craggy Range</b></span><span class="wr__g"></span><span class="wr__b">210</span></div>
+    <div class="wr"><span class="wr__year">2021</span><span class="wr__name">Mtsvivani Kakhuri <small>Barrel</small><b>Koncho &amp; Co</b></span><span class="wr__g"></span><span class="wr__b">220</span></div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">White Semi Sweet</h3>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Kisi<b>Koncho &amp; Co</b></span><span class="wr__g">19</span><span class="wr__b">79</span></div>
+    <div class="wr"><span class="wr__year">2024</span><span class="wr__name">Tvishi <small>PDO</small><b>Ancient Valley</b></span><span class="wr__g">19</span><span class="wr__b">85</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Tvishi <small>PDO</small><b>Naberauli</b></span><span class="wr__g"></span><span class="wr__b">130</span></div>
+    <div class="wr"><span class="wr__year">2019</span><span class="wr__name">Tsolikauri<b>Okureshi Wine Cellar</b></span><span class="wr__g"></span><span class="wr__b">145</span></div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">White Sweet</h3>
+    <div class="wr"><span class="wr__year">2020</span><span class="wr__name">Rkatsiteli <small>PDO, Late harvest</small><b>Barbale</b></span><span class="wr__g"></span><span class="wr__b">95</span></div>
+    <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Muscaturi Rkatsiteli <small>Fortified, 500 ml</small><b>Spring Fields</b></span><span class="wr__g">23</span><span class="wr__b">100</span></div>
+    <div class="wr"><span class="wr__year">2018</span><span class="wr__name">Kardanakhi <small>PDO, Fortified Barrel</small><b>Kardanakhi 1888</b></span><span class="wr__g"></span><span class="wr__b">110</span></div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Amber Dry</h3>
+    <div class="wr"><span class="wr__year">2021</span><span class="wr__name">Rkatsiteli <small>Qvevri Barrel</small><b>Terra Georgia Winery</b></span><span class="wr__g">17</span><span class="wr__b">70</span></div>
+    <div class="wr"><span class="wr__year">2020</span><span class="wr__name">Rkatsiteli <small>Qvevri</small><b>Marbano</b></span><span class="wr__g"></span><span class="wr__b">75</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Kisi – Rkatsiteli <small>Qvevri</small><b>Igi Winery</b></span><span class="wr__g">18</span><span class="wr__b">85</span></div>
+    <div class="wr"><span class="wr__year">2019</span><span class="wr__name">Chinuri <small>Qvevri</small><b>Marbano</b></span><span class="wr__g">18</span><span class="wr__b">85</span></div>
+    <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Krakhua <small>Qvevri Barrel</small><b>Anemo</b></span><span class="wr__g"></span><span class="wr__b">85</span></div>
+    <div class="wr"><span class="wr__year">2021</span><span class="wr__name">Krakhua <small>Qvevri</small><b>Labara</b></span><span class="wr__g"></span><span class="wr__b">90</span></div>
+    <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Khikhvi <small>Qvevri</small><b>Chateau Buera</b></span><span class="wr__g"></span><span class="wr__b">95</span></div>
+    <div class="wr"><span class="wr__year">2020</span><span class="wr__name">Rkatsiteli – Mtsvane <small>Qvevri</small><b>Binekhi Winery</b></span><span class="wr__g"></span><span class="wr__b">100</span></div>
+    <div class="wr"><span class="wr__year">2021</span><span class="wr__name">Rkatsiteli <small>Qvevri Grand Reserve</small><b>Bolero Winery</b></span><span class="wr__g">23</span><span class="wr__b">110</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Rkatsiteli <small>Qvevri Natural</small><b>Naperebi Winery</b></span><span class="wr__g"></span><span class="wr__b">110</span></div>
+    <div class="wr"><span class="wr__year">2020</span><span class="wr__name">Kisi <small>Qvevri</small><b>Gurashvili Family Vineyards</b></span><span class="wr__g"></span><span class="wr__b">120</span></div>
+    <div class="wr"><span class="wr__year">2020</span><span class="wr__name">Khikhvi <small>Reserve Qvevri Barrel</small><b>Chateau Buera</b></span><span class="wr__g"></span><span class="wr__b">130</span></div>
+    <div class="wr"><span class="wr__year">2014</span><span class="wr__name">Mtsvane <small>Qvevri</small><b>Binekhi Winery</b></span><span class="wr__g"></span><span class="wr__b">170</span></div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Rose</h3>
+    <div class="wr"><span class="wr__year">2024</span><span class="wr__name">Khidistauri<b>Spring Fields</b></span><span class="wr__g">23</span><span class="wr__b">110</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Nino <small>Semi-sweet</small><b>Koncho &amp; Co</b></span><span class="wr__g">17</span><span class="wr__b">75</span></div>
+    <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Alie <small>Toscana IGT, Italy</small><b>Frescobaldi</b></span><span class="wr__g"></span><span class="wr__b">145</span></div>
+    <div class="wr"><span class="wr__year">2024</span><span class="wr__name">Chkhaveri Chkepi<b>Vineyard Dolidze</b></span><span class="wr__g"></span><span class="wr__b">146</span></div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Red Dry</h3>
+    <div class="wine-head"><span>year</span><span>wine</span><span>glass</span><span>bottle</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Saperavi <small>Limited collection</small><b>Bolero Winery</b></span><span class="wr__g">15</span><span class="wr__b">60</span></div>
+    <div class="wr"><span class="wr__year">2021</span><span class="wr__name">Alexandrouli <small>Barrel</small><b>Koncho &amp; Co</b></span><span class="wr__g">16</span><span class="wr__b">65</span></div>
+    <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Aladasturi <small>Qvevri</small><b>Sabado</b></span><span class="wr__g">16</span><span class="wr__b">65</span></div>
+    <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Mujuretuli<b>Ancient Valley</b></span><span class="wr__g">17</span><span class="wr__b">70</span></div>
+    <div class="wr"><span class="wr__year">2019</span><span class="wr__name">Dzelshavi – Saperavi<b>Royal Khvanchkara</b></span><span class="wr__g"></span><span class="wr__b">75</span></div>
+    <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Cabernet Sauvignon <small>Veneto IGT, Italy</small><b>Soligo</b></span><span class="wr__g">18</span><span class="wr__b">75</span></div>
+    <div class="wr"><span class="wr__year">2024</span><span class="wr__name">Mukuzani <small>Barrel</small><b>Bediani</b></span><span class="wr__g"></span><span class="wr__b">79</span></div>
+    <div class="wr"><span class="wr__year">2020</span><span class="wr__name">Saperavi <small>Barrel Special Reserve</small><b>Terra Georgia Winery</b></span><span class="wr__g">20</span><span class="wr__b">80</span></div>
+    <div class="wr"><span class="wr__year">2019</span><span class="wr__name">Kvareli <small>Barrel</small><b>Chelti Winery</b></span><span class="wr__g"></span><span class="wr__b">85</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Saperavi <small>Qvevri</small><b>Orgo</b></span><span class="wr__g">22</span><span class="wr__b">90</span></div>
+    <div class="wr"><span class="wr__year">2017</span><span class="wr__name">Saperavi – Merlot <small>Barrel</small><b>Marani – Kondoli Vineyards</b></span><span class="wr__g"></span><span class="wr__b">90</span></div>
+    <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Saperavi <small>Qvevri Natural</small><b>Naperebi Winery</b></span><span class="wr__g"></span><span class="wr__b">95</span></div>
+    <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Saperavi <small>Twin Vineyards Barrel</small><b>Tbilvino</b></span><span class="wr__g"></span><span class="wr__b">95</span></div>
+    <div class="wr"><span class="wr__year">2021</span><span class="wr__name">Shavkapito <small>Barrel</small><b>Mosavali Winery</b></span><span class="wr__g">25</span><span class="wr__b">110</span></div>
+    <div class="wr"><span class="wr__year">2020</span><span class="wr__name">Saperavi <small>Qvevri Exceptional harvest</small><b>Barbale</b></span><span class="wr__g"></span><span class="wr__b">115</span></div>
+    <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Saperavi <small>Qvevri</small><b>Marbano</b></span><span class="wr__g"></span><span class="wr__b">120</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Alexandrouli Mujuretuli<b>Anemo</b></span><span class="wr__g"></span><span class="wr__b">125</span></div>
+    <div class="wr"><span class="wr__year">2020</span><span class="wr__name">Ojaleshi<b>Labara</b></span><span class="wr__g"></span><span class="wr__b">130</span></div>
+    <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Shavkapito<b>Atenis Terasebi</b></span><span class="wr__g"></span><span class="wr__b">135</span></div>
+    <div class="wr"><span class="wr__year">2024</span><span class="wr__name">Otskhanuri Sapere <small>Qvevri</small><b>Vineyard Dolidze</b></span><span class="wr__g"></span><span class="wr__b">136</span></div>
+    <div class="wr"><span class="wr__year">2021</span><span class="wr__name">Saperavi <small>Qvevri Grand Reserve</small><b>Bolero Winery</b></span><span class="wr__g"></span><span class="wr__b">150</span></div>
+    <div class="wr"><span class="wr__year">2020</span><span class="wr__name">Reserve Rouge <small>Barrel</small><b>Chateau Buera</b></span><span class="wr__g"></span><span class="wr__b">165</span></div>
+    <div class="wr"><span class="wr__year">2019</span><span class="wr__name">Saperavi <small>Barrel</small><b>Marani – Satrapezo</b></span><span class="wr__g"></span><span class="wr__b">170</span></div>
+    <div class="wr"><span class="wr__year">2020</span><span class="wr__name">Merlot – Syrah – Cab. Sauvignon <small>Toscana IGT, Italy</small><b>Villa Antinori</b></span><span class="wr__g"></span><span class="wr__b">170</span></div>
+    <div class="wr"><span class="wr__year">2017</span><span class="wr__name">Dekanozishvili Red <small>Qvevri Barrel</small><b>Dekanozishvili Winery</b></span><span class="wr__g"></span><span class="wr__b">175</span></div>
+    <div class="wr"><span class="wr__year">2015</span><span class="wr__name">Saperavi <small>Barrel</small><b>Binekhi Winery</b></span><span class="wr__g"></span><span class="wr__b">185</span></div>
+    <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Alexandrouli <small>Single Vineyard Shashiani Barrel</small><b>Tbilvino</b></span><span class="wr__g"></span><span class="wr__b">235</span></div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Red Semi Sweet</h3>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Kindzmarauli <small>PDO, Limited collection</small><b>Bolero Winery</b></span><span class="wr__g">17</span><span class="wr__b">70</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Kindzmarauli <small>PDO</small><b>Terra Georgia Winery</b></span><span class="wr__g"></span><span class="wr__b">85</span></div>
+    <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Khvanchkara <small>PDO</small><b>Tsereteli Winery</b></span><span class="wr__g">21</span><span class="wr__b">113</span></div>
+    <div class="wr"><span class="wr__year">2021</span><span class="wr__name">Ojaleshi Reserve<b>Marani Tsereteli</b></span><span class="wr__g"></span><span class="wr__b">130</span></div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Wine Companions</h3>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Cheese Board</span><span class="mi__dots"></span><span class="mi__price">29.00 ₾</span></div><p class="mi__desc">International and Georgian cheese mix</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Georgian Board</span><span class="mi__dots"></span><span class="mi__price">32.00 ₾</span></div><p class="mi__desc">Four kinds of pkhali selection, tomato &amp; cucumber with walnut pesto, Guda cheese</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Charcuterie Board</span><span class="mi__dots"></span><span class="mi__price">35.00 ₾</span></div><p class="mi__desc">Prosciutto, chorizo, chicken ham, liver pate, olives, honey-mustard sauce</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Elargi Balls</span><span class="mi__dots"></span><span class="mi__price">22.00 ₾</span></div><p class="mi__desc">Corn flour mixed balls with walnut dip</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Nuts, Olives and Chips</span><span class="mi__dots"></span><span class="mi__price">29.00 ₾</span></div><p class="mi__desc">Roasted hazelnuts, olives and homemade chips</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Assorted Homemade Pies</span><span class="mi__dots"></span><span class="mi__price">27.00 ₾</span></div><p class="mi__desc">Beef meat, mushrooms and potato pies</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Mix of Sandwiches</span><span class="mi__dots"></span><span class="mi__price">30.00 ₾</span></div><p class="mi__desc">Smoked salmon, roast beef, vegetarian sandwich</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Bruschettas</span><span class="mi__dots"></span><span class="mi__price">21.00 ₾</span></div><p class="mi__desc">Two kinds of bruschetta — tomato salsa and mushroom &amp; bell pepper confit</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Blinis &amp; Red Caviar</span><span class="mi__dots"></span><span class="mi__price">25.00 ₾</span></div><p class="mi__desc">Mini pancakes with cream cheese and caviar</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Georgian Sweets</span><span class="mi__dots"></span><span class="mi__price">30.00 ₾</span></div><p class="mi__desc">Mix of dry fruits, nuts, churchkhela &amp; pelamushi</p></div>
+  </div>
+
+  <div class="menu-foot">
+    <span>Prices include 18% VAT &nbsp;&middot;&nbsp; glass / bottle prices in GEL</span>
+  </div>
+</section>
+
+<!-- ═══════════ ROOM SERVICE ═══════════ -->
+<section class="menu" id="room-service">
+  <div class="menu__head">
+    <p class="menu__venue">&bull; afisha hotel &bull;</p>
+    <h2 class="menu__title">room service</h2>
+    <p class="menu__note">Available daily from 12:00 to 00:00</p>
+    <a class="menu__pdf" href="menus/room-service.pdf" target="_blank">Download PDF</a>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Soups</h3>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Soup Kharcho</span><span class="mi__dots"></span><span class="mi__price">26.00 ₾</span></div><p class="mi__desc">Boiled beef meat, fresh herbs, tomato paste, Georgian spices</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Borsch</span><span class="mi__dots"></span><span class="mi__price">28.00 ₾</span></div><p class="mi__desc">Beef meat, beetroot, cabbage, sour cream</p></div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Salads</h3>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Georgian Salad<span class="veg">v</span></span><span class="mi__dots"></span><span class="mi__price">25.00 ₾</span></div><p class="mi__desc">Tomato and cucumber, fresh herbs, walnut paste, fried jonjoli, mchadi chips</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Caesar Salad</span><span class="mi__dots"></span><span class="mi__price">35.00 ₾ / 41.00 ₾</span></div><p class="mi__desc">Grilled chicken or shrimps, parmesan, Caesar dressing</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Steak Salad</span><span class="mi__dots"></span><span class="mi__price">42.00 ₾</span></div><p class="mi__desc">Beef steak, cream, pesto, parmesan, salad leaves, walnut, grapes</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Georgian Board<span class="veg">v</span></span><span class="mi__dots"></span><span class="mi__price">45.00 ₾</span></div><p class="mi__desc">Four kinds of pkhali selection, tomato &amp; cucumber, Guda cheese, marinated jonjoli, lavash chips</p></div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Sandwiches</h3>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Falafel Wrap<span class="veg">vg</span></span><span class="mi__dots"></span><span class="mi__price">28.00 ₾</span></div><p class="mi__desc">Falafel balls, taco bread, tahini dressing, french fries</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Steak Sandwich</span><span class="mi__dots"></span><span class="mi__price">39.00 ₾</span></div><p class="mi__desc">Focaccia bread, beef steak, mushroom, marinated onion, green pesto, rucola</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Beef Burger</span><span class="mi__dots"></span><span class="mi__price">41.00 ₾</span></div><p class="mi__desc">Beef meat, cheddar cheese, caramelized onion, burger bun</p></div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Main Dishes</h3>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Adjapsandali with Guda Cheese<span class="veg">v</span></span><span class="mi__dots"></span><span class="mi__price">28.00 ₾</span></div><p class="mi__desc">Eggplant, bell pepper, onion, garlic, corn bread</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Mini Khinkali</span><span class="mi__dots"></span><span class="mi__price">36.00 ₾</span></div><p class="mi__desc">With creamy truffle sauce</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Chicken Chkmeruli</span><span class="mi__dots"></span><span class="mi__price">37.00 ₾</span></div><p class="mi__desc">Grilled poulet fillet, garlic butter sauce, potato</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Apkhazura</span><span class="mi__dots"></span><span class="mi__price">38.00 ₾</span></div><p class="mi__desc">Potato puree with cheese, tkemali sauce, sauteed beans</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Beef Stroganoff</span><span class="mi__dots"></span><span class="mi__price">58.00 ₾</span></div><p class="mi__desc">Mixed mushroom, potato pave</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Grilled Salmon Steak</span><span class="mi__dots"></span><span class="mi__price">92.00 ₾</span></div><p class="mi__desc">Grilled vegetables and beurre blanc</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Organic Tenderloin Steak</span><span class="mi__dots"></span><span class="mi__price">98.00 ₾</span></div><p class="mi__desc">Potato puree, creamy spinach, pepper sauce</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Rib-eye Steak</span><span class="mi__dots"></span><span class="mi__price">138.00 ₾</span></div><p class="mi__desc">Baked potato with herbs, chimichurri sauce</p></div>
+  </div>
+
+  <div class="cols" style="margin-top: clamp(30px,4vw,46px);">
+    <div class="menu-section">
+      <h3 class="menu-section__title">Garnishes</h3>
+      <div class="mi"><div class="mi__row"><span class="mi__name">French Fries</span><span class="mi__dots"></span><span class="mi__price">18.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Grilled Vegetables</span><span class="mi__dots"></span><span class="mi__price">18.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Sauteed Mushroom</span><span class="mi__dots"></span><span class="mi__price">20.00 ₾</span></div></div>
+    </div>
+    <div class="menu-section">
+      <h3 class="menu-section__title">Pasta</h3>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Penne Arrabiata<span class="veg">v</span></span><span class="mi__dots"></span><span class="mi__price">40.00 ₾</span></div><p class="mi__desc">Tomato, basil, parmesan</p></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Tagliatelle Carbonara</span><span class="mi__dots"></span><span class="mi__price">45.00 ₾</span></div><p class="mi__desc">Cream, garlic, pork bacon, parmesan</p></div>
+    </div>
+    <div class="menu-section">
+      <h3 class="menu-section__title">Bakery</h3>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Pan Fried Pkhlovana</span><span class="mi__dots"></span><span class="mi__price">30.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Pan Fried Khachapuri</span><span class="mi__dots"></span><span class="mi__price">30.00 ₾</span></div></div>
+    </div>
+    <div class="menu-section">
+      <h3 class="menu-section__title">Desserts</h3>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Cheesecake</span><span class="mi__dots"></span><span class="mi__price">25.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Tiramisu</span><span class="mi__dots"></span><span class="mi__price">22.00 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Seasonal Fresh Cut Fruits Plate</span><span class="mi__dots"></span><span class="mi__price">30.00 ₾</span></div></div>
+    </div>
+  </div>
+
+  <div class="menu-section">
+    <h3 class="menu-section__title">Kids Menu</h3>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Sulgunela Skewers</span><span class="mi__dots"></span><span class="mi__price">15.00 ₾</span></div><p class="mi__desc">Skewers with sulguni cheese, cherry tomatoes &amp; basil leaves, drizzled with balsamic glaze</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Ham and Cheese Sandwich</span><span class="mi__dots"></span><span class="mi__price">18.00 ₾</span></div><p class="mi__desc">Ham, bread toast, lettuce, tomato and cucumber, french fries</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Spaghetti</span><span class="mi__dots"></span><span class="mi__price">20.00 ₾</span></div><p class="mi__desc">Light tomato sauce, spaghetti &amp; parmesan cheese</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Chicken Nuggets</span><span class="mi__dots"></span><span class="mi__price">25.00 ₾</span></div><p class="mi__desc">Deep fried nuggets, mashed potatoes, ketchup</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Ice Cream</span><span class="mi__dots"></span><span class="mi__price">10.00 ₾</span></div><p class="mi__desc">Vanilla or chocolate ice cream</p></div>
+    <div class="mi"><div class="mi__row"><span class="mi__name">Fruit Salad with Yoghurt</span><span class="mi__dots"></span><span class="mi__price">15.00 ₾</span></div><p class="mi__desc">Seasonal fruits and berries, yoghurt</p></div>
+  </div>
+
+  <div class="menu-foot">
+    <span>Prices include 18% VAT &nbsp;&middot;&nbsp; <span class="veg" style="margin-left:0;">v</span> vegetarian &nbsp; <span class="veg" style="margin-left:0;">vg</span> vegan</span>
+    <span>Room service is available Monday to Sunday from 12:00 to 00:00</span>
+  </div>
+</section>
+
+<!-- ═══════════ MINI BAR ═══════════ -->
+<section class="menu" id="mini-bar">
+  <div class="menu__head">
+    <p class="menu__venue">&bull; afisha hotel &bull;</p>
+    <h2 class="menu__title">mini bar</h2>
+    <a class="menu__pdf" href="menus/mini-bar.pdf" target="_blank">Download PDF</a>
+  </div>
+
+  <div class="cols">
+    <div class="menu-section">
+      <h3 class="menu-section__title">Drinks</h3>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Spring Water</span><span class="mi__dots"></span><span class="mi__price">8 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Sparkling Water</span><span class="mi__dots"></span><span class="mi__price">8 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Coca-Cola</span><span class="mi__dots"></span><span class="mi__price">8 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Coca-Cola Zero</span><span class="mi__dots"></span><span class="mi__price">8 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Schweppes</span><span class="mi__dots"></span><span class="mi__price">9 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Cherry Juice</span><span class="mi__dots"></span><span class="mi__price">12 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Orange Juice</span><span class="mi__dots"></span><span class="mi__price">12 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Red Bull</span><span class="mi__dots"></span><span class="mi__price">15 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Estrella</span><span class="mi__dots"></span><span class="mi__price">17 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Chacha</span><span class="mi__dots"></span><span class="mi__price">18 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Absolut Blue</span><span class="mi__dots"></span><span class="mi__price">20 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Red Wine Saperavi</span><span class="mi__dots"></span><span class="mi__price">21 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">White Wine Tsinandali</span><span class="mi__dots"></span><span class="mi__price">21 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Bacardi Carta Blanca</span><span class="mi__dots"></span><span class="mi__price">23 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Bombay Sapphire</span><span class="mi__dots"></span><span class="mi__price">25 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Sarajishvili VSOP</span><span class="mi__dots"></span><span class="mi__price">27 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Monkey Shoulder</span><span class="mi__dots"></span><span class="mi__price">35 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Mionetto Prosecco</span><span class="mi__dots"></span><span class="mi__price">35 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Hendrick's</span><span class="mi__dots"></span><span class="mi__price">35 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Chivas Regal <small>12 yo</small></span><span class="mi__dots"></span><span class="mi__price">46 ₾</span></div></div>
+    </div>
+    <div class="menu-section">
+      <h3 class="menu-section__title">Snacks</h3>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Chewing Gum</span><span class="mi__dots"></span><span class="mi__price">9 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Snickers</span><span class="mi__dots"></span><span class="mi__price">11 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Kit-Kat</span><span class="mi__dots"></span><span class="mi__price">11 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">M&amp;M</span><span class="mi__dots"></span><span class="mi__price">13 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Pringles</span><span class="mi__dots"></span><span class="mi__price">18 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Salted Peanuts</span><span class="mi__dots"></span><span class="mi__price">18 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Fruit YumEarth Balls</span><span class="mi__dots"></span><span class="mi__price">23 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Leibniz Mini Original</span><span class="mi__dots"></span><span class="mi__price">25 ₾</span></div></div>
+      <div class="mi"><div class="mi__row"><span class="mi__name">Ritter Sport Chocolate</span><span class="mi__dots"></span><span class="mi__price">26 ₾</span></div></div>
+    </div>
+  </div>
+
+  <div class="menu-foot">
+    <span>Prices include 18% VAT</span>
+    <span>Once a product is opened the full amount will be charged</span>
+  </div>
+</section>
+
+<div class="reserve">
+  <h3>book a table</h3>
+  <p>Reserve your evening at the Brasserie or the Wine Room — our team will take care of the rest.</p>
+  <a href="mailto:Info@hotelafisha.com?subject=Table Reservation">Reserve</a>
+</div>
+
+</div>
+
+<script>
+  // highlight active menu in the jump nav
+  const navLinks = document.querySelectorAll('.menu-nav a');
+  const sections = [...document.querySelectorAll('section.menu')];
+  const byId = Object.fromEntries([...navLinks].map(a => [a.getAttribute('href').slice(1), a]));
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const link = byId[e.target.id];
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => spy.observe(s));
+</script>
+</body>
+</html>
