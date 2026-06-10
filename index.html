@@ -688,6 +688,8 @@ body.lang-ka .philharmonic__fact-num {
 .room-card {
   flex: 0 0 340px;
   scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
   background: #fff;
   border: 1px solid var(--line);
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
@@ -705,6 +707,7 @@ body.lang-ka .philharmonic__fact-num {
   position: relative;
   aspect-ratio: 4/3;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .room-card__img img {
@@ -727,6 +730,9 @@ body.lang-ka .philharmonic__fact-num {
 
 .room-card__body {
   padding: 28px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .room-card__name {
@@ -750,6 +756,7 @@ body.lang-ka .philharmonic__fact-num {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: auto;
 }
 
 .room-card__price {
@@ -2692,30 +2699,30 @@ body.lang-ka .philharmonic__fact-num {
   </div>
 
   <div class="restaurants__grid">
-    <div class="resto-card reveal">
-      <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67cabeedd234665666868325_mtavari%20gverdi.jpg" alt="Kino Restaurant">
+    <div class="resto-card reveal" onclick="location.href='menus.html#brasserie'">
+      <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67b8623400707b40050bd00a_brasserie5.jpg" alt="Afisha Brasserie">
       <div class="resto-card__overlay">
-        <p class="resto-card__type" data-i18n="resto.kino.type">Fine Dining</p>
-        <h3 class="resto-card__name" data-i18n="resto.kino.name">Kino</h3>
-        <p class="resto-card__desc" data-i18n="resto.kino.desc">Modern Georgian cuisine reimagined through a cinematic lens. Seasonal tasting menus with paired natural wines.</p>
+        <p class="resto-card__type" data-i18n="resto.brasserie.type">French-European Brasserie</p>
+        <h3 class="resto-card__name" data-i18n="resto.brasserie.name">Brasserie</h3>
+        <p class="resto-card__desc" data-i18n="resto.brasserie.desc">French-European classics from the Josper grill — duck ravioli to Angus rib-eye — with a champagne bar at its heart.</p>
       </div>
     </div>
 
-    <div class="resto-card reveal reveal-delay-1">
-      <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67b8625012317796264ddc18_bubble1.jpg" alt="Marani Wine Bar">
+    <div class="resto-card reveal reveal-delay-1" onclick="location.href='menus.html#wine'">
+      <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67cabeedd234665666868325_mtavari%20gverdi.jpg" alt="Afisha Wine Room">
       <div class="resto-card__overlay">
-        <p class="resto-card__type" data-i18n="resto.marani.type">Wine Bar</p>
-        <h3 class="resto-card__name" data-i18n="resto.marani.name">Marani</h3>
-        <p class="resto-card__desc" data-i18n="resto.marani.desc">An intimate cellar bar celebrating 8,000 years of Georgian winemaking. Qvevri wines and small plates.</p>
+        <p class="resto-card__type" data-i18n="resto.wineroom.type">Wine Bar &amp; Cellar</p>
+        <h3 class="resto-card__name" data-i18n="resto.wineroom.name">Wine Room</h3>
+        <p class="resto-card__desc" data-i18n="resto.wineroom.desc">8,000 years of Georgian winemaking — qvevri ambers and rare Saperavi, paired with Georgian boards.</p>
       </div>
     </div>
 
     <div class="resto-card reveal reveal-delay-2">
-      <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67b8623400707b40050bd00a_brasserie5.jpg" alt="The Terrace">
+      <img src="https://cdn.prod.website-files.com/669a26f7d42524ab776f6ebf/67b8625012317796264ddc18_bubble1.jpg" alt="Bubble Bar">
       <div class="resto-card__overlay">
-        <p class="resto-card__type" data-i18n="resto.terrace.type">Rooftop Lounge</p>
-        <h3 class="resto-card__name" data-i18n="resto.terrace.name">The Terrace</h3>
-        <p class="resto-card__desc" data-i18n="resto.terrace.desc">Cocktails and light fare beneath the stars, with an uninterrupted view of the Tbilisi skyline.</p>
+        <p class="resto-card__type" data-i18n="resto.bubble.type">Rooftop Bar — 8th Floor</p>
+        <h3 class="resto-card__name" data-i18n="resto.bubble.name">Bubble Bar</h3>
+        <p class="resto-card__desc" data-i18n="resto.bubble.desc">Champagne and cocktails above the rooftops, with panoramic skyline views and live jazz on weekends.</p>
       </div>
     </div>
   </div>
@@ -3083,15 +3090,15 @@ body.lang-ka .philharmonic__fact-num {
       'resto.label': 'Dining',
       'resto.title': 'A Taste of<br>Every Act',
       'resto.subtitle': 'Three distinctive venues, each a different mood — from intimate wine bars to panoramic terraces.',
-      'resto.kino.type': 'Fine Dining',
-      'resto.kino.name': 'Kino',
-      'resto.kino.desc': 'Modern Georgian cuisine reimagined through a cinematic lens. Seasonal tasting menus with paired natural wines.',
-      'resto.marani.type': 'Wine Bar',
-      'resto.marani.name': 'Marani',
-      'resto.marani.desc': 'An intimate cellar bar celebrating 8,000 years of Georgian winemaking. Qvevri wines and small plates.',
-      'resto.terrace.type': 'Rooftop Lounge',
-      'resto.terrace.name': 'The Terrace',
-      'resto.terrace.desc': 'Cocktails and light fare beneath the stars, with an uninterrupted view of the Tbilisi skyline.',
+      'resto.brasserie.type': 'French-European Brasserie',
+      'resto.brasserie.name': 'Brasserie',
+      'resto.brasserie.desc': 'French-European classics from the Josper grill \u2014 duck ravioli to Angus rib-eye \u2014 with a champagne bar at its heart.',
+      'resto.wineroom.type': 'Wine Bar & Cellar',
+      'resto.wineroom.name': 'Wine Room',
+      'resto.wineroom.desc': '8,000 years of Georgian winemaking \u2014 qvevri ambers and rare Saperavi, paired with Georgian boards.',
+      'resto.bubble.type': 'Rooftop Bar \u2014 8th Floor',
+      'resto.bubble.name': 'Bubble Bar',
+      'resto.bubble.desc': 'Champagne and cocktails above the rooftops, with panoramic skyline views and live jazz on weekends.',
       'resto.menus': 'View Our Menus',
 
       // Wellness
@@ -3252,15 +3259,15 @@ body.lang-ka .philharmonic__fact-num {
       'resto.label': 'სასადილო',
       'resto.title': 'ყოველი მოქმედების<br>გემო',
       'resto.subtitle': 'სამი განსაკუთრებული სივრცე, თითოეული განსხვავებული განწყობით — ინტიმური ღვინის ბარიდან პანორამულ ტერასამდე.',
-      'resto.kino.type': 'ფაინ დაინინგი',
-      'resto.kino.name': 'კინო',
-      'resto.kino.desc': 'თანამედროვე ქართული სამზარეულო კინემატოგრაფიული ხედვით. სეზონური დეგუსტაციური მენიუ ბუნებრივი ღვინით.',
-      'resto.marani.type': 'ღვინის ბარი',
-      'resto.marani.name': 'მარანი',
-      'resto.marani.desc': 'ინტიმური სარდაფის ბარი, რომელიც ქართული მეღვინეობის 8,000 წლიან ისტორიას ზეიმობს. ქვევრის ღვინო და მცირე კერძები.',
-      'resto.terrace.type': 'სახურავის ლაუნჯი',
-      'resto.terrace.name': 'ტერასა',
-      'resto.terrace.desc': 'კოქტეილები და მსუბუქი კერძები ვარსკვლავების ქვეშ, თბილისის ჰორიზონტის შეუფერხებელი ხედით.',
+      'resto.brasserie.type': 'ფრანგულ-ევროპული ბრასერია',
+      'resto.brasserie.name': 'ბრასერია',
+      'resto.brasserie.desc': 'ფრანგულ-ევროპული კლასიკა ჯოსპერის გრილიდან — იხვის რავიოლიდან ანგუსის რიბ-აიმდე — შამპანურის ბარით გულში.',
+      'resto.wineroom.type': 'ღვინის ბარი და მარანი',
+      'resto.wineroom.name': 'ღვინის ოთახი',
+      'resto.wineroom.desc': 'ქართული მეღვინეობის 8,000 წელი — ქვევრის ქარვისფერი ღვინოები და იშვიათი საფერავი, ქართულ დაფებთან ერთად.',
+      'resto.bubble.type': 'სახურავის ბარი — მე-8 სართული',
+      'resto.bubble.name': 'ბაბლ ბარი',
+      'resto.bubble.desc': 'შამპანური და კოქტეილები ქალაქის სახურავებს ზემოთ — ჰორიზონტის პანორამული ხედით და ცოცხალი ჯაზით შაბათ-კვირას.',
       'resto.menus': 'იხილეთ მენიუ',
 
       // Wellness
