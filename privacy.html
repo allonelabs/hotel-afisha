@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — Hotel Afisha</title>
+<link rel="stylesheet" href="https://cdn.web-fonts.ge/fonts/bpg-nino-elite/css/bpg-nino-elite.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 @font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
@@ -47,6 +51,16 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
 .content ul { padding-left: 20px; margin-bottom: 16px; }
 .content li { font-size: 14px; line-height: 1.9; color: var(--grey); margin-bottom: 6px; }
 .content a { color: var(--red); }
+
+/* language switch + Georgian font fallbacks */
+.header__actions { display: flex; align-items: center; gap: 24px; }
+.lang-switch { display: flex; align-items: center; gap: 6px; }
+.lang-btn { background: none; border: none; font-family: var(--font-body); font-size: 11px; letter-spacing: 0.15em; color: var(--grey); cursor: pointer; padding: 4px 2px; transition: color 0.3s; border-bottom: 1.5px solid transparent; }
+.lang-btn:hover { color: #2c2c2c; }
+.lang-btn.active { color: #2c2c2c; border-bottom-color: var(--red); }
+.lang-sep { color: var(--grey); font-size: 10px; }
+body.lang-ka { --font-body: 'BPG Nino Elite', 'Noto Serif Georgian', sans-serif; --font-heading: 'Noto Serif Georgian', serif; --font-display: 'Noto Serif Georgian', serif; --font-type: 'BPG Nino Elite', sans-serif; }
+body.lang-ka .page-title h1 { font-weight: 500; }
 </style>
 </head>
 <body>
@@ -54,52 +68,83 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
   <a href="index.html" class="header__logo">
     <img src="afisha-logo-en.png" alt="Hotel Afisha">
   </a>
-  <a href="index.html" class="header__back">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    Back to Hotel
-  </a>
+  <div class="header__actions">
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <span class="lang-sep">/</span>
+      <button class="lang-btn" data-lang="ka">KA</button>
+    </div>
+    <a href="index.html" class="header__back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      <span data-i18n="back">Back to Hotel</span>
+    </a>
+  </div>
 </header>
 
 <div class="page-title">
-  <h1>Privacy Policy</h1>
+  <h1 data-i18n="title">Privacy Policy</h1>
 </div>
 
 <div class="content">
-  <p>Hotel Afisha ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you visit our website or stay at our hotel.</p>
+  <p data-i18n="intro">Hotel Afisha ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you visit our website or stay at our hotel.</p>
 
-  <h2>Information We Collect</h2>
-  <p>We may collect the following types of personal information:</p>
+  <h2 data-i18n="h.collect">Information We Collect</h2>
+  <p data-i18n="p.collect">We may collect the following types of personal information:</p>
   <ul>
-    <li>Name, email address, phone number, and postal address</li>
-    <li>Payment and billing information for reservations</li>
-    <li>Booking preferences and stay history</li>
-    <li>Information provided through contact forms or email correspondence</li>
+    <li data-i18n="c1">Name, email address, phone number, and postal address</li>
+    <li data-i18n="c2">Payment and billing information for reservations</li>
+    <li data-i18n="c3">Booking preferences and stay history</li>
+    <li data-i18n="c4">Information provided through contact forms or email correspondence</li>
   </ul>
 
-  <h2>How We Use Your Information</h2>
-  <p>Your personal information is used to:</p>
+  <h2 data-i18n="h.use">How We Use Your Information</h2>
+  <p data-i18n="p.use">Your personal information is used to:</p>
   <ul>
-    <li>Process reservations and payments</li>
-    <li>Communicate with you about your stay or inquiries</li>
-    <li>Improve our services and personalize your experience</li>
-    <li>Send promotional offers, if you have opted in to receive them</li>
+    <li data-i18n="u1">Process reservations and payments</li>
+    <li data-i18n="u2">Communicate with you about your stay or inquiries</li>
+    <li data-i18n="u3">Improve our services and personalize your experience</li>
+    <li data-i18n="u4">Send promotional offers, if you have opted in to receive them</li>
   </ul>
 
-  <h2>Data Protection</h2>
-  <p>We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, or destruction. Your payment data is processed securely through our third-party booking partners.</p>
+  <h2 data-i18n="h.protect">Data Protection</h2>
+  <p data-i18n="p.protect">We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, or destruction. Your payment data is processed securely through our third-party booking partners.</p>
 
-  <h2>Cookies</h2>
-  <p>Our website uses cookies to enhance your browsing experience and analyze site traffic. You can manage cookie preferences through your browser settings.</p>
+  <h2 data-i18n="h.cookies">Cookies</h2>
+  <p data-i18n="p.cookies">Our website uses cookies to enhance your browsing experience and analyze site traffic. You can manage cookie preferences through your browser settings.</p>
 
-  <h2>Third-Party Services</h2>
-  <p>We use third-party services including SwiftBook for reservations and Google Analytics for website analytics. These services may collect data in accordance with their own privacy policies.</p>
+  <h2 data-i18n="h.third">Third-Party Services</h2>
+  <p data-i18n="p.third">We use third-party services including SwiftBook for reservations and Google Analytics for website analytics. These services may collect data in accordance with their own privacy policies.</p>
 
-  <h2>Your Rights</h2>
-  <p>You have the right to access, correct, or delete your personal information at any time. To exercise these rights, please contact us at <a href="mailto:Info@hotelafisha.com" style="color: var(--accent);">Info@hotelafisha.com</a>.</p>
+  <h2 data-i18n="h.rights">Your Rights</h2>
+  <p data-i18n="p.rights" data-i18n-html="true">You have the right to access, correct, or delete your personal information at any time. To exercise these rights, please contact us at <a href="mailto:Info@hotelafisha.com" style="color: var(--accent);">Info@hotelafisha.com</a>.</p>
 
-  <h2>Contact</h2>
-  <p>If you have any questions about this Privacy Policy, please contact us:</p>
-  <p>Hotel Afisha<br>5 Petre Melikishvili St, Tbilisi 0108<br>Email: Info@hotelafisha.com<br>Phone: 032 200 22 44</p>
+  <h2 data-i18n="h.contact">Contact</h2>
+  <p data-i18n="p.contact1">If you have any questions about this Privacy Policy, please contact us:</p>
+  <p data-i18n="p.contact2" data-i18n-html="true">Hotel Afisha<br>5 Petre Melikishvili St, Tbilisi 0108<br>Email: Info@hotelafisha.com<br>Phone: 032 200 22 44</p>
 </div>
+<script>
+(function() {
+  const T = { en: {"back": "Back to Hotel", "title": "Privacy Policy", "intro": "Hotel Afisha (\"we,\" \"us,\" or \"our\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you visit our website or stay at our hotel.", "h.collect": "Information We Collect", "p.collect": "We may collect the following types of personal information:", "c1": "Name, email address, phone number, and postal address", "c2": "Payment and billing information for reservations", "c3": "Booking preferences and stay history", "c4": "Information provided through contact forms or email correspondence", "h.use": "How We Use Your Information", "p.use": "Your personal information is used to:", "u1": "Process reservations and payments", "u2": "Communicate with you about your stay or inquiries", "u3": "Improve our services and personalize your experience", "u4": "Send promotional offers, if you have opted in to receive them", "h.protect": "Data Protection", "p.protect": "We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, or destruction. Your payment data is processed securely through our third-party booking partners.", "h.cookies": "Cookies", "p.cookies": "Our website uses cookies to enhance your browsing experience and analyze site traffic. You can manage cookie preferences through your browser settings.", "h.third": "Third-Party Services", "p.third": "We use third-party services including SwiftBook for reservations and Google Analytics for website analytics. These services may collect data in accordance with their own privacy policies.", "h.rights": "Your Rights", "p.rights": "You have the right to access, correct, or delete your personal information at any time. To exercise these rights, please contact us at <a href=\"mailto:Info@hotelafisha.com\" style=\"color: var(--accent);\">Info@hotelafisha.com</a>.", "h.contact": "Contact", "p.contact1": "If you have any questions about this Privacy Policy, please contact us:", "p.contact2": "Hotel Afisha<br>5 Petre Melikishvili St, Tbilisi 0108<br>Email: Info@hotelafisha.com<br>Phone: 032 200 22 44"}, ka: {"back": "მთავარზე დაბრუნება", "title": "კონფიდენციალურობის პოლიტიკა", "intro": "სასტუმრო აფიშა („ჩვენ\") იღებს ვალდებულებას დაიცვას თქვენი კონფიდენციალურობა. ეს პოლიტიკა განმარტავს, როგორ ვაგროვებთ, ვიყენებთ და ვიცავთ თქვენს პერსონალურ ინფორმაციას ჩვენი ვებსაიტის მონახულებისას ან სასტუმროში ყოფნისას.", "h.collect": "რა ინფორმაციას ვაგროვებთ", "p.collect": "ჩვენ შეიძლება შევაგროვოთ შემდეგი სახის პერსონალური ინფორმაცია:", "c1": "სახელი, ელ. ფოსტა, ტელეფონის ნომერი და მისამართი", "c2": "გადახდისა და ბილინგის ინფორმაცია ჯავშნებისთვის", "c3": "ჯავშნის პრეფერენციები და ყოფნის ისტორია", "c4": "საკონტაქტო ფორმებით ან ელ. ფოსტით მოწოდებული ინფორმაცია", "h.use": "როგორ ვიყენებთ თქვენს ინფორმაციას", "p.use": "თქვენი პერსონალური ინფორმაცია გამოიყენება:", "u1": "ჯავშნებისა და გადახდების დასამუშავებლად", "u2": "თქვენთან კომუნიკაციისთვის ყოფნასთან ან კითხვებთან დაკავშირებით", "u3": "სერვისების გასაუმჯობესებლად და გამოცდილების პერსონალიზაციისთვის", "u4": "სარეკლამო შეთავაზებების გასაგზავნად, თუ ამაზე თანხმობა გაქვთ გაცემული", "h.protect": "მონაცემთა დაცვა", "p.protect": "ჩვენ ვიყენებთ შესაბამის ტექნიკურ და ორგანიზაციულ ზომებს თქვენი პერსონალური მონაცემების უნებართვო წვდომის, ცვლილების ან განადგურებისგან დასაცავად. გადახდის მონაცემები უსაფრთხოდ მუშავდება ჩვენი მესამე მხარის საჯავშნო პარტნიორების მეშვეობით.", "h.cookies": "ქუქი-ფაილები", "p.cookies": "ჩვენი ვებსაიტი იყენებს ქუქი-ფაილებს დათვალიერების გამოცდილების გასაუმჯობესებლად და ტრაფიკის გასაანალიზებლად. ქუქი-ფაილების მართვა შეგიძლიათ ბრაუზერის პარამეტრებიდან.", "h.third": "მესამე მხარის სერვისები", "p.third": "ჩვენ ვიყენებთ მესამე მხარის სერვისებს, მათ შორის SwiftBook-ს ჯავშნებისთვის და Google Analytics-ს ანალიტიკისთვის. ეს სერვისები მონაცემებს აგროვებენ საკუთარი კონფიდენციალურობის პოლიტიკის შესაბამისად.", "h.rights": "თქვენი უფლებები", "p.rights": "თქვენ გაქვთ უფლება ნებისმიერ დროს მოითხოვოთ წვდომა თქვენს პერსონალურ ინფორმაციაზე, მისი შესწორება ან წაშლა. ამისთვის დაგვიკავშირდით: <a href=\"mailto:Info@hotelafisha.com\" style=\"color: var(--accent);\">Info@hotelafisha.com</a>.", "h.contact": "კონტაქტი", "p.contact1": "თუ გაქვთ კითხვები ამ პოლიტიკასთან დაკავშირებით, დაგვიკავშირდით:", "p.contact2": "სასტუმრო აფიშა<br>პეტრე მელიქიშვილის ქ. 5, თბილისი 0108<br>ელ. ფოსტა: Info@hotelafisha.com<br>ტელ: 032 200 22 44"} };
+  const btns = document.querySelectorAll('.lang-btn');
+  function setLang(l) {
+    const d = T[l]; if (!d) return;
+    document.documentElement.lang = l;
+    document.body.classList.toggle('lang-ka', l === 'ka');
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if (d[k] !== undefined) {
+        if (el.getAttribute('data-i18n-html') === 'true') el.innerHTML = d[k];
+        else el.textContent = d[k];
+      }
+    });
+    btns.forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+    try { localStorage.setItem('hotel-afisha-lang', l); } catch (e) {}
+  }
+  btns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  let saved = 'en';
+  try { saved = localStorage.getItem('hotel-afisha-lang') || 'en'; } catch (e) {}
+  if (saved !== 'en') setLang(saved);
+})();
+</script>
 </body>
 </html>

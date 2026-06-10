@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Offers — Hotel Afisha</title>
+<link rel="stylesheet" href="https://cdn.web-fonts.ge/fonts/bpg-nino-elite/css/bpg-nino-elite.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 @font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
@@ -50,6 +54,16 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
 .offer__desc { font-size: 13px; line-height: 1.8; color: var(--grey); margin-bottom: 24px; }
 .offer__cta { display: inline-block; padding: 10px 28px; border: 1px solid var(--red); color: var(--red); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
 .offer__cta:hover { background: var(--red); color: #fff; }
+
+/* language switch + Georgian font fallbacks */
+.header__actions { display: flex; align-items: center; gap: 24px; }
+.lang-switch { display: flex; align-items: center; gap: 6px; }
+.lang-btn { background: none; border: none; font-family: var(--font-body); font-size: 11px; letter-spacing: 0.15em; color: var(--grey); cursor: pointer; padding: 4px 2px; transition: color 0.3s; border-bottom: 1.5px solid transparent; }
+.lang-btn:hover { color: #2c2c2c; }
+.lang-btn.active { color: #2c2c2c; border-bottom-color: var(--red); }
+.lang-sep { color: var(--grey); font-size: 10px; }
+body.lang-ka { --font-body: 'BPG Nino Elite', 'Noto Serif Georgian', sans-serif; --font-heading: 'Noto Serif Georgian', serif; --font-display: 'Noto Serif Georgian', serif; --font-type: 'BPG Nino Elite', sans-serif; }
+body.lang-ka .page-title h1 { font-weight: 500; }
 </style>
 </head>
 <body>
@@ -57,47 +71,78 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
   <a href="index.html" class="header__logo">
     <img src="afisha-logo-en.png" alt="Hotel Afisha">
   </a>
-  <a href="index.html" class="header__back">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    Back to Hotel
-  </a>
+  <div class="header__actions">
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <span class="lang-sep">/</span>
+      <button class="lang-btn" data-lang="ka">KA</button>
+    </div>
+    <a href="index.html" class="header__back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      <span data-i18n="back">Back to Hotel</span>
+    </a>
+  </div>
 </header>
 
 <div class="page-title">
-  <h1>Offers</h1>
-  <p>Exclusive packages and special rates designed to make your stay at Hotel Afisha unforgettable.</p>
+  <h1 data-i18n="title">Offers</h1>
+  <p data-i18n="sub">Exclusive packages and special rates designed to make your stay at Hotel Afisha unforgettable.</p>
 </div>
 
 <div class="content">
   <div class="offers-grid">
     <div class="offer">
-      <p class="offer__badge">Dining</p>
-      <h3 class="offer__title">Brasserie Experience</h3>
-      <p class="offer__desc">Enjoy a complimentary dinner for two at our French-European Brasserie when you book a Junior Suite or Executive Suite for two or more nights.</p>
-      <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="offer__cta">Book Now</a>
+      <p class="offer__badge" data-i18n="o1.badge">Dining</p>
+      <h3 class="offer__title" data-i18n="o1.title">Brasserie Experience</h3>
+      <p class="offer__desc" data-i18n="o1.desc">Enjoy a complimentary dinner for two at our French-European Brasserie when you book a Junior Suite or Executive Suite for two or more nights.</p>
+      <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="offer__cta" data-i18n="cta.book">Book Now</a>
     </div>
 
     <div class="offer">
-      <p class="offer__badge">Wellness</p>
-      <h3 class="offer__title">Spa & Stay</h3>
-      <p class="offer__desc">Unwind with a relaxing spa package including Finnish sauna access, a 60-minute massage, and jacuzzi session with any room booking of three nights or more.</p>
-      <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="offer__cta">Book Now</a>
+      <p class="offer__badge" data-i18n="o2.badge">Wellness</p>
+      <h3 class="offer__title" data-i18n="o2.title">Spa & Stay</h3>
+      <p class="offer__desc" data-i18n="o2.desc">Unwind with a relaxing spa package including Finnish sauna access, a 60-minute massage, and jacuzzi session with any room booking of three nights or more.</p>
+      <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="offer__cta" data-i18n="cta.book">Book Now</a>
     </div>
 
     <div class="offer">
-      <p class="offer__badge">Rooftop</p>
-      <h3 class="offer__title">Bubble Bar Evening</h3>
-      <p class="offer__desc">Elevate your evening on the 8th floor — a welcome cocktail and reserved seating at Bubble Bar with breathtaking views, included with every weekend stay.</p>
-      <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="offer__cta">Book Now</a>
+      <p class="offer__badge" data-i18n="o3.badge">Rooftop</p>
+      <h3 class="offer__title" data-i18n="o3.title">Bubble Bar Evening</h3>
+      <p class="offer__desc" data-i18n="o3.desc">Elevate your evening on the 8th floor — a welcome cocktail and reserved seating at Bubble Bar with breathtaking views, included with every weekend stay.</p>
+      <a href="https://www.swiftbook.io/inst/#home?propertyId=681Nz1gx7jSQeoMxbrbaGYlF5EZL98zP7QIhPfTI3Mjc=&JDRN=Y" target="_blank" class="offer__cta" data-i18n="cta.book">Book Now</a>
     </div>
 
     <div class="offer">
-      <p class="offer__badge">Wine</p>
-      <h3 class="offer__title">Wine Room Discovery</h3>
-      <p class="offer__desc">Discover Georgia's finest wines with a guided tasting of six premium selections paired with artisan snacks in our intimate Wine Room.</p>
-      <a href="mailto:Info@hotelafisha.com?subject=Wine Room Discovery Inquiry" class="offer__cta">Inquire</a>
+      <p class="offer__badge" data-i18n="o4.badge">Wine</p>
+      <h3 class="offer__title" data-i18n="o4.title">Wine Room Discovery</h3>
+      <p class="offer__desc" data-i18n="o4.desc">Discover Georgia's finest wines with a guided tasting of six premium selections paired with artisan snacks in our intimate Wine Room.</p>
+      <a href="mailto:Info@hotelafisha.com?subject=Wine Room Discovery Inquiry" class="offer__cta" data-i18n="cta.inquire">Inquire</a>
     </div>
   </div>
 </div>
+<script>
+(function() {
+  const T = { en: {"back": "Back to Hotel", "title": "Offers", "sub": "Exclusive packages and special rates designed to make your stay at Hotel Afisha unforgettable.", "o1.badge": "Dining", "o1.title": "Brasserie Experience", "o1.desc": "Enjoy a complimentary dinner for two at our French-European Brasserie when you book a Junior Suite or Executive Suite for two or more nights.", "o2.badge": "Wellness", "o2.title": "Spa & Stay", "o2.desc": "Unwind with a relaxing spa package including Finnish sauna access, a 60-minute massage, and jacuzzi session with any room booking of three nights or more.", "o3.badge": "Rooftop", "o3.title": "Bubble Bar Evening", "o3.desc": "Elevate your evening on the 8th floor — a welcome cocktail and reserved seating at Bubble Bar with breathtaking views, included with every weekend stay.", "o4.badge": "Wine", "o4.title": "Wine Room Discovery", "o4.desc": "Discover Georgia's finest wines with a guided tasting of six premium selections paired with artisan snacks in our intimate Wine Room.", "cta.book": "Book Now", "cta.inquire": "Inquire"}, ka: {"back": "მთავარზე დაბრუნება", "title": "შეთავაზებები", "sub": "ექსკლუზიური პაკეტები და სპეციალური ფასები, შექმნილი იმისთვის, რომ თქვენი ყოფნა აფიშაში დაუვიწყარი იყოს.", "o1.badge": "გასტრონომია", "o1.title": "ბრასერიას გამოცდილება", "o1.desc": "ისიამოვნეთ უფასო ვახშმით ორ პერსონაზე ჩვენს ფრანგულ-ევროპულ ბრასერიაში, ჯუნიორ ან ეგზეკუტივ სვიტის ორი ან მეტი ღამით დაჯავშნისას.", "o2.badge": "ველნესი", "o2.title": "სპა და დასვენება", "o2.desc": "მოდუნდით სპა პაკეტით — ფინური საუნა, 60-წუთიანი მასაჟი და ჯაკუზი — ნებისმიერი ნომრის სამი ან მეტი ღამით დაჯავშნისას.", "o3.badge": "სახურავი", "o3.title": "საღამო ბაბლ ბარში", "o3.desc": "აამაღლეთ საღამო მე-8 სართულზე — მისასალმებელი კოქტეილი და დაჯავშნილი ადგილი ბაბლ ბარში თვალწარმტაცი ხედებით, ყოველი შაბათ-კვირის ყოფნისას.", "o4.badge": "ღვინო", "o4.title": "ღვინის ოთახის აღმოჩენა", "o4.desc": "აღმოაჩინეთ საქართველოს საუკეთესო ღვინოები — ექვსი პრემიუმ ღვინის გიდირებული დეგუსტაცია ხელნაკეთ სასუსნავებთან ერთად ჩვენს ღვინის ოთახში.", "cta.book": "დაჯავშნე", "cta.inquire": "მოითხოვე"} };
+  const btns = document.querySelectorAll('.lang-btn');
+  function setLang(l) {
+    const d = T[l]; if (!d) return;
+    document.documentElement.lang = l;
+    document.body.classList.toggle('lang-ka', l === 'ka');
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if (d[k] !== undefined) {
+        if (el.getAttribute('data-i18n-html') === 'true') el.innerHTML = d[k];
+        else el.textContent = d[k];
+      }
+    });
+    btns.forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+    try { localStorage.setItem('hotel-afisha-lang', l); } catch (e) {}
+  }
+  btns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  let saved = 'en';
+  try { saved = localStorage.getItem('hotel-afisha-lang') || 'en'; } catch (e) {}
+  if (saved !== 'en') setLang(saved);
+})();
+</script>
 </body>
 </html>

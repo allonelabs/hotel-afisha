@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Press — Hotel Afisha</title>
+<link rel="stylesheet" href="https://cdn.web-fonts.ge/fonts/bpg-nino-elite/css/bpg-nino-elite.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 @font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
@@ -52,6 +56,16 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
 .press-contact p { font-size: 14px; color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto 24px; line-height: 1.7; }
 .press-contact a { display: inline-block; padding: 12px 32px; background: var(--red); border: 1px solid var(--red); color: #fff; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
 .press-contact a:hover { background: var(--red-deep); border-color: var(--red-deep); }
+
+/* language switch + Georgian font fallbacks */
+.header__actions { display: flex; align-items: center; gap: 24px; }
+.lang-switch { display: flex; align-items: center; gap: 6px; }
+.lang-btn { background: none; border: none; font-family: var(--font-body); font-size: 11px; letter-spacing: 0.15em; color: var(--grey); cursor: pointer; padding: 4px 2px; transition: color 0.3s; border-bottom: 1.5px solid transparent; }
+.lang-btn:hover { color: #2c2c2c; }
+.lang-btn.active { color: #2c2c2c; border-bottom-color: var(--red); }
+.lang-sep { color: var(--grey); font-size: 10px; }
+body.lang-ka { --font-body: 'BPG Nino Elite', 'Noto Serif Georgian', sans-serif; --font-heading: 'Noto Serif Georgian', serif; --font-display: 'Noto Serif Georgian', serif; --font-type: 'BPG Nino Elite', sans-serif; }
+body.lang-ka .page-title h1 { font-weight: 500; }
 </style>
 </head>
 <body>
@@ -59,41 +73,72 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
   <a href="index.html" class="header__logo">
     <img src="afisha-logo-en.png" alt="Hotel Afisha">
   </a>
-  <a href="index.html" class="header__back">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    Back to Hotel
-  </a>
+  <div class="header__actions">
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <span class="lang-sep">/</span>
+      <button class="lang-btn" data-lang="ka">KA</button>
+    </div>
+    <a href="index.html" class="header__back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      <span data-i18n="back">Back to Hotel</span>
+    </a>
+  </div>
 </header>
 
 <div class="page-title">
-  <h1>Press</h1>
-  <p>The latest news and media coverage about Hotel Afisha, Tbilisi's cinematic design hotel.</p>
+  <h1 data-i18n="title">Press</h1>
+  <p data-i18n="sub">The latest news and media coverage about Hotel Afisha, Tbilisi's cinematic design hotel.</p>
 </div>
 
 <div class="content">
   <div class="press-item">
     <p class="press-item__date">2025</p>
-    <h3 class="press-item__title">Hotel Afisha Opens in the Heart of Tbilisi</h3>
-    <p class="press-item__desc">A new five-star design hotel brings Georgian cinema heritage to life through theatre aesthetic blended with retro-futuristic elements. Created by designer Esma Khetsuriani, the property features a Brasserie, Wine Room, and rooftop Bubble Bar on the 8th floor.</p>
+    <h3 class="press-item__title" data-i18n="p1.title">Hotel Afisha Opens in the Heart of Tbilisi</h3>
+    <p class="press-item__desc" data-i18n="p1.desc">A new five-star design hotel brings Georgian cinema heritage to life through theatre aesthetic blended with retro-futuristic elements. Created by designer Esma Khetsuriani, the property features a Brasserie, Wine Room, and rooftop Bubble Bar on the 8th floor.</p>
   </div>
 
   <div class="press-item">
     <p class="press-item__date">2025</p>
-    <h3 class="press-item__title">Where Cinema Meets Hospitality</h3>
-    <p class="press-item__desc">Hotel Afisha combines European ambiance with a distinctive conceptual approach, appealing to guests interested in cultural history, conceptual design, and the fusion of historical and contemporary elements in interior, cuisine, and hospitality.</p>
+    <h3 class="press-item__title" data-i18n="p2.title">Where Cinema Meets Hospitality</h3>
+    <p class="press-item__desc" data-i18n="p2.desc">Hotel Afisha combines European ambiance with a distinctive conceptual approach, appealing to guests interested in cultural history, conceptual design, and the fusion of historical and contemporary elements in interior, cuisine, and hospitality.</p>
   </div>
 
   <div class="press-item">
     <p class="press-item__date">2025</p>
-    <h3 class="press-item__title">Bubble Bar — Tbilisi's Newest Rooftop Destination</h3>
-    <p class="press-item__desc">Located on the 8th floor, Bubble Bar offers breathtaking panoramic views of the city skyline with a vibrant disco atmosphere, quickly becoming one of Tbilisi's most sought-after evening destinations.</p>
+    <h3 class="press-item__title" data-i18n="p3.title">Bubble Bar — Tbilisi's Newest Rooftop Destination</h3>
+    <p class="press-item__desc" data-i18n="p3.desc">Located on the 8th floor, Bubble Bar offers breathtaking panoramic views of the city skyline with a vibrant disco atmosphere, quickly becoming one of Tbilisi's most sought-after evening destinations.</p>
   </div>
 
   <div class="press-contact">
-    <h3>Media Inquiries</h3>
-    <p>For press kits, high-resolution images, or interview requests, please contact our communications team.</p>
-    <a href="mailto:Info@hotelafisha.com?subject=Press Inquiry">Contact Press Team</a>
+    <h3 data-i18n="pc.title">Media Inquiries</h3>
+    <p data-i18n="pc.desc">For press kits, high-resolution images, or interview requests, please contact our communications team.</p>
+    <a href="mailto:Info@hotelafisha.com?subject=Press Inquiry" data-i18n="pc.cta">Contact Press Team</a>
   </div>
 </div>
+<script>
+(function() {
+  const T = { en: {"back": "Back to Hotel", "title": "Press", "sub": "The latest news and media coverage about Hotel Afisha, Tbilisi's cinematic design hotel.", "p1.title": "Hotel Afisha Opens in the Heart of Tbilisi", "p1.desc": "A new five-star design hotel brings Georgian cinema heritage to life through theatre aesthetic blended with retro-futuristic elements. Created by designer Esma Khetsuriani, the property features a Brasserie, Wine Room, and rooftop Bubble Bar on the 8th floor.", "p2.title": "Where Cinema Meets Hospitality", "p2.desc": "Hotel Afisha combines European ambiance with a distinctive conceptual approach, appealing to guests interested in cultural history, conceptual design, and the fusion of historical and contemporary elements in interior, cuisine, and hospitality.", "p3.title": "Bubble Bar — Tbilisi's Newest Rooftop Destination", "p3.desc": "Located on the 8th floor, Bubble Bar offers breathtaking panoramic views of the city skyline with a vibrant disco atmosphere, quickly becoming one of Tbilisi's most sought-after evening destinations.", "pc.title": "Media Inquiries", "pc.desc": "For press kits, high-resolution images, or interview requests, please contact our communications team.", "pc.cta": "Contact Press Team"}, ka: {"back": "მთავარზე დაბრუნება", "title": "პრესა", "sub": "უახლესი სიახლეები და მედია გაშუქება სასტუმრო აფიშაზე — თბილისის კინემატოგრაფიულ დიზაინ სასტუმროზე.", "p1.title": "სასტუმრო აფიშა იხსნება თბილისის გულში", "p1.desc": "ახალი ხუთვარსკვლავიანი დიზაინ სასტუმრო აცოცხლებს ქართული კინოს მემკვიდრეობას თეატრალური ესთეტიკითა და რეტრო-ფუტურისტული ელემენტებით. დიზაინერ ესმა ხეცურიანის შექმნილ სივრცეში განთავსებულია ბრასერია, ღვინის ოთახი და სახურავის ბაბლ ბარი მე-8 სართულზე.", "p2.title": "სადაც კინო სტუმართმოყვარეობას ხვდება", "p2.desc": "სასტუმრო აფიშა აერთიანებს ევროპულ ატმოსფეროსა და გამორჩეულ კონცეპტუალურ მიდგომას — სტუმრებისთვის, ვისაც აინტერესებს კულტურული ისტორია, კონცეპტუალური დიზაინი და ისტორიულისა და თანამედროვის შერწყმა ინტერიერში, სამზარეულოსა და მასპინძლობაში.", "p3.title": "ბაბლ ბარი — თბილისის ახალი სახურავის სივრცე", "p3.desc": "მე-8 სართულზე მდებარე ბაბლ ბარი გთავაზობთ ქალაქის თვალწარმტაც პანორამას და ენერგიულ დისკო ატმოსფეროს — ის სწრაფად იქცა თბილისის ერთ-ერთ ყველაზე მოთხოვნად საღამოს ადგილად.", "pc.title": "მედია მოთხოვნები", "pc.desc": "პრეს-კიტების, მაღალი გარჩევადობის ფოტოების ან ინტერვიუს მოთხოვნებისთვის დაუკავშირდით ჩვენს საკომუნიკაციო გუნდს.", "pc.cta": "დაუკავშირდი პრეს-გუნდს"} };
+  const btns = document.querySelectorAll('.lang-btn');
+  function setLang(l) {
+    const d = T[l]; if (!d) return;
+    document.documentElement.lang = l;
+    document.body.classList.toggle('lang-ka', l === 'ka');
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if (d[k] !== undefined) {
+        if (el.getAttribute('data-i18n-html') === 'true') el.innerHTML = d[k];
+        else el.textContent = d[k];
+      }
+    });
+    btns.forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+    try { localStorage.setItem('hotel-afisha-lang', l); } catch (e) {}
+  }
+  btns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  let saved = 'en';
+  try { saved = localStorage.getItem('hotel-afisha-lang') || 'en'; } catch (e) {}
+  if (saved !== 'en') setLang(saved);
+})();
+</script>
 </body>
 </html>

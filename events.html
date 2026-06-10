@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Events — Hotel Afisha</title>
+<link rel="stylesheet" href="https://cdn.web-fonts.ge/fonts/bpg-nino-elite/css/bpg-nino-elite.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 @font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
@@ -58,6 +62,16 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
 .venue p { font-size: 14px; color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto 24px; line-height: 1.7; }
 .venue a { display: inline-block; padding: 12px 32px; background: var(--red); border: 1px solid var(--red); color: #fff; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
 .venue a:hover { background: var(--red-deep); border-color: var(--red-deep); }
+
+/* language switch + Georgian font fallbacks */
+.header__actions { display: flex; align-items: center; gap: 24px; }
+.lang-switch { display: flex; align-items: center; gap: 6px; }
+.lang-btn { background: none; border: none; font-family: var(--font-body); font-size: 11px; letter-spacing: 0.15em; color: var(--grey); cursor: pointer; padding: 4px 2px; transition: color 0.3s; border-bottom: 1.5px solid transparent; }
+.lang-btn:hover { color: #2c2c2c; }
+.lang-btn.active { color: #2c2c2c; border-bottom-color: var(--red); }
+.lang-sep { color: var(--grey); font-size: 10px; }
+body.lang-ka { --font-body: 'BPG Nino Elite', 'Noto Serif Georgian', sans-serif; --font-heading: 'Noto Serif Georgian', serif; --font-display: 'Noto Serif Georgian', serif; --font-type: 'BPG Nino Elite', sans-serif; }
+body.lang-ka .page-title h1 { font-weight: 500; }
 </style>
 </head>
 <body>
@@ -65,15 +79,22 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
   <a href="index.html" class="header__logo">
     <img src="afisha-logo-en.png" alt="Hotel Afisha">
   </a>
-  <a href="index.html" class="header__back">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    Back to Hotel
-  </a>
+  <div class="header__actions">
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <span class="lang-sep">/</span>
+      <button class="lang-btn" data-lang="ka">KA</button>
+    </div>
+    <a href="index.html" class="header__back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      <span data-i18n="back">Back to Hotel</span>
+    </a>
+  </div>
 </header>
 
 <div class="page-title">
-  <h1>Events</h1>
-  <p>From cinema nights to wine tastings, discover what's happening at Hotel Afisha.</p>
+  <h1 data-i18n="title">Events</h1>
+  <p data-i18n="sub">From cinema nights to wine tastings, discover what's happening at Hotel Afisha.</p>
 </div>
 
 <div class="content">
@@ -81,68 +102,92 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
     <div class="event">
       <div class="event__img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div>
       <div class="event__body">
-        <p class="event__date">Every Friday</p>
-        <h3 class="event__title">Cinema Night</h3>
-        <p class="event__desc">Experience classic Georgian and international films in our intimate screening lounge, paired with signature cocktails from Bubble Bar.</p>
-        <a href="mailto:Info@hotelafisha.com?subject=Cinema Night Inquiry" class="event__link">Learn More &rarr;</a>
+        <p class="event__date" data-i18n="e1.date">Every Friday</p>
+        <h3 class="event__title" data-i18n="e1.title">Cinema Night</h3>
+        <p class="event__desc" data-i18n="e1.desc">Experience classic Georgian and international films in our intimate screening lounge, paired with signature cocktails from Bubble Bar.</p>
+        <a href="mailto:Info@hotelafisha.com?subject=Cinema Night Inquiry" class="event__link" data-i18n="link.more">Learn More →</a>
       </div>
     </div>
 
     <div class="event">
       <div class="event__img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"/></svg></div>
       <div class="event__body">
-        <p class="event__date">Weekends</p>
-        <h3 class="event__title">Live Jazz at Bubble Bar</h3>
-        <p class="event__desc">Join us on the 8th floor for live jazz performances with breathtaking views of the Tbilisi skyline. A vibrant, unforgettable evening.</p>
-        <a href="mailto:Info@hotelafisha.com?subject=Jazz Night Inquiry" class="event__link">Learn More &rarr;</a>
+        <p class="event__date" data-i18n="e2.date">Weekends</p>
+        <h3 class="event__title" data-i18n="e2.title">Live Jazz at Bubble Bar</h3>
+        <p class="event__desc" data-i18n="e2.desc">Join us on the 8th floor for live jazz performances with breathtaking views of the Tbilisi skyline. A vibrant, unforgettable evening.</p>
+        <a href="mailto:Info@hotelafisha.com?subject=Jazz Night Inquiry" class="event__link" data-i18n="link.more">Learn More →</a>
       </div>
     </div>
 
     <div class="event">
       <div class="event__img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></div>
       <div class="event__body">
-        <p class="event__date">Monthly</p>
-        <h3 class="event__title">Georgian Wine Tasting</h3>
-        <p class="event__desc">Explore an extensive selection of Georgian and European wines in our Wine Room, guided by our sommelier with perfectly paired snacks.</p>
-        <a href="mailto:Info@hotelafisha.com?subject=Wine Tasting Inquiry" class="event__link">Learn More &rarr;</a>
+        <p class="event__date" data-i18n="e3.date">Monthly</p>
+        <h3 class="event__title" data-i18n="e3.title">Georgian Wine Tasting</h3>
+        <p class="event__desc" data-i18n="e3.desc">Explore an extensive selection of Georgian and European wines in our Wine Room, guided by our sommelier with perfectly paired snacks.</p>
+        <a href="mailto:Info@hotelafisha.com?subject=Wine Tasting Inquiry" class="event__link" data-i18n="link.more">Learn More →</a>
       </div>
     </div>
     <div class="event">
       <div class="event__img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 7.66l-.71-.71M4.05 4.05l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg></div>
       <div class="event__body">
-        <p class="event__date">May 10, 2026</p>
-        <h3 class="event__title">Rooftop Sunset Dinner</h3>
-        <p class="event__desc">A five-course tasting menu served on our 8th-floor terrace as the sun sets over the Old Town. Limited to 24 guests per evening.</p>
-        <a href="mailto:Info@hotelafisha.com?subject=Rooftop Dinner Inquiry" class="event__link">Reserve a Seat &rarr;</a>
+        <p class="event__date" data-i18n="e4.date">May 10, 2026</p>
+        <h3 class="event__title" data-i18n="e4.title">Rooftop Sunset Dinner</h3>
+        <p class="event__desc" data-i18n="e4.desc">A five-course tasting menu served on our 8th-floor terrace as the sun sets over the Old Town. Limited to 24 guests per evening.</p>
+        <a href="mailto:Info@hotelafisha.com?subject=Rooftop Dinner Inquiry" class="event__link" data-i18n="link.reserve">Reserve a Seat →</a>
       </div>
     </div>
 
     <div class="event">
       <div class="event__img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
       <div class="event__body">
-        <p class="event__date">May 24, 2026</p>
-        <h3 class="event__title">Poetry & Prose Evening</h3>
-        <p class="event__desc">Local authors and poets share new work in our lobby lounge, accompanied by ambient music and complimentary Georgian tea service.</p>
-        <a href="mailto:Info@hotelafisha.com?subject=Poetry Evening Inquiry" class="event__link">Learn More &rarr;</a>
+        <p class="event__date" data-i18n="e5.date">May 24, 2026</p>
+        <h3 class="event__title" data-i18n="e5.title">Poetry & Prose Evening</h3>
+        <p class="event__desc" data-i18n="e5.desc">Local authors and poets share new work in our lobby lounge, accompanied by ambient music and complimentary Georgian tea service.</p>
+        <a href="mailto:Info@hotelafisha.com?subject=Poetry Evening Inquiry" class="event__link" data-i18n="link.more">Learn More →</a>
       </div>
     </div>
 
     <div class="event">
       <div class="event__img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
       <div class="event__body">
-        <p class="event__date">June 7, 2026</p>
-        <h3 class="event__title">Art Exhibition Opening</h3>
-        <p class="event__desc">Emerging Tbilisi artists debut a curated collection of contemporary works throughout the hotel's public spaces. Opening night reception included.</p>
-        <a href="mailto:Info@hotelafisha.com?subject=Art Exhibition Inquiry" class="event__link">View Details &rarr;</a>
+        <p class="event__date" data-i18n="e6.date">June 7, 2026</p>
+        <h3 class="event__title" data-i18n="e6.title">Art Exhibition Opening</h3>
+        <p class="event__desc" data-i18n="e6.desc">Emerging Tbilisi artists debut a curated collection of contemporary works throughout the hotel's public spaces. Opening night reception included.</p>
+        <a href="mailto:Info@hotelafisha.com?subject=Art Exhibition Inquiry" class="event__link" data-i18n="link.details">View Details →</a>
       </div>
     </div>
   </div>
 
   <div class="venue">
-    <h3>Host Your Event at Afisha</h3>
-    <p>Our conference facilities accommodate up to 80 guests. From corporate meetings to private celebrations, we offer a sophisticated setting in the heart of Tbilisi.</p>
-    <a href="mailto:Info@hotelafisha.com?subject=Event Venue Inquiry">Get in Touch</a>
+    <h3 data-i18n="venue.title">Host Your Event at Afisha</h3>
+    <p data-i18n="venue.desc">Our conference facilities accommodate up to 80 guests. From corporate meetings to private celebrations, we offer a sophisticated setting in the heart of Tbilisi.</p>
+    <a href="mailto:Info@hotelafisha.com?subject=Event Venue Inquiry" data-i18n="venue.cta">Get in Touch</a>
   </div>
 </div>
+<script>
+(function() {
+  const T = { en: {"back": "Back to Hotel", "title": "Events", "sub": "From cinema nights to wine tastings, discover what's happening at Hotel Afisha.", "e1.date": "Every Friday", "e1.title": "Cinema Night", "e1.desc": "Experience classic Georgian and international films in our intimate screening lounge, paired with signature cocktails from Bubble Bar.", "e2.date": "Weekends", "e2.title": "Live Jazz at Bubble Bar", "e2.desc": "Join us on the 8th floor for live jazz performances with breathtaking views of the Tbilisi skyline. A vibrant, unforgettable evening.", "e3.date": "Monthly", "e3.title": "Georgian Wine Tasting", "e3.desc": "Explore an extensive selection of Georgian and European wines in our Wine Room, guided by our sommelier with perfectly paired snacks.", "e4.date": "May 10, 2026", "e4.title": "Rooftop Sunset Dinner", "e4.desc": "A five-course tasting menu served on our 8th-floor terrace as the sun sets over the Old Town. Limited to 24 guests per evening.", "e5.date": "May 24, 2026", "e5.title": "Poetry & Prose Evening", "e5.desc": "Local authors and poets share new work in our lobby lounge, accompanied by ambient music and complimentary Georgian tea service.", "e6.date": "June 7, 2026", "e6.title": "Art Exhibition Opening", "e6.desc": "Emerging Tbilisi artists debut a curated collection of contemporary works throughout the hotel's public spaces. Opening night reception included.", "link.more": "Learn More →", "link.reserve": "Reserve a Seat →", "link.details": "View Details →", "venue.title": "Host Your Event at Afisha", "venue.desc": "Our conference facilities accommodate up to 80 guests. From corporate meetings to private celebrations, we offer a sophisticated setting in the heart of Tbilisi.", "venue.cta": "Get in Touch"}, ka: {"back": "მთავარზე დაბრუნება", "title": "ღონისძიებები", "sub": "კინო საღამოებიდან ღვინის დეგუსტაციებამდე — გაიგეთ, რა ხდება სასტუმრო აფიშაში.", "e1.date": "ყოველ პარასკევს", "e1.title": "კინო საღამო", "e1.desc": "უყურეთ კლასიკურ ქართულ და საერთაშორისო ფილმებს ჩვენს ინტიმურ საჩვენებელ ლაუნჯში, ბაბლ ბარის საფირმო კოქტეილებთან ერთად.", "e2.date": "შაბათ-კვირას", "e2.title": "ცოცხალი ჯაზი ბაბლ ბარში", "e2.desc": "შემოგვიერთდით მე-8 სართულზე ცოცხალი ჯაზის საღამოებზე თბილისის თვალწარმტაცი ხედებით. ენერგიული, დაუვიწყარი საღამო.", "e3.date": "ყოველთვიურად", "e3.title": "ქართული ღვინის დეგუსტაცია", "e3.desc": "აღმოაჩინეთ ქართული და ევროპული ღვინოების ფართო არჩევანი ჩვენს ღვინის ოთახში, სომელიეს თანხლებითა და იდეალურად შერჩეული სასუსნავებით.", "e4.date": "10 მაისი, 2026", "e4.title": "ვახშამი მზის ჩასვლისას სახურავზე", "e4.desc": "ხუთკერძიანი სადეგუსტაციო მენიუ მე-8 სართულის ტერასაზე, სანამ მზე ძველ თბილისს ეფერება. მხოლოდ 24 სტუმარი თითო საღამოს.", "e5.date": "24 მაისი, 2026", "e5.title": "პოეზიისა და პროზის საღამო", "e5.desc": "ადგილობრივი ავტორები და პოეტები წარადგენენ ახალ ნაწარმოებებს ლობის ლაუნჯში, ფონური მუსიკისა და ქართული ჩაის თანხლებით.", "e6.date": "7 ივნისი, 2026", "e6.title": "ხელოვნების გამოფენის გახსნა", "e6.desc": "თბილისელი ახალგაზრდა ხელოვანები წარადგენენ თანამედროვე ნამუშევრების კურირებულ კოლექციას სასტუმროს საჯარო სივრცეებში. გახსნის საღამო მიღებით.", "link.more": "გაიგე მეტი →", "link.reserve": "დაჯავშნე ადგილი →", "link.details": "დეტალები →", "venue.title": "გამართეთ თქვენი ღონისძიება აფიშაში", "venue.desc": "ჩვენი საკონფერენციო სივრცე იტევს 80-მდე სტუმარს. კორპორატიული შეხვედრებიდან კერძო ზეიმებამდე — დახვეწილი გარემო თბილისის გულში.", "venue.cta": "დაგვიკავშირდით"} };
+  const btns = document.querySelectorAll('.lang-btn');
+  function setLang(l) {
+    const d = T[l]; if (!d) return;
+    document.documentElement.lang = l;
+    document.body.classList.toggle('lang-ka', l === 'ka');
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if (d[k] !== undefined) {
+        if (el.getAttribute('data-i18n-html') === 'true') el.innerHTML = d[k];
+        else el.textContent = d[k];
+      }
+    });
+    btns.forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+    try { localStorage.setItem('hotel-afisha-lang', l); } catch (e) {}
+  }
+  btns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  let saved = 'en';
+  try { saved = localStorage.getItem('hotel-afisha-lang') || 'en'; } catch (e) {}
+  if (saved !== 'en') setLang(saved);
+})();
+</script>
 </body>
 </html>
