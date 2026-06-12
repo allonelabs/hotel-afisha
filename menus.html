@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Menus — Hotel Afisha</title>
+<link rel="stylesheet" href="https://cdn.web-fonts.ge/fonts/bpg-nino-elite/css/bpg-nino-elite.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 @font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Simplo'; src: url('fonts/Simplo-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
@@ -104,6 +108,20 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
 .reserve p { font-size: 14px; color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto 24px; line-height: 1.7; }
 .reserve a { display: inline-block; padding: 12px 32px; background: var(--red); border: 1px solid var(--red); color: #fff; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
 .reserve a:hover { background: var(--red-deep); border-color: var(--red-deep); }
+
+/* language switch + Georgian fallbacks */
+.header__actions { display: flex; align-items: center; gap: 24px; }
+.lang-switch { display: flex; align-items: center; gap: 6px; }
+.lang-btn { background: none; border: none; font-family: var(--font-body); font-size: 11px; letter-spacing: 0.15em; color: var(--grey); cursor: pointer; padding: 4px 2px; transition: color 0.3s; border-bottom: 1.5px solid transparent; }
+.lang-btn:hover { color: #2c2c2c; }
+.lang-btn.active { color: #2c2c2c; border-bottom-color: var(--red); }
+.lang-sep { color: var(--grey); font-size: 10px; }
+body.lang-ka { --font-body: 'BPG Nino Elite', 'Noto Serif Georgian', sans-serif; --font-heading: 'Noto Serif Georgian', serif; --font-display: 'Noto Serif Georgian', serif; --font-type: 'BPG Nino Elite', sans-serif; --font-script: 'Noto Serif Georgian', serif; }
+body.lang-ka .page-title h1, body.lang-ka .menu__title { font-weight: 500; }
+body.lang-ka .menu-section__title { font-style: italic; font-weight: 500; font-size: clamp(21px, 2.6vw, 27px); margin-bottom: 20px; }
+body.lang-ka .cols .menu-section__title { font-size: 20px; }
+body.lang-ka .mi__name { font-size: 14px; }
+body.lang-ka .menu-nav a { font-size: 12.5px; }
 </style>
 </head>
 <body>
@@ -111,23 +129,30 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
   <a href="index.html" class="header__logo">
     <img src="afisha-logo-en.png" alt="Hotel Afisha">
   </a>
-  <a href="index.html" class="header__back">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    Back to Hotel
-  </a>
+  <div class="header__actions">
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <span class="lang-sep">/</span>
+      <button class="lang-btn" data-lang="ka">KA</button>
+    </div>
+    <a href="index.html" class="header__back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      <span data-i18n="back">Back to Hotel</span>
+    </a>
+  </div>
 </header>
 
 <div class="page-title">
-  <h1>menus</h1>
-  <p>From the Brasserie's Josper grill to the Wine Room's qvevri cellar — every menu at Hotel Afisha, exactly as served.</p>
+  <h1 data-i18n="title">menus</h1>
+  <p data-i18n="sub">From the Brasserie's Josper grill to the Wine Room's qvevri cellar — every menu at Hotel Afisha, exactly as served.</p>
 </div>
 
 <nav class="menu-nav" id="menuNav">
-  <a href="#brasserie" class="active">brasserie</a>
-  <a href="#lunch">lunch</a>
-  <a href="#wine">wine room</a>
-  <a href="#room-service">room service</a>
-  <a href="#mini-bar">mini bar</a>
+  <a href="#brasserie" class="active" data-i18n="nav.brasserie">brasserie</a>
+  <a href="#lunch" data-i18n="nav.lunch">lunch</a>
+  <a href="#wine" data-i18n="nav.wine">wine room</a>
+  <a href="#room-service" data-i18n="nav.rs">room service</a>
+  <a href="#mini-bar" data-i18n="nav.mb">mini bar</a>
 </nav>
 
 <div class="wrap">
@@ -135,9 +160,9 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
 <!-- ═══════════ BRASSERIE ═══════════ -->
 <section class="menu" id="brasserie">
   <div class="menu__head">
-    <p class="menu__venue">&bull; afisha brasserie &bull;</p>
-    <h2 class="menu__title">dine menu</h2>
-    <a class="menu__pdf" href="menus/brasserie.pdf" target="_blank">Download PDF</a>
+    <p class="menu__venue" data-i18n="v.brasserie">&bull; afisha brasserie &bull;</p>
+    <h2 class="menu__title" data-i18n="t.dine">dine menu</h2>
+    <a class="menu__pdf" id="brasseriePdf" href="menus/brasserie.pdf" target="_blank" data-i18n="pdf">Download PDF</a>
   </div>
 
   <div class="menu-section">
@@ -357,18 +382,18 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
   </div>
 
   <div class="menu-foot">
-    <span>Prices include VAT 18% &nbsp;&middot;&nbsp; <span class="veg" style="margin-left:0;">v</span> vegetarian &nbsp; <span class="veg" style="margin-left:0;">vg</span> vegan</span>
-    <span>Dishes may contain allergens — please ask a member of our staff for more information</span>
+    <span data-i18n="foot.vatveg" data-i18n-html="true">Prices include VAT 18% &nbsp;&middot;&nbsp; <span class="veg" style="margin-left:0;">v</span> vegetarian &nbsp; <span class="veg" style="margin-left:0;">vg</span> vegan</span>
+    <span data-i18n="foot.allergen1">Dishes may contain allergens — please ask a member of our staff for more information</span>
   </div>
 </section>
 
 <!-- ═══════════ LUNCH ═══════════ -->
 <section class="menu" id="lunch">
   <div class="menu__head">
-    <p class="menu__venue">&bull; afisha brasserie &bull;</p>
-    <h2 class="menu__title">lunch menu</h2>
-    <p class="menu__note">Build your own set — choose one dish per course</p>
-    <a class="menu__pdf" href="menus/lunch.pdf" target="_blank">Download PDF</a>
+    <p class="menu__venue" data-i18n="v.brasserie">&bull; afisha brasserie &bull;</p>
+    <h2 class="menu__title" data-i18n="t.lunch">lunch menu</h2>
+    <p class="menu__note" data-i18n="note.lunch">Build your own set — choose one dish per course</p>
+    <a class="menu__pdf" href="menus/lunch.pdf" target="_blank" data-i18n="pdf">Download PDF</a>
   </div>
 
   <div class="menu-section">
@@ -405,22 +430,22 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
   </div>
 
   <div class="menu-foot">
-    <span>Prices include 18% VAT &nbsp;&middot;&nbsp; <span class="veg" style="margin-left:0;">v</span> vegetarian &nbsp; <span class="veg" style="margin-left:0;">vg</span> vegan</span>
-    <span>Dishes may contain allergens — please contact a service employee for information</span>
+    <span data-i18n="foot.vatveg2" data-i18n-html="true">Prices include 18% VAT &nbsp;&middot;&nbsp; <span class="veg" style="margin-left:0;">v</span> vegetarian &nbsp; <span class="veg" style="margin-left:0;">vg</span> vegan</span>
+    <span data-i18n="foot.allergen2">Dishes may contain allergens — please contact a service employee for information</span>
   </div>
 </section>
 
 <!-- ═══════════ WINE ROOM ═══════════ -->
 <section class="menu" id="wine">
   <div class="menu__head">
-    <p class="menu__venue">&bull; afisha wine room &bull;</p>
-    <h2 class="menu__title">wine menu</h2>
-    <a class="menu__pdf" href="menus/wine.pdf" target="_blank">Download PDF</a>
+    <p class="menu__venue" data-i18n="v.wine">&bull; afisha wine room &bull;</p>
+    <h2 class="menu__title" data-i18n="t.wine">wine menu</h2>
+    <a class="menu__pdf" href="menus/wine.pdf" target="_blank" data-i18n="pdf">Download PDF</a>
   </div>
 
   <div class="menu-section">
     <h3 class="menu-section__title">Sparkling Wine</h3>
-    <div class="wine-head"><span>year</span><span>wine</span><span>glass</span><span>bottle</span></div>
+    <div class="wine-head"><span data-i18n="w.year">year</span><span data-i18n="w.wine">wine</span><span data-i18n="w.glass">glass</span><span data-i18n="w.bottle">bottle</span></div>
     <div class="wr"><span class="wr__year">N/V</span><span class="wr__name">Prosecco <small>DOC Extra-dry, Veneto, Italy</small><b>Tosti</b></span><span class="wr__g">21</span><span class="wr__b">91</span></div>
     <div class="wr"><span class="wr__year">N/V</span><span class="wr__name">Prosecco <small>DOC Brut, Veneto, Italy</small><b>Mionetto</b></span><span class="wr__g"></span><span class="wr__b">96</span></div>
     <div class="wr"><span class="wr__year">N/V</span><span class="wr__name">Prosecco <small>DOC Extra-dry, Veneto, Italy</small><b>Mionetto</b></span><span class="wr__g"></span><span class="wr__b">101</span></div>
@@ -429,7 +454,7 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
 
   <div class="menu-section">
     <h3 class="menu-section__title">White Dry</h3>
-    <div class="wine-head"><span>year</span><span>wine</span><span>glass</span><span>bottle</span></div>
+    <div class="wine-head"><span data-i18n="w.year">year</span><span data-i18n="w.wine">wine</span><span data-i18n="w.glass">glass</span><span data-i18n="w.bottle">bottle</span></div>
     <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Tsinandali <small>PDO, Limited collection</small><b>Bolero Winery</b></span><span class="wr__g">15</span><span class="wr__b">60</span></div>
     <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Tsitska Tsolikouri<b>Royal Khvanchkara</b></span><span class="wr__g">16</span><span class="wr__b">70</span></div>
     <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Goruli Mtsvane <small>On Lees</small><b>Mosavali Winery</b></span><span class="wr__g">17</span><span class="wr__b">80</span></div>
@@ -493,7 +518,7 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
 
   <div class="menu-section">
     <h3 class="menu-section__title">Red Dry</h3>
-    <div class="wine-head"><span>year</span><span>wine</span><span>glass</span><span>bottle</span></div>
+    <div class="wine-head"><span data-i18n="w.year">year</span><span data-i18n="w.wine">wine</span><span data-i18n="w.glass">glass</span><span data-i18n="w.bottle">bottle</span></div>
     <div class="wr"><span class="wr__year">2023</span><span class="wr__name">Saperavi <small>Limited collection</small><b>Bolero Winery</b></span><span class="wr__g">15</span><span class="wr__b">60</span></div>
     <div class="wr"><span class="wr__year">2021</span><span class="wr__name">Alexandrouli <small>Barrel</small><b>Koncho &amp; Co</b></span><span class="wr__g">16</span><span class="wr__b">65</span></div>
     <div class="wr"><span class="wr__year">2022</span><span class="wr__name">Aladasturi <small>Qvevri</small><b>Sabado</b></span><span class="wr__g">16</span><span class="wr__b">65</span></div>
@@ -546,17 +571,17 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
   </div>
 
   <div class="menu-foot">
-    <span>Prices include 18% VAT &nbsp;&middot;&nbsp; glass / bottle prices in GEL</span>
+    <span data-i18n="foot.wine" data-i18n-html="true">Prices include 18% VAT &nbsp;&middot;&nbsp; glass / bottle prices in GEL</span>
   </div>
 </section>
 
 <!-- ═══════════ ROOM SERVICE ═══════════ -->
 <section class="menu" id="room-service">
   <div class="menu__head">
-    <p class="menu__venue">&bull; afisha hotel &bull;</p>
-    <h2 class="menu__title">room service</h2>
-    <p class="menu__note">Available daily from 12:00 to 00:00</p>
-    <a class="menu__pdf" href="menus/room-service.pdf" target="_blank">Download PDF</a>
+    <p class="menu__venue" data-i18n="v.hotel">&bull; afisha hotel &bull;</p>
+    <h2 class="menu__title" data-i18n="t.rs">room service</h2>
+    <p class="menu__note" data-i18n="note.rs">Available daily from 12:00 to 00:00</p>
+    <a class="menu__pdf" href="menus/room-service.pdf" target="_blank" data-i18n="pdf">Download PDF</a>
   </div>
 
   <div class="menu-section">
@@ -628,17 +653,17 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
   </div>
 
   <div class="menu-foot">
-    <span>Prices include 18% VAT &nbsp;&middot;&nbsp; <span class="veg" style="margin-left:0;">v</span> vegetarian &nbsp; <span class="veg" style="margin-left:0;">vg</span> vegan</span>
-    <span>Room service is available Monday to Sunday from 12:00 to 00:00</span>
+    <span data-i18n="foot.vatveg2" data-i18n-html="true">Prices include 18% VAT &nbsp;&middot;&nbsp; <span class="veg" style="margin-left:0;">v</span> vegetarian &nbsp; <span class="veg" style="margin-left:0;">vg</span> vegan</span>
+    <span data-i18n="foot.rs">Room service is available Monday to Sunday from 12:00 to 00:00</span>
   </div>
 </section>
 
 <!-- ═══════════ MINI BAR ═══════════ -->
 <section class="menu" id="mini-bar">
   <div class="menu__head">
-    <p class="menu__venue">&bull; afisha hotel &bull;</p>
-    <h2 class="menu__title">mini bar</h2>
-    <a class="menu__pdf" href="menus/mini-bar.pdf" target="_blank">Download PDF</a>
+    <p class="menu__venue" data-i18n="v.hotel">&bull; afisha hotel &bull;</p>
+    <h2 class="menu__title" data-i18n="t.mb">mini bar</h2>
+    <a class="menu__pdf" href="menus/mini-bar.pdf" target="_blank" data-i18n="pdf">Download PDF</a>
   </div>
 
   <div class="cols">
@@ -680,15 +705,15 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
   </div>
 
   <div class="menu-foot">
-    <span>Prices include 18% VAT</span>
-    <span>Once a product is opened the full amount will be charged</span>
+    <span data-i18n="foot.vat">Prices include 18% VAT</span>
+    <span data-i18n="foot.opened">Once a product is opened the full amount will be charged</span>
   </div>
 </section>
 
 <div class="reserve">
-  <h3>book a table</h3>
-  <p>Reserve your evening at the Brasserie or the Wine Room — our team will take care of the rest.</p>
-  <a href="mailto:Info@hotelafisha.com?subject=Table Reservation">Reserve</a>
+  <h3 data-i18n="reserve.title">book a table</h3>
+  <p data-i18n="reserve.desc">Reserve your evening at the Brasserie or the Wine Room — our team will take care of the rest.</p>
+  <a href="mailto:Info@hotelafisha.com?subject=Table Reservation" data-i18n="reserve.cta">Reserve</a>
 </div>
 
 </div>
@@ -708,6 +733,51 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 4000; pointer-eve
     });
   }, { rootMargin: '-30% 0px -60% 0px' });
   sections.forEach(s => spy.observe(s));
+</script>
+<script>
+(function() {
+  const CHROME = { en: {"back": "Back to Hotel", "title": "menus", "sub": "From the Brasserie's Josper grill to the Wine Room's qvevri cellar — every menu at Hotel Afisha, exactly as served.", "nav.brasserie": "brasserie", "nav.lunch": "lunch", "nav.wine": "wine room", "nav.rs": "room service", "nav.mb": "mini bar", "t.dine": "dine menu", "t.lunch": "lunch menu", "t.wine": "wine menu", "t.rs": "room service", "t.mb": "mini bar", "v.brasserie": "• afisha brasserie •", "v.hotel": "• afisha hotel •", "v.wine": "• afisha wine room •", "pdf": "Download PDF", "note.lunch": "Build your own set — choose one dish per course", "note.rs": "Available daily from 12:00 to 00:00", "w.year": "year", "w.wine": "wine", "w.glass": "glass", "w.bottle": "bottle", "foot.allergen1": "Dishes may contain allergens — please ask a member of our staff for more information", "foot.allergen2": "Dishes may contain allergens — please contact a service employee for information", "foot.wine": "Prices include 18% VAT &nbsp;&middot;&nbsp; glass / bottle prices in GEL", "foot.rs": "Room service is available Monday to Sunday from 12:00 to 00:00", "foot.vat": "Prices include 18% VAT", "foot.opened": "Once a product is opened the full amount will be charged", "foot.vatveg": "Prices include VAT 18% &nbsp;&middot;&nbsp; <span class=\"veg\" style=\"margin-left:0;\">v</span> vegetarian &nbsp; <span class=\"veg\" style=\"margin-left:0;\">vg</span> vegan", "foot.vatveg2": "Prices include 18% VAT &nbsp;&middot;&nbsp; <span class=\"veg\" style=\"margin-left:0;\">v</span> vegetarian &nbsp; <span class=\"veg\" style=\"margin-left:0;\">vg</span> vegan", "reserve.title": "book a table", "reserve.desc": "Reserve your evening at the Brasserie or the Wine Room — our team will take care of the rest.", "reserve.cta": "Reserve"}, ka: {"back": "მთავარზე დაბრუნება", "title": "მენიუ", "sub": "ბრასერიას ჯოსპერ გრილიდან ღვინის ოთახის ქვევრის მარნამდე — სასტუმრო აფიშას ყველა მენიუ.", "nav.brasserie": "ბრასერია", "nav.lunch": "ლანჩი", "nav.wine": "ღვინის ოთახი", "nav.rs": "რუმ სერვისი", "nav.mb": "მინი ბარი", "t.dine": "მენიუ", "t.lunch": "ლანჩ მენიუ", "t.wine": "ღვინის მენიუ", "t.rs": "რუმ სერვისი", "t.mb": "მინი ბარი", "v.brasserie": "• აფიშა ბრასერია •", "v.hotel": "• აფიშა სასტუმრო •", "v.wine": "• აფიშა ღვინის ოთახი •", "pdf": "ჩამოტვირთე PDF", "note.lunch": "შეადგინეთ თქვენი სეტი — აირჩიეთ თითო კერძი თითო კურსიდან", "note.rs": "ხელმისაწვდომია ყოველდღე 12:00-დან 00:00-მდე", "w.year": "წელი", "w.wine": "ღვინო", "w.glass": "ჭიქა", "w.bottle": "ბოთლი", "foot.allergen1": "კერძები შეიძლება შეიცავდეს ალერგენებს — ინფორმაციის მისაღებად მიმართეთ სერვისის თანამშრომელს", "foot.allergen2": "კერძები შეიძლება შეიცავდეს ალერგენებს — ინფორმაციის მისაღებად მიმართეთ სერვისის თანამშრომელს", "foot.wine": "ფასები მოიცავს 18% დღგ-ს &nbsp;&middot;&nbsp; ჭიქა / ბოთლი — ფასები ლარში", "foot.rs": "რუმ სერვისი ხელმისაწვდომია ყოველდღე, 12:00-დან 00:00-მდე", "foot.vat": "ფასები მოიცავს 18% დღგ-ს", "foot.opened": "პროდუქტის გახსნის შემთხვევაში დაგერიცხებათ სრული ღირებულება", "foot.vatveg": "ფასები მოიცავს 18% დღგ-ს &nbsp;&middot;&nbsp; <span class=\"veg\" style=\"margin-left:0;\">v</span> ვეგეტარიანული &nbsp; <span class=\"veg\" style=\"margin-left:0;\">vg</span> ვეგანური", "foot.vatveg2": "ფასები მოიცავს 18% დღგ-ს &nbsp;&middot;&nbsp; <span class=\"veg\" style=\"margin-left:0;\">v</span> ვეგეტარიანული &nbsp; <span class=\"veg\" style=\"margin-left:0;\">vg</span> ვეგანური", "reserve.title": "დაჯავშნე მაგიდა", "reserve.desc": "დაჯავშნეთ საღამო ბრასერიაში ან ღვინის ოთახში — დანარჩენზე ჩვენი გუნდი იზრუნებს.", "reserve.cta": "დაჯავშნა"} };
+  const M = {"Starter": "სტარტერი", "Salad": "სალათი", "Soup": "წვნიანი", "Sandwiches": "სენდვიჩი", "Main Dish": "მთავარი კერძი", "From Josper Grill": "ჯოსპერ გრილი", "Garnish": "გარნირი", "Sauces": "სოუსი", "Pasta": "პასტა", "Bakery": "ცომეული", "Desserts": "დესერტი", "Beverage": "სასმელები", "Soft Drinks": "უალკოჰოლო სასმელები", "Coffee": "ყავა", "Palais des Thes Tea": "ჩაი", "Beer": "ლუდი", "Vermouth, Bitter, Liqueur": "ლიქიორი", "Gin": "ჯინი", "Tequila": "ტეკილა", "Rum": "რომი", "Cognac & Brandy": "კონიაკი / ბრენდი", "Whiskey": "ვისკი", "Vodka & Chacha": "ჭაჭა / არაყი", "Sets": "სეტები", "Main Course": "ძირითადი კერძი", "Dessert": "დესერტი", "Drinks": "სასმელები", "Sparkling Wine": "ცქრიალა ღვინო", "White Dry": "თეთრი მშრალი", "White Semi Sweet": "თეთრი ნახევრად ტკბილი", "White Sweet": "თეთრი ტკბილი", "Amber Dry": "ქარვისფერი მშრალი", "Rose": "ვარდისფერი", "Red Dry": "წითელი მშრალი", "Red Semi Sweet": "წითელი ნახევრად ტკბილი", "Wine Companions": "ღვინის თანმხლები", "Soups": "წვნიანი", "Salads": "სალათი", "Main Dishes": "მთავარი კერძი", "Garnishes": "გარნირი", "Kids Menu": "საბავშვო მენიუ", "Snacks": "სნექები", "Georgian Mezze Board": "ქართული დაფა", "Four kinds of pkhali selection, tomato & cucumber with coriander pesto, Guda cheese, marinated jonjoli, lavashi bread": "ოთხი სახეობის ფხალი, პომიდორი & კიტრი ქინძის პესტოთი, გუდის ყველი, ჯონჯოლი, ლავაში", "Avocado-Shrimp Salsa": "ავოკადოს და კრევეტების სალსა", "Avocado shrimps' salad with rocket leaves, cherry tomato confit and vinegar dressing": "ავოკადოს და კრევეტების სალათი რუკოლათი, ჩერი პომიდვრის კონფიტი და ძმრის დრესინგით", "Salmon Rillette": "ორაგულის რილეტი", "Smoked salmon, cream cheese": "შებოლილი ორაგული, კრემ-ყველი", "Tomato Stracciatella": "პომიდორი სტრაჩატელათი", "Stracciatella, pickled onion, Kakhetian oil dressing, pistachio": "სტრაჩატელა, დამარინადებული ხახვი, კახური ზეთი, ფისტა", "Georgian Salad": "ქართული სალათი", "Tomato and cucumber, fresh herbs, onion, sour cream, walnut dressing & fried jonjoli": "პომიდორი, კიტრი, მწვანილები, ხახვი, არაჟანი, ნიგვზის დრესინგი & შემწვარი ჯონჯოლი", "Caesar Salad": "ცეზარი", "Grilled chicken or shrimps, parmesan, Caesar dressing": "ქათამი ან კრევეტი გრილზე, პარმეზანი, ცეზარის დრესინგი", "Burrata Salad": "ბურატას სალათი", "Tomato, basil pesto": "პომიდორი, ბაზილიკის პესტო", "Steak Salad": "სტეიკ სალათი", "Beef steak, cream, pesto, parmesan, salad leaves, walnut, grapes": "საქონლის სტეიკი, ნაღები, პესტო, პარმეზანი, სალათის ფოთლები, ნიგოზი, ყურძენი", "Pelmeni Soup": "პელმენის წვნიანი", "Chicken broth, mixed meat dumplings & sour cream": "ქათმის ბულიონი, შერეული ხორცის პელმენი & არაჟანი", "Soup “Kharcho”": "სუპ-ხარჩო", "Boiled beef with fresh herbs, tomato paste, rice & home-made adjika": "მოხარშული საქონლის ხორცი მწვანილებით, ტომატის პასტა, ბრინჯი & აჯიკა", "Borsch": "ბორში", "Beef short ribs, beetroot, cabbage, sour cream": "საქონლის ხორცი, ჭარხალი, კომბოსტო, არაჟანი", "Falafel Wrap": "ფალაფელის ვრაპი", "Falafel balls wrapped in taco bread & tahini dressing": "ფალაფელის ბურთები ტაჰინის დრესინგით ტაკოს პურში", "Steak Sandwich": "სტეიკ სენდვიჩი", "Focaccia bread, steak, mushroom, marinated onion, green pesto sauce and rucola": "ფოკაჩა, სტეიკი, სოკო, დამარინადებული ხახვი, პესტო და რუკოლა", "The Brasserie House Burger": "ბურგერი", "Angus beef topped with melted cheese, pickled onion on toast bun": "სალათის ფურცელი, პომიდორი, ხახვი, ტრუფელის სოუსი, კარტოფილი ფრი", "Stuffed Eggplant": "ბადრიჯანი გრილზე", "Vegetable ratatouille with spicy tomato sauce": "ბოსტნეულის რატატუი ტომატის სოუსით", "Adjapsandali with Guda Cheese": "აჯაფსანდალი გუდის ყველით", "Eggplant, bell pepper, onion, garlic, cornbread": "ბადრიჯანი, ბულგარული წიწაკა, ხახვი, ნიორი, მჭადი", "Mini Khinkali": "მინი ხინკალი", "With creamy truffle sauce": "ნაღებისა და ტრუფელის სოუსით", "Chkmeruli": "შქმერული", "Grilled poulet fillet with garlic-butter sauce and potato": "მობრაწული ქათმის ხორცი ნივრიანი სოუსით და კარტოფილით", "Apkhazura": "აფხაზურა", "Potato puree with cheese, tkemali sauce and sauteed green beans": "კარტოფილის პიურე ყველით, ტყემალი და მონალული მწვანე ლობიო", "Duck Ravioli": "იხვის რავიოლი", "Tomato, basil, duck confit, parmesan": "პომიდორი, ბაზილიკი, იხვის კონფი, პარმეზანი", "Chicken Kiev": "ქათამი კიევურად", "Potato puree, green peas, truffle sauce": "კარტოფილის პიურე, მწვანე ლობიო, ტრუფელი", "Duck Breast": "იხვის მკერდი", "With sweet potato puree & berry sauce": "სტაფილოს პიურე & კენკრის სოუსი", "Beef Stroganoff": "ბიფსტროგანოფი", "Mixed mushrooms, potato pave": "შერეული სოკო, კარტოფილის გრატანი", "Grilled Mountain River Trout": "გრილზე შემწვარი კალმახი", "Pork Mtsvadi": "ღორის მწვადი", "Slow Cooked Pork Belly": "გამომცხვარი ღორის მუცელი", "Grilled Salmon Steak": "გრილზე შემწვარი ორაგულის სტეიკი", "Lamb Chops": "ბატკნის ნეკნები", "Organic Tenderloin Steak": "საქონლის სტეიკი", "Angus Rib-eye Steak": "ანგუს რიბაი სტეიკი", "Potato Puree": "კარტოფილის პიურე", "French Fries": "კარტოფილი ფრი", "Grilled Vegetables": "გრილზე შემწვარი ბოსტნეული", "Baked Potato with Herbs": "გამომცხვარი კარტოფილი მწვანილებით", "Creamy Spinach": "ისპანახი ნაღებით", "Sauteed Mushrooms": "მონალული სოკო", "Sweet Potato Fries": "ტკბილი კარტოფილის ფრი", "Red Wine": "წითელი ღვინის", "Chimichurri": "ჩიმიჩური", "Pepper": "წიწაკის", "Bearnaise": "ბერნეზი", "Beurre Blanc": "ბურბლანკი", "Arrabiata": "არაბიატა", "Carbonara": "კარბონარა", "Bolognese": "ბოლონეზე", "Spaghetti, penne or fettuccini": "სპაგეტი, პენე ან ფეტუჩინი", "Cornbread": "მჭადი", "Pan Fried Pkhlovana": "ტაფის ფხლოვანა", "Pan Fried Khachapuri": "ტაფის ხაჭაპური", "Creme Brulee": "კრემბრულე", "Tiramisu": "ტირამისუ", "Ideal": "იდეალი", "Profiteroli with Berries": "პროფიტროლი კენკრით", "Pistachio Crepe Cake": "ფისტას ბლინის ტორტი", "Pavlova": "პავლოვა კენკრით", "Cheesecake": "ჩიზქეიქი", "Starter, Main Course & Dessert": "სტარტერი, ძირითადი კერძი და დესერტი", "Starter & Main Course": "სტარტერი და ძირითადი კერძი", "Main Course & Dessert": "ძირითადი კერძი და დესერტი", "Starter & Dessert": "სტარტერი და დესერტი", "Fried fish balls with vegetables and beurre blanc sauce": "მობრაწული თევზის ბურთულები ბოსტნეულითა და ბერბლანკის სოუსით", "Grilled chicken breast with tarragon sauce": "შემწვარი ქათმის მკერდი ტარხუნის სოუსით", "Josper grilled eggplant babaganoush": "ბადრიჯნის ბაბაგანუში ჯოსპერიდან", "Pan fried chicken pate in bade koni": "მობრაწული ქათმის ბადექონში", "Creamy tomato gnocchi": "ნიოკი ჩერი პომიდვრითა და ნაღებით", "Grilled pork chop with beetroot puree and gravy sauce": "გრილზე შემწვარი ღორის ნეკნი ჭარხლის პიურეთი და გრევის სოუსით", "Peanut tart": "მიწისთხილის ტარტი", "Fruit crepes": "ხილის კრეპები", "Vegan chocolate cake": "ვეგანური შოკოლადის დესერტი", "Borjomi, coffee or tea — included": "ბორჯომი, ყავა ან ჩაი — შედის ფასში", "Cheese Board": "ყველის დაფა", "International and Georgian cheese mix": "საერთაშორისო და ქართული ყველის ასორტი", "Georgian Board": "ქართული დაფა", "Four kinds of pkhali selection, tomato & cucumber with walnut pesto, Guda cheese": "ოთხი სახეობის ფხალი, პომიდორი & კიტრი ნიგვზის პესტოთი, გუდის ყველი", "Charcuterie Board": "ხორცეულის დაფა", "Prosciutto, chorizo, chicken ham, liver pate, olives, honey-mustard sauce": "პროშუტო, ჩორიზო, ქათმის ლორი, ღვიძლის პატე, ზეთისხილი, თაფლ-მდოგვის სოუსი", "Elargi Balls": "ელარჯის ბურთულები", "Corn flour mixed balls with walnut dip": "სიმინდის ფქვილის ბურთულები ნიგვზის დიპით", "Nuts, Olives and Chips": "თხილი, ზეთისხილი და ჩიფსი", "Roasted hazelnuts, olives and homemade chips": "მოხალული თხილი, ზეთისხილი და ხელნაკეთი ჩიფსი", "Assorted Homemade Pies": "ხელნაკეთი ღვეზელების ასორტი", "Beef meat, mushrooms and potato pies": "საქონლის ხორცის, სოკოსა და კარტოფილის ღვეზელები", "Mix of Sandwiches": "სენდვიჩების ასორტი", "Smoked salmon, roast beef, vegetarian sandwich": "შებოლილი ორაგული, როსტბიფი, ვეგეტარიანული სენდვიჩი", "Bruschettas": "ბრუსკეტა", "Two kinds of bruschetta — tomato salsa and mushroom & bell pepper confit": "ორი სახის ბრუსკეტა — ტომატის სალსა და სოკო & ბულგარული წიწაკის კონფი", "Blinis & Red Caviar": "ბლინი და წითელი ხიზილალა", "Mini pancakes with cream cheese and caviar": "მინი ბლინები კრემ-ყველითა და ხიზილალით", "Georgian Sweets": "ქართული ტკბილეული", "Mix of dry fruits, nuts, churchkhela & pelamushi": "ჩირის, თხილეულის, ჩურჩხელისა და ფელამუშის ასორტი", "Soup Kharcho": "სუპ-ხარჩო", "Boiled beef meat, fresh herbs, tomato paste, Georgian spices": "მოხარშული საქონლის ხორცი მწვანილებით, ტომატის პასტა, ქართული სანელებლები", "Beef meat, beetroot, cabbage, sour cream": "საქონლის ხორცი, ჭარხალი, კომბოსტო, არაჟანი", "Tomato and cucumber, fresh herbs, walnut paste, fried jonjoli, mchadi chips": "პომიდორი და კიტრი, მწვანილები, ნიგვზის პასტა, შემწვარი ჯონჯოლი, მჭადის ჩიფსი", "Four kinds of pkhali selection, tomato & cucumber, Guda cheese, marinated jonjoli, lavash chips": "ოთხი სახეობის ფხალი, პომიდორი & კიტრი, გუდის ყველი, ჯონჯოლი, ლავაშის ჩიფსი", "Falafel balls, taco bread, tahini dressing, french fries": "ფალაფელის ბურთები, ტაკოს პური, ტაჰინის დრესინგი, კარტოფილი ფრი", "Focaccia bread, beef steak, mushroom, marinated onion, green pesto, rucola": "ფოკაჩა, საქონლის სტეიკი, სოკო, დამარინადებული ხახვი, პესტო, რუკოლა", "Beef Burger": "ბურგერი", "Beef meat, cheddar cheese, caramelized onion, burger bun": "საქონლის ხორცი, ჩედარის ყველი, კარამელიზებული ხახვი, ბურგერის პური", "Eggplant, bell pepper, onion, garlic, corn bread": "ბადრიჯანი, ბულგარული წიწაკა, ხახვი, ნიორი, მჭადი", "Chicken Chkmeruli": "შქმერული", "Grilled poulet fillet, garlic butter sauce, potato": "მობრაწული ქათმის ხორცი ნივრიანი სოუსით და კარტოფილით", "Potato puree with cheese, tkemali sauce, sauteed beans": "კარტოფილის პიურე ყველით, ტყემალი და მონალული მწვანე ლობიო", "Mixed mushroom, potato pave": "შერეული სოკო, კარტოფილის გრატანი", "Grilled vegetables and beurre blanc": "გრილზე შემწვარი ბოსტნეული და ბურბლანკი", "Potato puree, creamy spinach, pepper sauce": "კარტოფილის პიურე, ისპანახი ნაღებით, წიწაკის სოუსი", "Rib-eye Steak": "რიბაი სტეიკი", "Baked potato with herbs, chimichurri sauce": "გამომცხვარი კარტოფილი მწვანილებით, ჩიმიჩურის სოუსი", "Sauteed Mushroom": "მონალული სოკო", "Penne Arrabiata": "პენე არაბიატა", "Tomato, basil, parmesan": "პომიდორი, ბაზილიკი, პარმეზანი", "Tagliatelle Carbonara": "ტალიატელე კარბონარა", "Cream, garlic, pork bacon, parmesan": "ნაღები, ნიორი, ბეკონი, პარმეზანი", "Seasonal Fresh Cut Fruits Plate": "სეზონური ხილის ასორტი", "Sulgunela Skewers": "სულგუნელას შამფურები", "Skewers with sulguni cheese, cherry tomatoes & basil leaves, drizzled with balsamic glaze": "შამფურები სულგუნით, ჩერი პომიდვრითა და ბაზილიკით, ბალზამიკოს გლაზურით", "Ham and Cheese Sandwich": "ლორისა და ყველის სენდვიჩი", "Ham, bread toast, lettuce, tomato and cucumber, french fries": "ლორი, ტოსტის პური, სალათის ფურცელი, პომიდორი და კიტრი, კარტოფილი ფრი", "Spaghetti": "სპაგეტი", "Light tomato sauce, spaghetti & parmesan cheese": "მსუბუქი ტომატის სოუსი, სპაგეტი & პარმეზანი", "Chicken Nuggets": "ქათმის ნაგეტსები", "Deep fried nuggets, mashed potatoes, ketchup": "შემწვარი ნაგეტსები, კარტოფილის პიურე, კეტჩუპი", "Ice Cream": "ნაყინი", "Vanilla or chocolate ice cream": "ვანილის ან შოკოლადის ნაყინი", "Fruit Salad with Yoghurt": "ხილის სალათი იოგურტით", "Seasonal fruits and berries, yoghurt": "სეზონური ხილი და კენკრა, იოგურტი"};
+  const btns = document.querySelectorAll('.lang-btn');
+
+  function swapTexts(l) {
+    document.querySelectorAll('.mi__name, .mi__desc, .menu-section__title').forEach(el => {
+      let tn = null;
+      for (const n of el.childNodes) { if (n.nodeType === 3 && n.nodeValue.trim()) { tn = n; break; } }
+      if (!tn) return;
+      if (el.dataset.en === undefined) el.dataset.en = tn.nodeValue;
+      const key = el.dataset.en.trim();
+      if (l === 'ka' && M[key]) {
+        tn.nodeValue = M[key] + (el.dataset.en.endsWith(' ') ? ' ' : '');
+      } else if (l === 'en') {
+        tn.nodeValue = el.dataset.en;
+      }
+    });
+  }
+
+  function setLang(l) {
+    const d = CHROME[l]; if (!d) return;
+    document.documentElement.lang = l;
+    document.body.classList.toggle('lang-ka', l === 'ka');
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if (d[k] !== undefined) {
+        if (el.getAttribute('data-i18n-html') === 'true') el.innerHTML = d[k];
+        else el.textContent = d[k];
+      }
+    });
+    swapTexts(l);
+    const bp = document.getElementById('brasseriePdf');
+    if (bp) bp.href = l === 'ka' ? 'menus/brasserie-ka.pdf' : 'menus/brasserie.pdf';
+    btns.forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+    try { localStorage.setItem('hotel-afisha-lang', l); } catch (e) {}
+  }
+
+  btns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  let saved = 'en';
+  try { saved = localStorage.getItem('hotel-afisha-lang') || 'en'; } catch (e) {}
+  if (saved !== 'en') setLang(saved);
+})();
 </script>
 </body>
 </html>
